@@ -1,6 +1,6 @@
 Flow report for FPGA
-Tue Mar 07 17:07:53 2017
-Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+Thu Mar 09 17:22:36 2017
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Full Version
 
 
 ---------------------
@@ -37,26 +37,26 @@ applicable agreement for further details.
 
 
 
-+---------------------------------------------------------------------------------+
-; Flow Summary                                                                    ;
-+------------------------------------+--------------------------------------------+
-; Flow Status                        ; Successful - Tue Mar 07 17:07:53 2017      ;
-; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
-; Revision Name                      ; FPGA                                       ;
-; Top-level Entity Name              ; FPGA                                       ;
-; Family                             ; Cyclone III                                ;
-; Device                             ; EP3C120F484C8                              ;
-; Timing Models                      ; Final                                      ;
-; Total logic elements               ; 3,166 / 119,088 ( 3 % )                    ;
-;     Total combinational functions  ; 1,599 / 119,088 ( 1 % )                    ;
-;     Dedicated logic registers      ; 2,848 / 119,088 ( 2 % )                    ;
-; Total registers                    ; 2848                                       ;
-; Total pins                         ; 76 / 284 ( 27 % )                          ;
-; Total virtual pins                 ; 0                                          ;
-; Total memory bits                  ; 569,344 / 3,981,312 ( 14 % )               ;
-; Embedded Multiplier 9-bit elements ; 0 / 576 ( 0 % )                            ;
-; Total PLLs                         ; 1 / 4 ( 25 % )                             ;
-+------------------------------------+--------------------------------------------+
++----------------------------------------------------------------------------------+
+; Flow Summary                                                                     ;
++------------------------------------+---------------------------------------------+
+; Flow Status                        ; Successful - Thu Mar 09 17:22:36 2017       ;
+; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Full Version ;
+; Revision Name                      ; FPGA                                        ;
+; Top-level Entity Name              ; FPGA                                        ;
+; Family                             ; Cyclone III                                 ;
+; Device                             ; EP3C120F484C8                               ;
+; Timing Models                      ; Final                                       ;
+; Total logic elements               ; 6,377 / 119,088 ( 5 % )                     ;
+;     Total combinational functions  ; 4,646 / 119,088 ( 4 % )                     ;
+;     Dedicated logic registers      ; 4,997 / 119,088 ( 4 % )                     ;
+; Total registers                    ; 4997                                        ;
+; Total pins                         ; 189 / 284 ( 67 % )                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 626,740 / 3,981,312 ( 16 % )                ;
+; Embedded Multiplier 9-bit elements ; 0 / 576 ( 0 % )                             ;
+; Total PLLs                         ; 1 / 4 ( 25 % )                              ;
++------------------------------------+---------------------------------------------+
 
 
 +-----------------------------------------+
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/07/2017 17:06:51 ;
+; Start date & time ; 03/09/2017 16:25:18 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; FPGA                ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                                                                                                                                                                                                                                                                                                                                                                                                                                  ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 128437436397710.148887761011144                                                                                                                                                                                                                                                                                                                                                                                                                        ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 92526986194238.148904791709184                                                                                                                                                                                                                                                                                                                                                                                                                         ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Verilog Hdl                                                                                                                                                                                                                                                                                                                                                                                                                                            ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (Verilog)                                                                                                                                                                                                                                                                                                                                                                                                                              ; <None>        ; --          ; --             ;
 ; ENABLE_SIGNALTAP                    ; On                                                                                                                                                                                                                                                                                                                                                                                                                                                     ; --            ; --          ; --             ;
@@ -99,8 +99,16 @@ applicable agreement for further details.
 ; MISC_FILE                           ; sig_pll_bb.v                                                                                                                                                                                                                                                                                                                                                                                                                                           ; --            ; --          ; --             ;
 ; MISC_FILE                           ; sig_pll.ppf                                                                                                                                                                                                                                                                                                                                                                                                                                            ; --            ; --          ; --             ;
 ; MISC_FILE                           ; fifo_doppler_bb.v                                                                                                                                                                                                                                                                                                                                                                                                                                      ; --            ; --          ; --             ;
+; MISC_FILE                           ; ram_ca.bsf                                                                                                                                                                                                                                                                                                                                                                                                                                             ; --            ; --          ; --             ;
+; MISC_FILE                           ; ram_ca_inst.v                                                                                                                                                                                                                                                                                                                                                                                                                                          ; --            ; --          ; --             ;
 ; MISC_FILE                           ; ram_ca_bb.v                                                                                                                                                                                                                                                                                                                                                                                                                                            ; --            ; --          ; --             ;
+; MISC_FILE                           ; ram_ca.inc                                                                                                                                                                                                                                                                                                                                                                                                                                             ; --            ; --          ; --             ;
+; MISC_FILE                           ; ram_ca.cmp                                                                                                                                                                                                                                                                                                                                                                                                                                             ; --            ; --          ; --             ;
+; MISC_FILE                           ; ram_msg.bsf                                                                                                                                                                                                                                                                                                                                                                                                                                            ; --            ; --          ; --             ;
+; MISC_FILE                           ; ram_msg_inst.v                                                                                                                                                                                                                                                                                                                                                                                                                                         ; --            ; --          ; --             ;
 ; MISC_FILE                           ; ram_msg_bb.v                                                                                                                                                                                                                                                                                                                                                                                                                                           ; --            ; --          ; --             ;
+; MISC_FILE                           ; ram_msg.inc                                                                                                                                                                                                                                                                                                                                                                                                                                            ; --            ; --          ; --             ;
+; MISC_FILE                           ; ram_msg.cmp                                                                                                                                                                                                                                                                                                                                                                                                                                            ; --            ; --          ; --             ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                                                                                                                                                                                                                                                                                                                                                                                                                                      ; --            ; --          ; --             ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                                                                                                                                                                                                                                                                                                                                                                                                                                      ; --            ; --          ; --             ;
 ; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                                                                                                                                                                                                                                                                                                                                                                                                                                             ; --            ; --          ; --             ;
@@ -143,12 +151,61 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:23     ; 1.0                     ; 739 MB              ; 00:00:23                           ;
-; Fitter                    ; 00:00:19     ; 1.5                     ; 1483 MB             ; 00:00:26                           ;
-; Assembler                 ; 00:00:05     ; 1.0                     ; 537 MB              ; 00:00:05                           ;
-; TimeQuest Timing Analyzer ; 00:00:04     ; 1.0                     ; 691 MB              ; 00:00:05                           ;
-; EDA Netlist Writer        ; 00:00:04     ; 1.0                     ; 505 MB              ; 00:00:04                           ;
-; Total                     ; 00:00:55     ; --                      ; --                  ; 00:01:03                           ;
+; Analysis & Synthesis      ; 00:00:29     ; 1.0                     ; 730 MB              ; 00:00:29                           ;
+; Fitter                    ; 00:00:25     ; 1.5                     ; 1530 MB             ; 00:00:32                           ;
+; Assembler                 ; 00:00:05     ; 1.0                     ; 518 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:05     ; 1.0                     ; 691 MB              ; 00:00:05                           ;
+; EDA Netlist Writer        ; 00:00:05     ; 1.0                     ; 495 MB              ; 00:00:04                           ;
+; Analysis & Synthesis      ; 00:00:33     ; 1.7                     ; 728 MB              ; 00:00:35                           ;
+; Partition Merge           ; 00:00:02     ; 1.0                     ; 583 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:25     ; 1.5                     ; 1546 MB             ; 00:00:33                           ;
+; Assembler                 ; 00:00:06     ; 1.0                     ; 517 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:06     ; 1.8                     ; 693 MB              ; 00:00:05                           ;
+; EDA Netlist Writer        ; 00:00:05     ; 1.0                     ; 503 MB              ; 00:00:04                           ;
+; Analysis & Synthesis      ; 00:00:32     ; 2.4                     ; 729 MB              ; 00:00:41                           ;
+; Partition Merge           ; 00:00:02     ; 1.0                     ; 579 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:32     ; 1.7                     ; 1584 MB             ; 00:00:43                           ;
+; Assembler                 ; 00:00:05     ; 1.0                     ; 530 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:06     ; 1.5                     ; 723 MB              ; 00:00:06                           ;
+; EDA Netlist Writer        ; 00:00:09     ; 1.0                     ; 530 MB              ; 00:00:08                           ;
+; Analysis & Synthesis      ; 00:00:32     ; 2.4                     ; 731 MB              ; 00:00:41                           ;
+; Partition Merge           ; 00:00:02     ; 1.0                     ; 567 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:38     ; 1.4                     ; 1658 MB             ; 00:00:49                           ;
+; Assembler                 ; 00:00:06     ; 1.0                     ; 530 MB              ; 00:00:06                           ;
+; TimeQuest Timing Analyzer ; 00:00:06     ; 1.2                     ; 724 MB              ; 00:00:06                           ;
+; EDA Netlist Writer        ; 00:00:09     ; 1.0                     ; 526 MB              ; 00:00:08                           ;
+; Analysis & Synthesis      ; 00:00:04     ; 1.0                     ; 608 MB              ; 00:00:03                           ;
+; Analysis & Synthesis      ; 00:00:04     ; 1.0                     ; 601 MB              ; 00:00:03                           ;
+; Analysis & Synthesis      ; 00:00:10     ; 1.0                     ; 721 MB              ; 00:00:09                           ;
+; Analysis & Synthesis      ; 00:00:11     ; 1.0                     ; 720 MB              ; 00:00:10                           ;
+; Analysis & Synthesis      ; 00:00:09     ; 1.0                     ; 724 MB              ; 00:00:09                           ;
+; Analysis & Synthesis      ; 00:00:32     ; 2.4                     ; 723 MB              ; 00:00:41                           ;
+; Partition Merge           ; 00:00:02     ; 1.0                     ; 575 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:32     ; 1.5                     ; 1570 MB             ; 00:00:42                           ;
+; Assembler                 ; 00:00:05     ; 1.0                     ; 530 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:07     ; 1.0                     ; 722 MB              ; 00:00:06                           ;
+; EDA Netlist Writer        ; 00:00:09     ; 1.0                     ; 535 MB              ; 00:00:08                           ;
+; Analysis & Synthesis      ; 00:00:33     ; 2.4                     ; 728 MB              ; 00:00:42                           ;
+; Partition Merge           ; 00:00:02     ; 1.0                     ; 575 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:32     ; 1.6                     ; 1586 MB             ; 00:00:44                           ;
+; Assembler                 ; 00:00:05     ; 1.0                     ; 530 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:06     ; 1.0                     ; 717 MB              ; 00:00:06                           ;
+; EDA Netlist Writer        ; 00:00:09     ; 1.0                     ; 526 MB              ; 00:00:08                           ;
+; Analysis & Synthesis      ; 00:00:32     ; 1.7                     ; 731 MB              ; 00:00:34                           ;
+; Partition Merge           ; 00:00:02     ; 1.0                     ; 592 MB              ; 00:00:02                           ;
+; Analysis & Synthesis      ; 00:00:33     ; 2.3                     ; 724 MB              ; 00:00:41                           ;
+; Partition Merge           ; 00:00:02     ; 1.0                     ; 563 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:32     ; 1.5                     ; 1578 MB             ; 00:00:43                           ;
+; Assembler                 ; 00:00:05     ; 1.0                     ; 526 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:06     ; 1.5                     ; 717 MB              ; 00:00:06                           ;
+; EDA Netlist Writer        ; 00:00:10     ; 1.0                     ; 539 MB              ; 00:00:08                           ;
+; Analysis & Synthesis      ; 00:00:33     ; 2.4                     ; 727 MB              ; 00:00:41                           ;
+; Partition Merge           ; 00:00:02     ; 1.0                     ; 575 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:31     ; 1.4                     ; 1569 MB             ; 00:00:42                           ;
+; Assembler                 ; 00:00:05     ; 1.0                     ; 530 MB              ; 00:00:05                           ;
+; TimeQuest Timing Analyzer ; 00:00:06     ; 1.5                     ; 717 MB              ; 00:00:06                           ;
+; EDA Netlist Writer        ; 00:00:09     ; 1.0                     ; 531 MB              ; 00:00:08                           ;
+; Total                     ; 00:12:25     ; --                      ; --                  ; 00:14:26                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -157,11 +214,60 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; MOHISMIST        ; Windows 7 ; 6.2        ; x86_64         ;
-; Fitter                    ; MOHISMIST        ; Windows 7 ; 6.2        ; x86_64         ;
-; Assembler                 ; MOHISMIST        ; Windows 7 ; 6.2        ; x86_64         ;
-; TimeQuest Timing Analyzer ; MOHISMIST        ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; MOHISMIST        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Partition Merge           ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Partition Merge           ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Partition Merge           ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Partition Merge           ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Partition Merge           ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Partition Merge           ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Partition Merge           ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Partition Merge           ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; nh-laptop        ; Windows 7 ; 6.2        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
@@ -169,6 +275,55 @@ applicable agreement for further details.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_fit --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_asm --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_sta FPGA -c FPGA
+quartus_eda --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_cdb --read_settings_files=off --write_settings_files=off FPGA -c FPGA --merge=on
+quartus_fit --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_asm --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_sta FPGA -c FPGA
+quartus_eda --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_cdb --read_settings_files=off --write_settings_files=off FPGA -c FPGA --merge=on
+quartus_fit --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_asm --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_sta FPGA -c FPGA
+quartus_eda --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_cdb --read_settings_files=off --write_settings_files=off FPGA -c FPGA --merge=on
+quartus_fit --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_asm --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_sta FPGA -c FPGA
+quartus_eda --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_cdb --read_settings_files=off --write_settings_files=off FPGA -c FPGA --merge=on
+quartus_fit --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_asm --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_sta FPGA -c FPGA
+quartus_eda --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_cdb --read_settings_files=off --write_settings_files=off FPGA -c FPGA --merge=on
+quartus_fit --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_asm --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_sta FPGA -c FPGA
+quartus_eda --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_cdb --read_settings_files=off --write_settings_files=off FPGA -c FPGA --merge=on
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_cdb --read_settings_files=off --write_settings_files=off FPGA -c FPGA --merge=on
+quartus_fit --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_asm --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_sta FPGA -c FPGA
+quartus_eda --read_settings_files=off --write_settings_files=off FPGA -c FPGA
+quartus_map --read_settings_files=on --write_settings_files=off FPGA -c FPGA
+quartus_cdb --read_settings_files=off --write_settings_files=off FPGA -c FPGA --merge=on
 quartus_fit --read_settings_files=off --write_settings_files=off FPGA -c FPGA
 quartus_asm --read_settings_files=off --write_settings_files=off FPGA -c FPGA
 quartus_sta FPGA -c FPGA

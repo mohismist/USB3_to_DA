@@ -48,7 +48,7 @@ set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE POST_FIT -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
@@ -383,14 +383,6 @@ set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[127] -
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[128] -to "stream_out:stream_inst|usb_wr_state[0]" -section_id FPGA
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[129] -to "stream_out:stream_inst|usb_wr_state[1]" -section_id FPGA
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[130] -to "stream_out:stream_inst|usb_wr_state[2]" -section_id FPGA
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_DATA_BITS=131" -section_id FPGA
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_BITS=131" -section_id FPGA
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" -section_id FPGA
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK_LENGTH=419" -section_id FPGA
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_CRC_LOWORD=48416" -section_id FPGA
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_CRC_HIWORD=46614" -section_id FPGA
-set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_FPGA_FPGA_1_4edd,basic,1,sld_reserved_FPGA_FPGA_3_ec3b," -section_id FPGA
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name VERILOG_FILE NCO_bb.v
 set_global_assignment -name VERILOG_FILE NCO.v
 set_global_assignment -name VERILOG_FILE stream.v
@@ -404,4 +396,99 @@ set_global_assignment -name QIP_FILE fifo_doppler.qip
 set_global_assignment -name QIP_FILE ram_ca.qip
 set_global_assignment -name VERILOG_FILE ram_bb.v
 set_global_assignment -name QIP_FILE ram_msg.qip
+set_location_assignment PIN_E5 -to DAC_CLK
+set_location_assignment PIN_N5 -to DAC1[0]
+set_location_assignment PIN_P3 -to DAC1[1]
+set_location_assignment PIN_P4 -to DAC1[2]
+set_location_assignment PIN_R3 -to DAC1[3]
+set_location_assignment PIN_R4 -to DAC1[4]
+set_location_assignment PIN_T4 -to DAC1[5]
+set_location_assignment PIN_T5 -to DAC1[6]
+set_location_assignment PIN_V3 -to DAC1[7]
+set_location_assignment PIN_V4 -to DAC1[8]
+set_location_assignment PIN_M1 -to DAC1[9]
+set_location_assignment PIN_M2 -to DAC1[10]
+set_location_assignment PIN_N1 -to DAC1[11]
+set_location_assignment PIN_N2 -to DAC1[12]
+set_location_assignment PIN_P1 -to DAC1[13]
+set_location_assignment PIN_P2 -to DAC2[0]
+set_location_assignment PIN_R1 -to DAC2[1]
+set_location_assignment PIN_R2 -to DAC2[2]
+set_location_assignment PIN_T3 -to DAC2[3]
+set_location_assignment PIN_U1 -to DAC2[4]
+set_location_assignment PIN_U2 -to DAC2[5]
+set_location_assignment PIN_V1 -to DAC2[6]
+set_location_assignment PIN_V2 -to DAC2[7]
+set_location_assignment PIN_W1 -to DAC2[8]
+set_location_assignment PIN_W2 -to DAC2[9]
+set_location_assignment PIN_Y1 -to DAC2[10]
+set_location_assignment PIN_Y2 -to DAC2[11]
+set_location_assignment PIN_AA1 -to DAC2[12]
+set_location_assignment PIN_AA2 -to DAC2[13]
+set_location_assignment PIN_L22 -to DAC3[0]
+set_location_assignment PIN_L21 -to DAC3[1]
+set_location_assignment PIN_K22 -to DAC3[2]
+set_location_assignment PIN_K21 -to DAC3[3]
+set_location_assignment PIN_J22 -to DAC3[4]
+set_location_assignment PIN_J21 -to DAC3[5]
+set_location_assignment PIN_H22 -to DAC3[6]
+set_location_assignment PIN_H21 -to DAC3[7]
+set_location_assignment PIN_F22 -to DAC3[8]
+set_location_assignment PIN_F21 -to DAC3[9]
+set_location_assignment PIN_E22 -to DAC3[10]
+set_location_assignment PIN_E21 -to DAC3[11]
+set_location_assignment PIN_D22 -to DAC3[12]
+set_location_assignment PIN_D21 -to DAC3[13]
+set_location_assignment PIN_C22 -to DAC4[0]
+set_location_assignment PIN_C21 -to DAC4[1]
+set_location_assignment PIN_B22 -to DAC4[2]
+set_location_assignment PIN_B21 -to DAC4[3]
+set_location_assignment PIN_B20 -to DAC4[4]
+set_location_assignment PIN_A20 -to DAC4[5]
+set_location_assignment PIN_B19 -to DAC4[6]
+set_location_assignment PIN_A19 -to DAC4[7]
+set_location_assignment PIN_B18 -to DAC4[8]
+set_location_assignment PIN_A18 -to DAC4[9]
+set_location_assignment PIN_B17 -to DAC4[10]
+set_location_assignment PIN_A17 -to DAC4[11]
+set_location_assignment PIN_H18 -to DAC4[12]
+set_location_assignment PIN_G18 -to DAC4[13]
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[131] -to DAC1[0] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[132] -to DAC1[10] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[133] -to DAC1[11] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[134] -to DAC1[12] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[135] -to DAC1[13] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[136] -to DAC1[1] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[137] -to DAC1[2] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[138] -to DAC1[3] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[139] -to DAC1[4] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[140] -to DAC1[5] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[141] -to DAC1[6] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[142] -to DAC1[7] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[143] -to DAC1[8] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[144] -to DAC1[9] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[131] -to DAC1[0] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[132] -to DAC1[10] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[133] -to DAC1[11] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[134] -to DAC1[12] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[135] -to DAC1[13] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[136] -to DAC1[1] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[137] -to DAC1[2] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[138] -to DAC1[3] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[139] -to DAC1[4] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[140] -to DAC1[5] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[141] -to DAC1[6] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[142] -to DAC1[7] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[143] -to DAC1[8] -section_id FPGA
+set_instance_assignment -name POST_FIT_CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[144] -to DAC1[9] -section_id FPGA
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_DATA_BITS=145" -section_id FPGA
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_BITS=145" -section_id FPGA
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" -section_id FPGA
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK_LENGTH=461" -section_id FPGA
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_CRC_LOWORD=48734" -section_id FPGA
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_CRC_HIWORD=57873" -section_id FPGA
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_FPGA_FPGA_1_8163,basic,1,sld_reserved_FPGA_FPGA_3_ec3b," -section_id FPGA
+set_global_assignment -name QIP_FILE dac_pll.qip
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name SLD_FILE db/stp1_auto_stripped.stp

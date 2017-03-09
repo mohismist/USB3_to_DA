@@ -29,69 +29,81 @@ module FPGA_tb();
 // general purpose registers
 reg eachvec;
 // test vector input registers
-reg CLK_IN;
-reg USB3_CTL4;
-reg USB3_CTL5;
-reg [31:0] USB3_DQ;
+reg CLK_IN;//10M
+reg CLK_26M;
 
-// wires    
-wire [31:0] USB3_DQ2;  
-wire USB3_CTL2;
-wire USB3_CTL3;
-wire USB3_CTL1;                                         
-wire USB3_PCLK;
+//reset signal
+
+//GPIF II
+reg USB3_CTL4;//FLAGA
+reg USB3_CTL5;//FLAGB
+wire [31:0] USB3_DQ;
+
+wire [31:0] data_hnr;
+wire USB3_CTL2;//SLOE ???????????????????
+wire USB3_CTL3;//SLRD
+wire USB3_CTL1;//SLWR
+wire USB3_CTL0;//SLCS
+wire USB3_PCLK;//100M
+wire USB3_CTL11;
+wire USB3_CTL12;
+wire SCLK;
+
+wire [13:0] DAC1;
+wire [13:0] DAC2;
+wire [13:0] DAC3;
+wire [13:0] DAC4;
+wire [13:0] DAC5;
+wire [13:0] DAC6;
+wire [13:0] DAC7;
+wire [13:0] DAC8;
+
+wire DAC_CLK;
 
 // assign statements (if any)                          
 FPGA FPGA0 (
 // port map - connection between master ports and signals/registers  
-	
-	.CLK_IN(CLK_IN),
-	.USB3_CTL4(USB3_CTL4),
-	.USB3_CTL5(USB3_CTL5),
-	
-	.USB3_DQ(USB3_DQ),
-	.USB3_DQ2(USB3_DQ2),
-	
-	.USB3_CTL2(USB3_CTL2),
-	.USB3_CTL3(USB3_CTL3),
-	.USB3_CTL1(USB3_CTL1),
-	.USB3_PCLK(USB3_PCLK)
+.CLK_IN(CLK_IN),
+.CLK_26M(CLK_26M),
+
+
+.USB3_CTL4(USB3_CTL4),
+.USB3_CTL5(USB3_CTL5),
+.USB3_DQ(USB3_DQ),
+
+.data_hnr(data_hnr),
+.USB3_CTL2(USB3_CTL2),
+.USB3_CTL3(USB3_CTL3),
+.USB3_CTL1(USB3_CTL1),
+.USB3_CTL0(USB3_CTL0),
+.USB3_PCLK(USB3_PCLK),
+.USB3_CTL11(USB3_CTL11),
+.USB3_CTL12(USB3_CTL12),
+.SCLK(SCLK),
+
+
+
+.DAC1(DAC1),
+.DAC2(DAC2),
+.DAC3(DAC3),
+.DAC4(DAC4),
+.DAC5(DAC5),
+.DAC6(DAC6),
+.DAC7(DAC7),
+.DAC8(DAC8),
+
+.DAC_CLK(DAC_CLK)
 );
 
-initial                                                
-begin                                                  
-// code that executes only once 
-	# 0 USB3_CTL4=1'b0;
-	# 10 USB3_CTL5=1'b1;
-	# 500000 USB3_DQ=32'h0000_0007;
-	# 0 USB3_CTL4=1'b1;
-	# 100000 USB3_DQ=32'h0000_000f;
-	# 100000 USB3_DQ=32'h0000_007f;
-	# 100000 USB3_DQ=32'h0000_00ff;
-	# 100000 USB3_DQ=32'h0000_07ff;
-	# 50000 USB3_CTL4=1'b0;
-	# 50000 USB3_DQ=32'h0000_fff7;
-// insert code here --> begin 
-end
-
-initial                         
-begin
-CLK_IN = 0;
-	forever
+     
+initial 
+begin 
+   CLK_IN=0;
+   forever
    # 50000 CLK_IN=~CLK_IN;
-// --> end                                             
-$display("Running testbench");                       
+// --> end                                                                   
 end 
                                                    
-always                                                 
-// optional sensitivity list                           
-// @(event1 or event2 or .... eventn)                  
-begin                                                  
-// code executes for every event on sensitivity list   
-// insert code here --> begin                          
-                                                       
-@eachvec;                                              
-// --> end                                             
-end                                                    
+                                           
 endmodule
 

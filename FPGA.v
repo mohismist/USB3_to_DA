@@ -22,7 +22,7 @@ module FPGA(
 	input CLK_26M,
 	
 	//reset signal
-	input RESET_N,
+	//input RESET_N,
 	
 	//GPIF II
 	input USB3_CTL4,	//FLAGA
@@ -37,8 +37,19 @@ module FPGA(
 	output USB3_PCLK,	//100M
 	output USB3_CTL11,
 	output USB3_CTL12,
-	output SCLK
-);
+	output SCLK,
+	
+	output [13:0] DAC1,
+	output [13:0] DAC2,
+	output [13:0] DAC3,
+	output [13:0] DAC4,
+	output [13:0] DAC5,
+	output [13:0] DAC6,
+	output [13:0] DAC7,
+	output [13:0] DAC8,
+	
+	output DAC_CLK
+	);
 	
 	
 // clocks
@@ -77,7 +88,7 @@ wire	hnr_wrfull;
 wire	[31:0] hnr_DQ;
 wire	[31:0] data_u2p;
 wire	[31:0] data_p2u;
-
+wire RESET_N;
 
 // 8 channel NCO
 wire	[7:0] clk_carrier; 
@@ -172,11 +183,22 @@ NCO_bb	nco_inst(
 	.pha_1023k7(pha_1023k7),
 	
 	.clk_1023k(clk_1023k),
-	.clk_carrier(clk_carrier));
+	.clk_carrier(clk_carrier),
+	
+	.DAC1(DAC1),
+	.DAC2(DAC2),
+	.DAC3(DAC3),
+	.DAC4(DAC4),
+	.DAC5(DAC5),
+	.DAC6(DAC6),
+	.DAC7(DAC7),
+	.DAC8(DAC8)	
+	
+	);
 
 ram_bb	ram_inst(
 	.clk(CLK_100M),
-	.rst_n(rst_n),
+	.rst_n(RESET_N),
 	.data(data_u2p),
 	
 	.delay_ca0(delay_ca0),
@@ -275,6 +297,7 @@ assign	USB3_FLAGB = USB3_CTL5;
 
 //assign	hnr_wrreq	=	USB3_CTL4?cnt1:1'b1;
 assign	hnr_rdreq = hnr_rdempty?1'b0:1'b1;
-
-
+assign 	DAC_CLK = CLK_100M;
+assign 	fre_carrier0 = 28'b0001_0000_0000_0000_0000_0000_0000;
+assign 	RESET_N=1;
 endmodule

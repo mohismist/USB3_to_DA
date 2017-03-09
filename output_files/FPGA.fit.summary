@@ -1,16 +1,16 @@
-Fitter Status : Successful - Tue Mar 07 17:07:34 2017
-Quartus II 64-Bit Version : 13.1.0 Build 162 10/23/2013 SJ Web Edition
+Fitter Status : Successful - Thu Mar 09 17:22:09 2017
+Quartus II 64-Bit Version : 13.1.0 Build 162 10/23/2013 SJ Full Version
 Revision Name : FPGA
 Top-level Entity Name : FPGA
 Family : Cyclone III
 Device : EP3C120F484C8
 Timing Models : Final
-Total logic elements : 3,166 / 119,088 ( 3 % )
-    Total combinational functions : 1,599 / 119,088 ( 1 % )
-    Dedicated logic registers : 2,848 / 119,088 ( 2 % )
-Total registers : 2848
-Total pins : 76 / 284 ( 27 % )
+Total logic elements : 6,377 / 119,088 ( 5 % )
+    Total combinational functions : 4,646 / 119,088 ( 4 % )
+    Dedicated logic registers : 4,997 / 119,088 ( 4 % )
+Total registers : 4997
+Total pins : 189 / 284 ( 67 % )
 Total virtual pins : 0
-Total memory bits : 569,344 / 3,981,312 ( 14 % )
+Total memory bits : 626,740 / 3,981,312 ( 16 % )
 Embedded Multiplier 9-bit elements : 0 / 576 ( 0 % )
 Total PLLs : 1 / 4 ( 25 % )

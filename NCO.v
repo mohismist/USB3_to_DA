@@ -25,8 +25,8 @@ module NCO(clk,rst_n,fre_chtr,pha_chtr,sin,cos);
   input  rst_n;
   input  [27:0] fre_chtr; //fre_chtr 频率控制字 28'd67108864 = 1/4 clk
   input  [27:0] pha_chtr; //pha_chtr 相位控制字 28'd67108864 = 90°相位
-  output [15:0] sin;
-  output [15:0] cos;
+  output [13:0] sin;
+  output [13:0] cos;
 
   
   //reg  [27:0] fre_chtr=28'd199372381;

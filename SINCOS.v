@@ -26,10 +26,10 @@ parameter PIPELINE=28;
 input                     clk,rst_n;
 input   [DATA_WIDTH-1:0]  phase_in;
 
-output  [DATA_WIDTH-1:0]  sin,cos;
+//reg  [DATA_WIDTH-1:0]  sin,cos;
 
 reg    [DATA_WIDTH-1:0]  sin_out,cos_out,eps;
-wire    [15:0]  sin,cos;
+output    [13:0]  sin,cos;
 reg     [DATA_WIDTH-1:0]  phase_in_reg;
 
 reg     [DATA_WIDTH-1:0]  x[PIPELINE:0];
@@ -41,8 +41,8 @@ reg     [1:0]             quadrant[PIPELINE:0];
 integer i;
 
 //get real quadrant and map to first_n quadrant
-assign sin=sin_out[27:12];
-assign cos=cos_out[27:12];
+assign sin=sin_out[27:14]+14'd8192;
+assign cos=cos_out[27:14]+14'd8192;
 
 always@(posedge clk or negedge rst_n)
 begin
