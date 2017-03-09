@@ -1,0 +1,733 @@
+Partition Merge report for FPGA
+Fri Feb 24 18:18:10 2017
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Partition Merge Summary
+  3. Partition Merge Netlist Types Used
+  4. Connections to In-System Debugging Instance "FPGA"
+  5. Partition Merge Partition Statistics
+  6. Partition Merge Partition Pin Processing
+  7. Partition Merge Resource Usage Summary
+  8. Partition Merge RAM Summary
+  9. Partition Merge Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; Partition Merge Summary                                                         ;
++------------------------------------+--------------------------------------------+
+; Partition Merge Status             ; Successful - Fri Feb 24 18:18:10 2017      ;
+; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
+; Revision Name                      ; FPGA                                       ;
+; Top-level Entity Name              ; FPGA                                       ;
+; Family                             ; Cyclone III                                ;
+; Total logic elements               ; 2,513                                      ;
+;     Total combinational functions  ; 1,186                                      ;
+;     Dedicated logic registers      ; 1,811                                      ;
+; Total registers                    ; 1811                                       ;
+; Total pins                         ; 74                                         ;
+; Total virtual pins                 ; 0                                          ;
+; Total memory bits                  ; 409,600                                    ;
+; Embedded Multiplier 9-bit elements ; 0                                          ;
+; Total PLLs                         ; 2                                          ;
++------------------------------------+--------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Partition Merge Netlist Types Used                                                                                            ;
++--------------------------------+----------------+-------------------+------------------------+--------------------------------+
+; Partition Name                 ; Partition Type ; Netlist Type Used ; Netlist Type Requested ; Partition Contents             ;
++--------------------------------+----------------+-------------------+------------------------+--------------------------------+
+; Top                            ; User-created   ; Source File       ; Source File            ;                                ;
+; sld_hub:auto_hub               ; Auto-generated ; Post-Synthesis    ; Post-Synthesis         ; sld_hub:auto_hub               ;
+; sld_signaltap:FPGA             ; Auto-generated ; Post-Synthesis    ; Post-Synthesis         ; sld_signaltap:FPGA             ;
+; hard_block:auto_generated_inst ; Auto-generated ; Source File       ; Source File            ; hard_block:auto_generated_inst ;
++--------------------------------+----------------+-------------------+------------------------+--------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Connections to In-System Debugging Instance "FPGA"                                                                                                                                                                                        ;
++---------------------------------+---------------+-----------+----------------+-------------------+------------------------------------------------------------------------------------------------------------------------------+---------+
+; Name                            ; Type          ; Status    ; Partition Name ; Netlist Type Used ; Actual Connection                                                                                                            ; Details ;
++---------------------------------+---------------+-----------+----------------+-------------------+------------------------------------------------------------------------------------------------------------------------------+---------+
+; CLK_IN                          ; pre-synthesis ; connected ; Top            ; post-synthesis    ; CLK_IN                                                                                                                       ; N/A     ;
+; CLK_IN                          ; pre-synthesis ; connected ; Top            ; post-synthesis    ; CLK_IN                                                                                                                       ; N/A     ;
+; SCLK                            ; pre-synthesis ; connected ; Top            ; post-synthesis    ; sig_pll:pll|altpll:altpll_component|sig_pll_altpll:auto_generated|wire_pll1_clk[0]                                           ; N/A     ;
+; USB3_CTL2                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_CTL2~0                                                                                                                  ; N/A     ;
+; USB3_CTL2                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_CTL2~0                                                                                                                  ; N/A     ;
+; USB3_CTL3                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_CTL2~0                                                                                                                  ; N/A     ;
+; USB3_CTL3                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_CTL2~0                                                                                                                  ; N/A     ;
+; USB3_CTL4                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_CTL4                                                                                                                    ; N/A     ;
+; USB3_CTL4                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_CTL4                                                                                                                    ; N/A     ;
+; USB3_CTL5                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_CTL5                                                                                                                    ; N/A     ;
+; USB3_CTL5                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_CTL5                                                                                                                    ; N/A     ;
+; USB3_DQ1[0]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[0]                        ; N/A     ;
+; USB3_DQ1[0]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[0]                        ; N/A     ;
+; USB3_DQ1[10]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[10]                       ; N/A     ;
+; USB3_DQ1[10]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[10]                       ; N/A     ;
+; USB3_DQ1[11]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[11]                       ; N/A     ;
+; USB3_DQ1[11]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[11]                       ; N/A     ;
+; USB3_DQ1[12]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[12]                       ; N/A     ;
+; USB3_DQ1[12]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[12]                       ; N/A     ;
+; USB3_DQ1[13]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[13]                       ; N/A     ;
+; USB3_DQ1[13]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[13]                       ; N/A     ;
+; USB3_DQ1[14]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[14]                       ; N/A     ;
+; USB3_DQ1[14]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[14]                       ; N/A     ;
+; USB3_DQ1[15]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[15]                       ; N/A     ;
+; USB3_DQ1[15]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[15]                       ; N/A     ;
+; USB3_DQ1[16]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[16]                       ; N/A     ;
+; USB3_DQ1[16]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[16]                       ; N/A     ;
+; USB3_DQ1[17]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[17]                       ; N/A     ;
+; USB3_DQ1[17]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[17]                       ; N/A     ;
+; USB3_DQ1[18]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[18]                       ; N/A     ;
+; USB3_DQ1[18]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[18]                       ; N/A     ;
+; USB3_DQ1[19]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[19]                       ; N/A     ;
+; USB3_DQ1[19]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[19]                       ; N/A     ;
+; USB3_DQ1[1]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[1]                        ; N/A     ;
+; USB3_DQ1[1]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[1]                        ; N/A     ;
+; USB3_DQ1[20]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[20]                       ; N/A     ;
+; USB3_DQ1[20]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[20]                       ; N/A     ;
+; USB3_DQ1[21]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[21]                       ; N/A     ;
+; USB3_DQ1[21]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[21]                       ; N/A     ;
+; USB3_DQ1[22]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[22]                       ; N/A     ;
+; USB3_DQ1[22]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[22]                       ; N/A     ;
+; USB3_DQ1[23]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[23]                       ; N/A     ;
+; USB3_DQ1[23]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[23]                       ; N/A     ;
+; USB3_DQ1[24]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[24]                       ; N/A     ;
+; USB3_DQ1[24]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[24]                       ; N/A     ;
+; USB3_DQ1[25]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[25]                       ; N/A     ;
+; USB3_DQ1[25]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[25]                       ; N/A     ;
+; USB3_DQ1[26]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[26]                       ; N/A     ;
+; USB3_DQ1[26]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[26]                       ; N/A     ;
+; USB3_DQ1[27]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[27]                       ; N/A     ;
+; USB3_DQ1[27]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[27]                       ; N/A     ;
+; USB3_DQ1[28]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[28]                       ; N/A     ;
+; USB3_DQ1[28]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[28]                       ; N/A     ;
+; USB3_DQ1[29]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[29]                       ; N/A     ;
+; USB3_DQ1[29]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[29]                       ; N/A     ;
+; USB3_DQ1[2]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[2]                        ; N/A     ;
+; USB3_DQ1[2]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[2]                        ; N/A     ;
+; USB3_DQ1[30]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[30]                       ; N/A     ;
+; USB3_DQ1[30]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[30]                       ; N/A     ;
+; USB3_DQ1[31]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[31]                       ; N/A     ;
+; USB3_DQ1[31]                    ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[31]                       ; N/A     ;
+; USB3_DQ1[3]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[3]                        ; N/A     ;
+; USB3_DQ1[3]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[3]                        ; N/A     ;
+; USB3_DQ1[4]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[4]                        ; N/A     ;
+; USB3_DQ1[4]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[4]                        ; N/A     ;
+; USB3_DQ1[5]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[5]                        ; N/A     ;
+; USB3_DQ1[5]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[5]                        ; N/A     ;
+; USB3_DQ1[6]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[6]                        ; N/A     ;
+; USB3_DQ1[6]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[6]                        ; N/A     ;
+; USB3_DQ1[7]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[7]                        ; N/A     ;
+; USB3_DQ1[7]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[7]                        ; N/A     ;
+; USB3_DQ1[8]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[8]                        ; N/A     ;
+; USB3_DQ1[8]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[8]                        ; N/A     ;
+; USB3_DQ1[9]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[9]                        ; N/A     ;
+; USB3_DQ1[9]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|q_b[9]                        ; N/A     ;
+; USB3_DQ[0]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[0]                                                                                                                   ; N/A     ;
+; USB3_DQ[0]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[0]                                                                                                                   ; N/A     ;
+; USB3_DQ[10]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[10]                                                                                                                  ; N/A     ;
+; USB3_DQ[10]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[10]                                                                                                                  ; N/A     ;
+; USB3_DQ[11]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[11]                                                                                                                  ; N/A     ;
+; USB3_DQ[11]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[11]                                                                                                                  ; N/A     ;
+; USB3_DQ[12]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[12]                                                                                                                  ; N/A     ;
+; USB3_DQ[12]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[12]                                                                                                                  ; N/A     ;
+; USB3_DQ[13]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[13]                                                                                                                  ; N/A     ;
+; USB3_DQ[13]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[13]                                                                                                                  ; N/A     ;
+; USB3_DQ[14]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[14]                                                                                                                  ; N/A     ;
+; USB3_DQ[14]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[14]                                                                                                                  ; N/A     ;
+; USB3_DQ[15]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[15]                                                                                                                  ; N/A     ;
+; USB3_DQ[15]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[15]                                                                                                                  ; N/A     ;
+; USB3_DQ[16]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[16]                                                                                                                  ; N/A     ;
+; USB3_DQ[16]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[16]                                                                                                                  ; N/A     ;
+; USB3_DQ[17]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[17]                                                                                                                  ; N/A     ;
+; USB3_DQ[17]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[17]                                                                                                                  ; N/A     ;
+; USB3_DQ[18]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[18]                                                                                                                  ; N/A     ;
+; USB3_DQ[18]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[18]                                                                                                                  ; N/A     ;
+; USB3_DQ[19]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[19]                                                                                                                  ; N/A     ;
+; USB3_DQ[19]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[19]                                                                                                                  ; N/A     ;
+; USB3_DQ[1]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[1]                                                                                                                   ; N/A     ;
+; USB3_DQ[1]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[1]                                                                                                                   ; N/A     ;
+; USB3_DQ[20]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[20]                                                                                                                  ; N/A     ;
+; USB3_DQ[20]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[20]                                                                                                                  ; N/A     ;
+; USB3_DQ[21]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[21]                                                                                                                  ; N/A     ;
+; USB3_DQ[21]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[21]                                                                                                                  ; N/A     ;
+; USB3_DQ[22]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[22]                                                                                                                  ; N/A     ;
+; USB3_DQ[22]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[22]                                                                                                                  ; N/A     ;
+; USB3_DQ[23]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[23]                                                                                                                  ; N/A     ;
+; USB3_DQ[23]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[23]                                                                                                                  ; N/A     ;
+; USB3_DQ[24]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[24]                                                                                                                  ; N/A     ;
+; USB3_DQ[24]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[24]                                                                                                                  ; N/A     ;
+; USB3_DQ[25]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[25]                                                                                                                  ; N/A     ;
+; USB3_DQ[25]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[25]                                                                                                                  ; N/A     ;
+; USB3_DQ[26]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[26]                                                                                                                  ; N/A     ;
+; USB3_DQ[26]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[26]                                                                                                                  ; N/A     ;
+; USB3_DQ[27]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[27]                                                                                                                  ; N/A     ;
+; USB3_DQ[27]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[27]                                                                                                                  ; N/A     ;
+; USB3_DQ[28]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[28]                                                                                                                  ; N/A     ;
+; USB3_DQ[28]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[28]                                                                                                                  ; N/A     ;
+; USB3_DQ[29]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[29]                                                                                                                  ; N/A     ;
+; USB3_DQ[29]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[29]                                                                                                                  ; N/A     ;
+; USB3_DQ[2]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[2]                                                                                                                   ; N/A     ;
+; USB3_DQ[2]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[2]                                                                                                                   ; N/A     ;
+; USB3_DQ[30]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[30]                                                                                                                  ; N/A     ;
+; USB3_DQ[30]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[30]                                                                                                                  ; N/A     ;
+; USB3_DQ[31]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[31]                                                                                                                  ; N/A     ;
+; USB3_DQ[31]                     ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[31]                                                                                                                  ; N/A     ;
+; USB3_DQ[3]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[3]                                                                                                                   ; N/A     ;
+; USB3_DQ[3]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[3]                                                                                                                   ; N/A     ;
+; USB3_DQ[4]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[4]                                                                                                                   ; N/A     ;
+; USB3_DQ[4]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[4]                                                                                                                   ; N/A     ;
+; USB3_DQ[5]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[5]                                                                                                                   ; N/A     ;
+; USB3_DQ[5]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[5]                                                                                                                   ; N/A     ;
+; USB3_DQ[6]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[6]                                                                                                                   ; N/A     ;
+; USB3_DQ[6]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[6]                                                                                                                   ; N/A     ;
+; USB3_DQ[7]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[7]                                                                                                                   ; N/A     ;
+; USB3_DQ[7]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[7]                                                                                                                   ; N/A     ;
+; USB3_DQ[8]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[8]                                                                                                                   ; N/A     ;
+; USB3_DQ[8]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[8]                                                                                                                   ; N/A     ;
+; USB3_DQ[9]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[9]                                                                                                                   ; N/A     ;
+; USB3_DQ[9]                      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; USB3_DQ[9]                                                                                                                   ; N/A     ;
+; USB3_PCLK                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_pll:pll_inst|altpll:altpll_component|hnr_pll_altpll:auto_generated|wire_pll1_clk[1]                                      ; N/A     ;
+; USB3_PCLK                       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_pll:pll_inst|altpll:altpll_component|hnr_pll_altpll:auto_generated|wire_pll1_clk[1]                                      ; N/A     ;
+; hnr_fifo:fifo_inst|rdclk        ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_pll:pll_inst|altpll:altpll_component|hnr_pll_altpll:auto_generated|wire_pll1_clk[0]                                      ; N/A     ;
+; hnr_fifo:fifo_inst|rdclk        ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_pll:pll_inst|altpll:altpll_component|hnr_pll_altpll:auto_generated|wire_pll1_clk[0]                                      ; N/A     ;
+; hnr_fifo:fifo_inst|rdempty      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|cmpr_f66:rdempty_eq_comp|aneb_result_wire[0]~_wirecell ; N/A     ;
+; hnr_fifo:fifo_inst|rdempty      ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|cmpr_f66:rdempty_eq_comp|aneb_result_wire[0]~_wirecell ; N/A     ;
+; hnr_fifo:fifo_inst|rdreq        ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|cmpr_f66:rdempty_eq_comp|aneb_result_wire[0]           ; N/A     ;
+; hnr_fifo:fifo_inst|rdreq        ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|cmpr_f66:rdempty_eq_comp|aneb_result_wire[0]           ; N/A     ;
+; hnr_fifo:fifo_inst|wrfull       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|cmpr_f66:wrfull_eq_comp|aneb_result_wire[0]            ; N/A     ;
+; hnr_fifo:fifo_inst|wrfull       ; pre-synthesis ; connected ; Top            ; post-synthesis    ; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|cmpr_f66:wrfull_eq_comp|aneb_result_wire[0]            ; N/A     ;
+; hnr_fifo:fifo_inst|wrreq        ; pre-synthesis ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|SLOE~1_wirecell                                                                                       ; N/A     ;
+; hnr_fifo:fifo_inst|wrreq        ; pre-synthesis ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|SLOE~1_wirecell                                                                                       ; N/A     ;
+; stream_out:stream_inst|cnt[0]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[0]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[0]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[0]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[10]  ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[10]                                                                                               ; N/A     ;
+; stream_out:stream_inst|cnt[10]  ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[10]                                                                                               ; N/A     ;
+; stream_out:stream_inst|cnt[11]  ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[11]                                                                                               ; N/A     ;
+; stream_out:stream_inst|cnt[11]  ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[11]                                                                                               ; N/A     ;
+; stream_out:stream_inst|cnt[12]  ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[12]                                                                                               ; N/A     ;
+; stream_out:stream_inst|cnt[12]  ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[12]                                                                                               ; N/A     ;
+; stream_out:stream_inst|cnt[13]  ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[13]                                                                                               ; N/A     ;
+; stream_out:stream_inst|cnt[13]  ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[13]                                                                                               ; N/A     ;
+; stream_out:stream_inst|cnt[1]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[1]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[1]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[1]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[2]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[2]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[2]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[2]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[3]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[3]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[3]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[3]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[4]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[4]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[4]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[4]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[5]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[5]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[5]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[5]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[6]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[6]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[6]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[6]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[7]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[7]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[7]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[7]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[8]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[8]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[8]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[8]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[9]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[9]                                                                                                ; N/A     ;
+; stream_out:stream_inst|cnt[9]   ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|cnt[9]                                                                                                ; N/A     ;
+; stream_out:stream_inst|state[0] ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|state[0]                                                                                              ; N/A     ;
+; stream_out:stream_inst|state[0] ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|state[0]                                                                                              ; N/A     ;
+; stream_out:stream_inst|state[1] ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|state[1]                                                                                              ; N/A     ;
+; stream_out:stream_inst|state[1] ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|state[1]                                                                                              ; N/A     ;
+; stream_out:stream_inst|state[2] ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|state[2]                                                                                              ; N/A     ;
+; stream_out:stream_inst|state[2] ; post-fitting  ; connected ; Top            ; post-synthesis    ; stream_out:stream_inst|state[2]                                                                                              ; N/A     ;
++---------------------------------+---------------+-----------+----------------+-------------------+------------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------+
+; Partition Merge Partition Statistics                                                                                         ;
++---------------------------------------------+-------+------------------+--------------------+--------------------------------+
+; Statistic                                   ; Top   ; sld_hub:auto_hub ; sld_signaltap:FPGA ; hard_block:auto_generated_inst ;
++---------------------------------------------+-------+------------------+--------------------+--------------------------------+
+; Estimated Total logic elements              ; 243   ; 150              ; 2125               ; 0                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; Total combinational functions               ; 168   ; 124              ; 894                ; 0                              ;
+; Logic element usage by number of LUT inputs ;       ;                  ;                    ;                                ;
+;     -- 4 input functions                    ; 63    ; 54               ; 489                ; 0                              ;
+;     -- 3 input functions                    ; 38    ; 34               ; 270                ; 0                              ;
+;     -- <=2 input functions                  ; 67    ; 36               ; 135                ; 0                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; Logic elements by mode                      ;       ;                  ;                    ;                                ;
+;     -- normal mode                          ; 124   ; 116              ; 805                ; 0                              ;
+;     -- arithmetic mode                      ; 44    ; 8                ; 89                 ; 0                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; Total registers                             ; 161   ; 90               ; 1560               ; 0                              ;
+;     -- Dedicated logic registers            ; 161   ; 90               ; 1560               ; 0                              ;
+;     -- I/O registers                        ; 0     ; 0                ; 0                  ; 0                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; Virtual pins                                ; 0     ; 0                ; 0                  ; 0                              ;
+; I/O pins                                    ; 74    ; 0                ; 0                  ; 0                              ;
+; Embedded Multiplier 9-bit elements          ; 0     ; 0                ; 0                  ; 0                              ;
+; Total memory bits                           ; 32768 ; 0                ; 376832             ; 0                              ;
+; Total RAM block bits                        ; 0     ; 0                ; 0                  ; 0                              ;
+; JTAG                                        ; 1     ; 0                ; 0                  ; 0                              ;
+; PLL                                         ; 0     ; 0                ; 0                  ; 2                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; Connections                                 ;       ;                  ;                    ;                                ;
+;     -- Input Connections                    ; 228   ; 133              ; 2163               ; 2                              ;
+;     -- Registered Input Connections         ; 225   ; 101              ; 1773               ; 0                              ;
+;     -- Output Connections                   ; 1162  ; 240              ; 1                  ; 1123                           ;
+;     -- Registered Output Connections        ; 98    ; 239              ; 0                  ; 0                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; Internal Connections                        ;       ;                  ;                    ;                                ;
+;     -- Total Connections                    ; 3021  ; 919              ; 10461              ; 1127                           ;
+;     -- Registered Connections               ; 1281  ; 693              ; 7892               ; 0                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; External Connections                        ;       ;                  ;                    ;                                ;
+;     -- Top                                  ; 0     ; 123              ; 1038               ; 229                            ;
+;     -- sld_hub:auto_hub                     ; 123   ; 20               ; 230                ; 0                              ;
+;     -- sld_signaltap:FPGA                   ; 1038  ; 230              ; 0                  ; 896                            ;
+;     -- hard_block:auto_generated_inst       ; 229   ; 0                ; 896                ; 0                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; Partition Interface                         ;       ;                  ;                    ;                                ;
+;     -- Input Ports                          ; 38    ; 21               ; 243                ; 2                              ;
+;     -- Output Ports                         ; 45    ; 39               ; 196                ; 3                              ;
+;     -- Bidir Ports                          ; 0     ; 0                ; 0                  ; 0                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; Registered Ports                            ;       ;                  ;                    ;                                ;
+;     -- Registered Input Ports               ; 0     ; 4                ; 189                ; 0                              ;
+;     -- Registered Output Ports              ; 0     ; 28               ; 185                ; 0                              ;
+;                                             ;       ;                  ;                    ;                                ;
+; Port Connectivity                           ;       ;                  ;                    ;                                ;
+;     -- Input Ports driven by GND            ; 0     ; 1                ; 0                  ; 0                              ;
+;     -- Output Ports driven by GND           ; 0     ; 1                ; 0                  ; 0                              ;
+;     -- Input Ports driven by VCC            ; 0     ; 0                ; 0                  ; 0                              ;
+;     -- Output Ports driven by VCC           ; 0     ; 0                ; 0                  ; 0                              ;
+;     -- Input Ports with no Source           ; 0     ; 1                ; 35                 ; 0                              ;
+;     -- Output Ports with no Source          ; 0     ; 0                ; 0                  ; 0                              ;
+;     -- Input Ports with no Fanout           ; 0     ; 2                ; 40                 ; 1                              ;
+;     -- Output Ports with no Fanout          ; 0     ; 15               ; 185                ; 0                              ;
++---------------------------------------------+-------+------------------+--------------------+--------------------------------+
+Note: Resource usage numbers presented for Partitions containing post-synthesis logic are estimates.  For Partitions containing post-fit logic, resource usage numbers are accurate based on previous placement information.  Actual Fitter results may vary depending on current Fitter Preservation Level assignments.
+
+
++----------------------------------------------------------------------------------------+
+; Partition Merge Partition Pin Processing                                               ;
++-----------------------------------+-----------+---------------+----------+-------------+
+; Name                              ; Partition ; Type          ; Location ; Status      ;
++-----------------------------------+-----------+---------------+----------+-------------+
+; CLK_IN                            ; Top       ; Input Port    ; n/a      ;             ;
+;     -- CLK_IN                     ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- CLK_IN~input               ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; SCLK                              ; Top       ; Output Port   ; n/a      ;             ;
+;     -- SCLK                       ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- SCLK~output                ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_CTL1                         ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_CTL1                  ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_CTL1~output           ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_CTL11                        ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_CTL11                 ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_CTL11~output          ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_CTL12                        ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_CTL12                 ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_CTL12~output          ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_CTL2                         ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_CTL2                  ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_CTL2~output           ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_CTL3                         ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_CTL3                  ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_CTL3~output           ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_CTL4                         ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_CTL4                  ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_CTL4~input            ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_CTL5                         ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_CTL5                  ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_CTL5~input            ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[0]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[0]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[0]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[10]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[10]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[10]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[11]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[11]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[11]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[12]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[12]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[12]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[13]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[13]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[13]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[14]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[14]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[14]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[15]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[15]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[15]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[16]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[16]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[16]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[17]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[17]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[17]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[18]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[18]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[18]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[19]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[19]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[19]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[1]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[1]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[1]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[20]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[20]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[20]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[21]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[21]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[21]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[22]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[22]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[22]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[23]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[23]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[23]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[24]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[24]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[24]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[25]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[25]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[25]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[26]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[26]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[26]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[27]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[27]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[27]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[28]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[28]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[28]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[29]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[29]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[29]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[2]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[2]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[2]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[30]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[30]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[30]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[31]                      ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[31]               ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[31]~output        ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[3]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[3]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[3]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[4]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[4]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[4]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[5]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[5]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[5]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[6]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[6]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[6]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[7]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[7]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[7]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[8]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[8]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[8]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ1[9]                       ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_DQ1[9]                ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_DQ1[9]~output         ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[0]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[0]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[0]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[10]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[10]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[10]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[11]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[11]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[11]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[12]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[12]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[12]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[13]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[13]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[13]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[14]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[14]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[14]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[15]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[15]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[15]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[16]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[16]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[16]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[17]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[17]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[17]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[18]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[18]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[18]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[19]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[19]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[19]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[1]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[1]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[1]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[20]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[20]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[20]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[21]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[21]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[21]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[22]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[22]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[22]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[23]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[23]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[23]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[24]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[24]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[24]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[25]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[25]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[25]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[26]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[26]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[26]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[27]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[27]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[27]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[28]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[28]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[28]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[29]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[29]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[29]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[2]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[2]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[2]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[30]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[30]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[30]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[31]                       ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[31]                ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[31]~input          ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[3]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[3]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[3]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[4]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[4]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[4]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[5]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[5]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[5]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[6]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[6]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[6]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[7]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[7]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[7]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[8]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[8]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[8]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_DQ[9]                        ; Top       ; Input Port    ; n/a      ;             ;
+;     -- USB3_DQ[9]                 ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- USB3_DQ[9]~input           ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; USB3_PCLK                         ; Top       ; Output Port   ; n/a      ;             ;
+;     -- USB3_PCLK                  ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- USB3_PCLK~output           ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; altera_reserved_tck               ; Top       ; Input Port    ; n/a      ;             ;
+;     -- altera_reserved_tck        ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- altera_reserved_tck~input  ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; altera_reserved_tdi               ; Top       ; Input Port    ; n/a      ;             ;
+;     -- altera_reserved_tdi        ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- altera_reserved_tdi~input  ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; altera_reserved_tdo               ; Top       ; Output Port   ; n/a      ;             ;
+;     -- altera_reserved_tdo        ; Top       ; Output Pad    ; Unplaced ; Synthesized ;
+;     -- altera_reserved_tdo~output ; Top       ; Output Buffer ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; altera_reserved_tms               ; Top       ; Input Port    ; n/a      ;             ;
+;     -- altera_reserved_tms        ; Top       ; Input Pad     ; Unplaced ; Synthesized ;
+;     -- altera_reserved_tms~input  ; Top       ; Input Buffer  ; Unplaced ; Synthesized ;
+;                                   ;           ;               ;          ;             ;
+; pre_syn.bp.fifo_inst_rdclk        ; Top       ; Output Port   ; n/a      ;             ;
+;                                   ;           ;               ;          ;             ;
+; pre_syn.bp.fifo_inst_rdempty      ; Top       ; Output Port   ; n/a      ;             ;
+;                                   ;           ;               ;          ;             ;
+; pre_syn.bp.fifo_inst_rdreq        ; Top       ; Output Port   ; n/a      ;             ;
+;                                   ;           ;               ;          ;             ;
+; pre_syn.bp.fifo_inst_wrfull       ; Top       ; Output Port   ; n/a      ;             ;
+;                                   ;           ;               ;          ;             ;
+; pre_syn.bp.fifo_inst_wrreq        ; Top       ; Output Port   ; n/a      ;             ;
+;                                   ;           ;               ;          ;             ;
++-----------------------------------+-----------+---------------+----------+-------------+
+
+
++------------------------------------------------------------------------+
+; Partition Merge Resource Usage Summary                                 ;
++---------------------------------------------+--------------------------+
+; Resource                                    ; Usage                    ;
++---------------------------------------------+--------------------------+
+; Estimated Total logic elements              ; 2,513                    ;
+;                                             ;                          ;
+; Total combinational functions               ; 1186                     ;
+; Logic element usage by number of LUT inputs ;                          ;
+;     -- 4 input functions                    ; 606                      ;
+;     -- 3 input functions                    ; 342                      ;
+;     -- <=2 input functions                  ; 238                      ;
+;                                             ;                          ;
+; Logic elements by mode                      ;                          ;
+;     -- normal mode                          ; 1045                     ;
+;     -- arithmetic mode                      ; 141                      ;
+;                                             ;                          ;
+; Total registers                             ; 1811                     ;
+;     -- Dedicated logic registers            ; 1811                     ;
+;     -- I/O registers                        ; 0                        ;
+;                                             ;                          ;
+; I/O pins                                    ; 74                       ;
+; Total memory bits                           ; 409600                   ;
+; Embedded Multiplier 9-bit elements          ; 0                        ;
+; Total PLLs                                  ; 2                        ;
+;     -- PLLs                                 ; 2                        ;
+;                                             ;                          ;
+; Maximum fan-out node                        ; altera_internal_jtag~TDO ;
+; Maximum fan-out                             ; 967                      ;
+; Total fan-out                               ; 12811                    ;
+; Average fan-out                             ; 3.91                     ;
++---------------------------------------------+--------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Partition Merge RAM Summary                                                                                                                                                                                                                                                                     ;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+------+
+; Name                                                                                                                                                                                      ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF  ;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+------+
+; hnr_fifo:fifo_inst|dcfifo:dcfifo_component|dcfifo_mmf1:auto_generated|altsyncram_d111:fifo_ram|ALTSYNCRAM                                                                                 ; AUTO ; Simple Dual Port ; 1024         ; 32           ; 1024         ; 32           ; 32768  ; None ;
+; sld_signaltap:FPGA|sld_signaltap_impl:sld_signaltap_body|sld_signaltap_implb:sld_signaltap_body|altsyncram:\stp_non_zero_ram_gen:stp_buffer_ram|altsyncram_5024:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 4096         ; 92           ; 4096         ; 92           ; 376832 ; None ;
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+------+
+
+
++--------------------------+
+; Partition Merge Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Partition Merge
+    Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+    Info: Processing started: Fri Feb 24 18:18:08 2017
+Info: Command: quartus_cdb --read_settings_files=off --write_settings_files=off FPGA -c FPGA --merge=on
+Info (35007): Using synthesis netlist for partition "Top"
+Info (35007): Using synthesis netlist for partition "sld_hub:auto_hub"
+Info (35007): Using synthesis netlist for partition "sld_signaltap:FPGA"
+Info (35024): Succesfully connected in-system debug instance "FPGA" to all 185 required data inputs, trigger inputs, acquisition clocks, and dynamic pins
+Info (35002): Resolved and merged 3 partition(s)
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 2 node(s), including 0 DDIO, 2 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 2741 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 38 input pins
+    Info (21059): Implemented 40 output pins
+    Info (21061): Implemented 2536 logic cells
+    Info (21064): Implemented 124 RAM segments
+    Info (21065): Implemented 2 PLLs
+Info: Quartus II 64-Bit Partition Merge was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 522 megabytes
+    Info: Processing ended: Fri Feb 24 18:18:10 2017
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+

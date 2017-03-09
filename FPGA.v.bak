@@ -1,0 +1,64 @@
+// Copyright (C) 1991-2013 Altera Corporation
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, Altera MegaCore Function License 
+// Agreement, or other applicable license agreement, including, 
+// without limitation, that your use is for the sole purpose of 
+// programming logic devices manufactured by Altera and sold by 
+// Altera or its authorized distributors.  Please refer to the 
+// applicable agreement for further details.
+
+// PROGRAM		"Quartus II 64-Bit"
+// VERSION		"Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version"
+// CREATED		"Thu Dec 17 18:18:17 2015"
+
+module FPGA(
+	// CLK
+	input CLK_IN,	//10M
+	
+	
+	//GPIF II
+	input USB3_CTL4,	//FLAGA
+	input USB3_CTL5,	//FLAGB
+	input [31:0] USB3_DQ,
+	
+	output [31:0] USB3_DQ2,
+	output USB3_CTL2,	//SLOE 输出使能信号，其唯一功能是驱动数据总线
+	output USB3_CTL3,	//SLRD
+	output USB3_CTL1,	//SLWR
+	output USB3_PCLK	//100M
+);
+	
+	
+// clocks
+wire	SYS_CLK;	// generate form pll 60MHz
+wire	CLK_100M; // generate from pll 100MHz 
+reg	CLK_600K; // 
+
+// Reset signals
+wire pll_set=1'b1;
+wire	pll_lock; // PLL locked signal
+
+wire	USB3_SLWR;
+wire	USB3_SLRD;
+wire	USB3_SLOE;
+
+hnr_pll pll_inst(
+	.inclk0(CLK_IN),
+	.c0(SYS_CLK),
+	.c1(CLK_100M),
+	.locked(pll_lock));
+
+assign	USB3_CTL2 = USB3_SLOE;	
+assign	USB3_CTL3 = USB3_SLRD;	
+assign	USB3_CTL1 = USB3_SLWR;
+assign	USB3_PCLK = CLK_100M;
+	
+assign	USB3_FLAGA = USB3_CTL4;
+assign	USB3_FLAGB = USB3_CTL5;
+
+endmodule
