@@ -55,11 +55,9 @@ module FPGA(
 // clocks
 wire	SYS_CLK;
 wire	CLK_100M;
-reg	CLK_600K;
 wire	SIG_CLK;
 
 // Reset signals
-wire	pll_set=1'b1;
 wire	pll_lock; // PLL locked signal
 wire	SIG_LOCK; // PLL locked signal
 
@@ -88,56 +86,62 @@ wire	hnr_wrfull;
 wire	[31:0] hnr_DQ;
 wire	[31:0] data_u2p;
 wire	[31:0] data_p2u;
-wire RESET_N;
+wire	RESET_N;
 
 // 8 channel NCO
-wire	[7:0] clk_carrier; 
 wire	[7:0] clk_1023k; 
 
 localparam DATA_WIDTH_NCO = 28;
+localparam DATA_WIDTH_DAC = 14;
 localparam DATA_WIDTH_NCO_DELAY = 10;
-	
+
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier0;
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k; 
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k;
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca; 
-
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier1;
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k1; 
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k1;
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca1; 
-
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier2;
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k2; 
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k2;
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca2; 
-
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier3;
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k3; 
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k3;
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca3; 
-
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier4;
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k4; 
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k4;
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca4; 
-
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier5;
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k5; 
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k5;
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca5; 
-
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier6;
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k6; 
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k6;
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca6; 
-
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier7;
+
+wire	[DATA_WIDTH_NCO-1:0] fre_1023k0; 
+wire	[DATA_WIDTH_NCO-1:0] fre_1023k1; 
+wire	[DATA_WIDTH_NCO-1:0] fre_1023k2; 
+wire	[DATA_WIDTH_NCO-1:0] fre_1023k3; 
+wire	[DATA_WIDTH_NCO-1:0] fre_1023k4; 
+wire	[DATA_WIDTH_NCO-1:0] fre_1023k5; 
+wire	[DATA_WIDTH_NCO-1:0] fre_1023k6; 
 wire	[DATA_WIDTH_NCO-1:0] fre_1023k7; 
+
+wire	[DATA_WIDTH_NCO-1:0] pha_1023k0;
+wire	[DATA_WIDTH_NCO-1:0] pha_1023k1;
+wire	[DATA_WIDTH_NCO-1:0] pha_1023k2;
+wire	[DATA_WIDTH_NCO-1:0] pha_1023k3;
+wire	[DATA_WIDTH_NCO-1:0] pha_1023k4;
+wire	[DATA_WIDTH_NCO-1:0] pha_1023k5;
+wire	[DATA_WIDTH_NCO-1:0] pha_1023k6;
 wire	[DATA_WIDTH_NCO-1:0] pha_1023k7;
+
+wire	[DATA_WIDTH_DAC-1:0]  clk_carrier0;
+wire	[DATA_WIDTH_DAC-1:0]  clk_carrier1;
+wire	[DATA_WIDTH_DAC-1:0]  clk_carrier2;
+wire	[DATA_WIDTH_DAC-1:0]  clk_carrier3;
+wire	[DATA_WIDTH_DAC-1:0]  clk_carrier4;
+wire	[DATA_WIDTH_DAC-1:0]  clk_carrier5;
+wire	[DATA_WIDTH_DAC-1:0]  clk_carrier6;
+wire	[DATA_WIDTH_DAC-1:0]  clk_carrier7;
+
+wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca0; 
+wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca1; 
+wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca2; 
+wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca3; 
+wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca4; 
+wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca5; 
+wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca6; 
 wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca7; 
 
-reg	[15:0] wren;
+
+reg	[15:0] wren = 16'd0;
 wire	[7:0] data_ca;
 wire	[7:0] data_msg;
 
@@ -183,16 +187,15 @@ NCO_bb	nco_inst(
 	.pha_1023k7(pha_1023k7),
 	
 	.clk_1023k(clk_1023k),
-	.clk_carrier(clk_carrier),
 	
-	.DAC1(DAC1),
-	.DAC2(DAC2),
-	.DAC3(DAC3),
-	.DAC4(DAC4),
-	.DAC5(DAC5),
-	.DAC6(DAC6),
-	.DAC7(DAC7),
-	.DAC8(DAC8)	
+	.clk_carrier0(clk_carrier0),	
+	.clk_carrier1(clk_carrier1),
+	.clk_carrier2(clk_carrier2),
+	.clk_carrier3(clk_carrier3),
+	.clk_carrier4(clk_carrier4),
+	.clk_carrier5(clk_carrier5),
+	.clk_carrier6(clk_carrier6),
+	.clk_carrier7(clk_carrier7)
 	
 	);
 
@@ -212,20 +215,19 @@ ram_bb	ram_inst(
 	
 	.clk_1023k(clk_1023k),
 	.wren(wren),
-	.data_ca(data_ca[0]),
-	.data_msg(data_msg[0]));
+	.data_ca(data_ca),
+	.data_msg(data_msg));
 
 
 // pll, 10MHz input, 200MHz output
-sig_pll pll(
+sig_pll	pll(
 	.inclk0(CLK_IN),
 	.c0(SIG_CLK),
 	.locked(SIG_LOCK)); 
 	
-// pll, 10MHz input, 50MHz output, 100MHz output
+// pll, 10MHz input, 100MHz output
 hnr_pll pll_inst(
 	.inclk0(CLK_IN),
-	.c0(SYS_CLK),
 	.c1(CLK_100M),
 	.locked(pll_lock));
 
@@ -289,6 +291,52 @@ assign	SCLK = SIG_CLK;
 assign	USB3_FLAGA = USB3_CTL4;
 assign	USB3_FLAGB = USB3_CTL5; 
 
+assign	DAC1 = (data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
+assign	DAC2 = (data_ca[1]^data_msg[1])? ~clk_carrier1:clk_carrier1;
+assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier2:clk_carrier2;
+assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
+assign	DAC5 = (data_ca[4]^data_msg[4])? ~clk_carrier4:clk_carrier4;
+assign	DAC6 = (data_ca[5]^data_msg[5])? ~clk_carrier5:clk_carrier5;
+assign	DAC7 = (data_ca[6]^data_msg[6])? ~clk_carrier6:clk_carrier6;
+assign	DAC8 = (data_ca[7]^data_msg[7])? ~clk_carrier7:clk_carrier7;
+
+assign	delay_ca0 = 10'd1;
+assign	delay_ca1 = 10'd1;
+assign	delay_ca2 = 10'd1;
+assign	delay_ca3 = 10'd1;
+assign	delay_ca4 = 10'd1;
+assign	delay_ca5 = 10'd1;
+assign	delay_ca6 = 10'd1;
+assign	delay_ca7 = 10'd1;
+
+assign 	fre_carrier0 = 28'd124607739;
+assign 	fre_carrier1 = 28'd124607739;
+assign 	fre_carrier2 = 28'd124607739;
+assign 	fre_carrier3 = 28'd124607739;
+assign 	fre_carrier4 = 28'd124607739;
+assign 	fre_carrier5 = 28'd124607739;
+assign 	fre_carrier6 = 28'd124607739;
+assign 	fre_carrier7 = 28'd124607739;
+
+assign 	fre_1023k0 = 28'd2746095;
+assign 	fre_1023k1 = 28'd2746095;
+assign 	fre_1023k2 = 28'd2746095;
+assign 	fre_1023k3 = 28'd2746095;
+assign 	fre_1023k4 = 28'd2746095;
+assign 	fre_1023k5 = 28'd2746095;
+assign 	fre_1023k6 = 28'd2746095;
+assign 	fre_1023k7 = 28'd2746095;
+
+assign 	pha_1023k0 = 28'd0;
+assign 	pha_1023k1 = 28'd0;
+assign 	pha_1023k2 = 28'd67108864;
+assign 	pha_1023k3 = 28'd67108864;
+assign 	pha_1023k4 = 28'd67108864;
+assign 	pha_1023k5 = 28'd67108864;
+assign 	pha_1023k6 = 28'd134217728;
+assign 	pha_1023k7 = 28'd134217728;
+
+
 //assign	USB3_SLOE = ~hnr_wrreq;
 //assign	USB3_SLRD = ~hnr_wrreq;
 //assign	USB3_SLWR = 1'b1;
@@ -298,6 +346,5 @@ assign	USB3_FLAGB = USB3_CTL5;
 //assign	hnr_wrreq	=	USB3_CTL4?cnt1:1'b1;
 assign	hnr_rdreq = hnr_rdempty?1'b0:1'b1;
 assign 	DAC_CLK = CLK_100M;
-assign 	fre_carrier0 = 28'b0001_0000_0000_0000_0000_0000_0000;
 assign 	RESET_N=1;
 endmodule

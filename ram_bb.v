@@ -43,11 +43,35 @@ module ram_bb(
 	output [7:0] data_msg;
 		
 	reg	[4:0] wraddress_ca;
-	wire	[9:0] rdaddress_ca [7:0];
 	reg	[5:0] wraddress_msg;
+	wire	[9:0] rdaddress_ca [7:0];
 	reg	[10:0] rdaddress_msg [7:0];
 
 	reg	[9:0] counter_ca [7:0];
+
+  initial
+  begin
+	 wraddress_ca= 4'd0;
+	 wraddress_msg= 6'd0;
+
+	 rdaddress_msg[0] = 11'd0;
+	 rdaddress_msg[1] = 11'd0;
+	 rdaddress_msg[2] = 11'd0;
+	 rdaddress_msg[3] = 11'd0;
+	 rdaddress_msg[4] = 11'd0;
+	 rdaddress_msg[5] = 11'd0;
+	 rdaddress_msg[6] = 11'd0;
+	 rdaddress_msg[7] = 11'd0;
+
+	 counter_ca[0] = 10'd0;
+	 counter_ca[1] = 10'd0;
+	 counter_ca[2] = 10'd0;
+	 counter_ca[3] = 10'd0;
+	 counter_ca[4] = 10'd0;
+	 counter_ca[5] = 10'd0;
+	 counter_ca[6] = 10'd0;
+	 counter_ca[7] = 10'd0;
+  end 
 
 ram_ca ram_ca0(
 	.data(data),

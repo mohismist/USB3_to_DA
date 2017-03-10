@@ -102,9 +102,7 @@ begin
 
 	# 150000 rst_n=1'b0;
 	# 10000 rst_n =1'b1;
-	# 40000 rst_n =1'b1;
-
-	# 0 wren = 16'd1;
+	# 40000 wren = 16'd1;
 // insert code here --> begin 
 end
 

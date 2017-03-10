@@ -1,0 +1,8 @@
+*.bak
+*.tmp2
+db/*
+output_files/*
+simulation/*
+greybox_tmp/*
+incremental_db/*
+iptb_ddr2_high_performance_controller*

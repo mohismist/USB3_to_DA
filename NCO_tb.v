@@ -32,8 +32,8 @@ reg rst_n;
 reg [27:0] fre_chtr;
 reg [27:0] pha_chtr;
 // wires    
-wire [15:0] sin;
-wire [15:0] cos;
+wire [13:0] sin;
+wire [13:0] cos;
 
 // assign statements (if any)           
 
@@ -51,9 +51,10 @@ initial
 begin                                                 
 	# 0 rst_n =1'b1;
 	# 0 rst_n =1'b1;
-	//# 10000 rst_n =1'b1;
-	fre_chtr = 28'b0000_0000_0001_0000_0000_0000_0000_0000;
-	pha_chtr = 28'b0000_0000_0000_0000_0000_0000_0000_0000;
+	fre_chtr = 28'd67108864;
+	pha_chtr = 28'd0;
+	# 150000 rst_n=1'b0;
+	# 10000 rst_n =1'b1;
 end
 
 // clk 100M
@@ -61,7 +62,7 @@ initial
 begin
 	clk = 0;
 	forever
- 	# 5000 clk=~clk;
+ 	# 50000 clk=~clk;
 $display("Running testbench");                       
 end 
 
