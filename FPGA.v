@@ -55,6 +55,7 @@ module FPGA(
 // clocks
 wire	SYS_CLK;
 wire	CLK_100M;
+wire	CLK_160M;
 wire	SIG_CLK;
 
 // Reset signals
@@ -151,7 +152,7 @@ reg	cnt1 = 1'b0;
 reg	[3:0] cnt2 = 4'b0;
 
 NCO_bb	nco_inst(
-	.clk(CLK_100M),
+	.clk(CLK_160M),
 	.rst_n(RESET_N),
 	
 	.fre_carrier0(fre_carrier0),
@@ -228,6 +229,7 @@ sig_pll	pll(
 // pll, 10MHz input, 100MHz output
 hnr_pll pll_inst(
 	.inclk0(CLK_IN),
+	.c0(CLK_160M),
 	.c1(CLK_100M),
 	.locked(pll_lock));
 
@@ -291,7 +293,7 @@ assign	SCLK = SIG_CLK;
 assign	USB3_FLAGA = USB3_CTL4;
 assign	USB3_FLAGB = USB3_CTL5; 
 
-assign	DAC1 = (data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
+assign	DAC1 = clk_carrier0;//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
 assign	DAC2 = (data_ca[1]^data_msg[1])? ~clk_carrier1:clk_carrier1;
 assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier2:clk_carrier2;
 assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
@@ -309,23 +311,24 @@ assign	delay_ca5 = 10'd1;
 assign	delay_ca6 = 10'd1;
 assign	delay_ca7 = 10'd1;
 
-assign 	fre_carrier0 = 28'd124607739;
-assign 	fre_carrier1 = 28'd124607739;
-assign 	fre_carrier2 = 28'd124607739;
-assign 	fre_carrier3 = 28'd124607739;
-assign 	fre_carrier4 = 28'd124607739;
-assign 	fre_carrier5 = 28'd124607739;
-assign 	fre_carrier6 = 28'd124607739;
-assign 	fre_carrier7 = 28'd124607739;
+assign 	fre_carrier0 = 28'd78132310;
+assign 	fre_carrier1 = 28'd78132310;
+assign 	fre_carrier2 = 28'd78132310;
+assign 	fre_carrier3 = 28'd78132310;
+assign 	fre_carrier4 = 28'd78132310;
+assign 	fre_carrier5 = 28'd78132310;
+assign 	fre_carrier6 = 28'd78132310;
+assign 	fre_carrier7 = 28'd78132310;
 
-assign 	fre_1023k0 = 28'd2746095;
-assign 	fre_1023k1 = 28'd2746095;
-assign 	fre_1023k2 = 28'd2746095;
-assign 	fre_1023k3 = 28'd2746095;
-assign 	fre_1023k4 = 28'd2746095;
-assign 	fre_1023k5 = 28'd2746095;
-assign 	fre_1023k6 = 28'd2746095;
-assign 	fre_1023k7 = 28'd2746095;
+
+assign 	fre_1023k0 = 28'h1A3055;
+assign 	fre_1023k1 = 28'h1A3055;
+assign 	fre_1023k2 = 28'h1A3055;
+assign 	fre_1023k3 = 28'h1A3055;
+assign 	fre_1023k4 = 28'h1A3055;
+assign 	fre_1023k5 = 28'h1A3055;
+assign 	fre_1023k6 = 28'h1A3055;
+assign 	fre_1023k7 = 28'h1A3055;
 
 assign 	pha_1023k0 = 28'd0;
 assign 	pha_1023k1 = 28'd0;
@@ -345,6 +348,6 @@ assign 	pha_1023k7 = 28'd134217728;
 
 //assign	hnr_wrreq	=	USB3_CTL4?cnt1:1'b1;
 assign	hnr_rdreq = hnr_rdempty?1'b0:1'b1;
-assign 	DAC_CLK = CLK_100M;
+assign 	DAC_CLK = CLK_160M;
 assign 	RESET_N=1;
 endmodule
