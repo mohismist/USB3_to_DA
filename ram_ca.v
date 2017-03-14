@@ -94,12 +94,7 @@ module ram_ca (
 		altsyncram_component.clock_enable_input_a = "BYPASS",
 		altsyncram_component.clock_enable_input_b = "BYPASS",
 		altsyncram_component.clock_enable_output_b = "BYPASS",
-`ifdef NO_PLI
-		altsyncram_component.init_file = "Hex1.rif"
-`else
-		altsyncram_component.init_file = "Hex1.hex"
-`endif
-,
+		altsyncram_component.init_file = "./matlab/HEX1.mif",
 		altsyncram_component.init_file_layout = "PORT_B",
 		altsyncram_component.intended_device_family = "Cyclone III",
 		altsyncram_component.lpm_type = "altsyncram",
@@ -153,7 +148,7 @@ endmodule
 // Retrieval info: PRIVATE: MAXIMUM_DEPTH NUMERIC "0"
 // Retrieval info: PRIVATE: MEMSIZE NUMERIC "1024"
 // Retrieval info: PRIVATE: MEM_IN_BITS NUMERIC "1"
-// Retrieval info: PRIVATE: MIFfilename STRING "Hex1.hex"
+// Retrieval info: PRIVATE: MIFfilename STRING "./matlab/HEX1.mif"
 // Retrieval info: PRIVATE: OPERATION_MODE NUMERIC "2"
 // Retrieval info: PRIVATE: OUTDATA_ACLR_B NUMERIC "0"
 // Retrieval info: PRIVATE: OUTDATA_REG_B NUMERIC "0"
@@ -186,7 +181,7 @@ endmodule
 // Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_A STRING "BYPASS"
 // Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_B STRING "BYPASS"
 // Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_B STRING "BYPASS"
-// Retrieval info: CONSTANT: INIT_FILE STRING "Hex1.hex"
+// Retrieval info: CONSTANT: INIT_FILE STRING "./matlab/HEX1.mif"
 // Retrieval info: CONSTANT: INIT_FILE_LAYOUT STRING "PORT_B"
 // Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone III"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "altsyncram"
