@@ -294,7 +294,7 @@ assign	USB3_FLAGA = USB3_CTL4;
 assign	USB3_FLAGB = USB3_CTL5; 
 
 assign	DAC1 = clk_carrier0;//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
-assign	DAC2 = (data_ca[1]^data_msg[1])? ~clk_carrier1:clk_carrier1;
+assign	DAC2 = data_ca[1]? ~clk_carrier1:clk_carrier1;
 assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier2:clk_carrier2;
 assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
 assign	DAC5 = (data_ca[4]^data_msg[4])? ~clk_carrier4:clk_carrier4;
@@ -311,14 +311,14 @@ assign	delay_ca5 = 10'd1;
 assign	delay_ca6 = 10'd1;
 assign	delay_ca7 = 10'd1;
 
-assign 	fre_carrier0 = 28'd78132310;
-assign 	fre_carrier1 = 28'd78132310;
-assign 	fre_carrier2 = 28'd78132310;
-assign 	fre_carrier3 = 28'd78132310;
-assign 	fre_carrier4 = 28'd78132310;
-assign 	fre_carrier5 = 28'd78132310;
-assign 	fre_carrier6 = 28'd78132310;
-assign 	fre_carrier7 = 28'd78132310;
+assign 	fre_carrier0 = 28'd74764642;
+assign 	fre_carrier1 = 28'd74764642;
+assign 	fre_carrier2 = 28'd74764642;
+assign 	fre_carrier3 = 28'd74764642;
+assign 	fre_carrier4 = 28'd74764642;
+assign 	fre_carrier5 = 28'd74764642;
+assign 	fre_carrier6 = 28'd74764642;
+assign 	fre_carrier7 = 28'd74764642;
 
 
 assign 	fre_1023k0 = 28'h1A3055;
