@@ -2,6 +2,7 @@ module stream(
 	input clk,
 	input rst_n,
 	input FLAGA,
+	input FLAGB,
 	input DATA_DIR,
 	
 	output reg SLCS,
@@ -16,7 +17,7 @@ module stream(
 	output reg [2:0] usb_wr_state
 );
 
-
+reg FLAGB1;
 
 always@(posedge clk or negedge rst_n)
 begin
@@ -50,6 +51,7 @@ begin
 		if (DATA_DIR==1'b0) begin
 			A0 <= 1'b1;
 			A1 <= 1'b1;
+			FLAGB1 <= FLAGB;
 			case (usb_rd_state)
 				3'b000, 3'b001, 3'b010, 3'b011: begin
 					usb_rd_state <= usb_rd_state + 3'b1;
@@ -68,9 +70,11 @@ begin
 					SLCS <= 1'b0;
 					SLOE <= 1'b0;
 					if (FLAGA==1'b1) begin
-						SLRD <= 1'b0;
-//						wrreq	<=	1'b1;
-						usb_rd_cnt <= usb_rd_cnt + 14'b1;
+						if(FLAGB1==1'b1) begin
+							SLRD <= 1'b0;
+//							wrreq	<=	1'b1;
+							usb_rd_cnt <= usb_rd_cnt + 14'b1;
+						end
 					end
 					else begin
 						usb_rd_cnt <= 14'b0;

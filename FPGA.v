@@ -82,6 +82,7 @@ stream stream_inst(
 	.clk(USB3_PCLK),
 	.rst_n(RESET_N),
 	.FLAGA(USB3_FLAGA),
+	.FLAGB(USB3_FLAGB),
 	.DATA_DIR(DATA_DIR),
 	.SLCS(USB3_SLCS),
 	.SLOE(USB3_SLOE),
