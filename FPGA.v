@@ -60,8 +60,8 @@ wire	USB3_FLAGB;
 
 // USB Interface
 wire	DATA_DIR = 1'b0;//1 for p2u	0 for u2p
-wire	[13:0] usb_rd_cnt = 14'b0;
-wire	[2:0] usb_rd_state = 3'b0;
+wire	[8:0] usb_rd_cnt = 9'b0;
+wire	[3:0] usb_rd_state = 3'b0;
 wire	[31:0] usb_wr_cnt = 32'b0;
 wire	[2:0] usb_wr_state = 3'b0;
 
