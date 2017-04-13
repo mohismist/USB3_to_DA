@@ -80,13 +80,13 @@ begin
 					SLCS <= 1'b0;
 					SLOE <= 1'b0;
 					if(FLAGB1==1'b1) begin
-						if(FLAGA==1'b0 && usb_rd_cnt>=500) begin
+						/*if(FLAGA==1'b0 && usb_rd_cnt>=500) begin
 							usb_rd_state <= usb_rd_state + 4'b1;
 						end
-						else begin
+						else begin*/
 							SLRD <= 1'b0;
 							usb_rd_cnt <= usb_rd_cnt + 9'b1;
-						end
+						//end
 					end
 					else begin
 						usb_rd_state <= usb_rd_state + 4'b1;
