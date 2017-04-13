@@ -11,16 +11,16 @@ module stream(
 	output reg SLWR,
 	output reg A1,
 	output reg A0,
-	output reg [8:0] usb_rd_cnt,
-	output reg [31:0] usb_wr_cnt,
-	output reg [3:0] usb_rd_state,
-	output reg [2:0] usb_wr_state
+	output reg FLAGB2 = 1'b1,
+	output reg [8:0] usb_rd_cnt = 4'b0,
+	output reg [31:0] usb_wr_cnt = 32'b0,
+	output reg [3:0] usb_rd_state = 4'b0,
+	output reg [2:0] usb_wr_state = 3'b0
 );
 
-reg FLAGB1;
-reg FLAGB2;
-reg FLAGB3;
-reg FLAGS = 1'b0;
+reg FLAGB1 = 1'b1;
+reg FLAGB3 = 1'b1;
+reg FLAGB4 = 1'b1;
 
 always@(posedge clk or negedge rst_n)
 begin
@@ -57,53 +57,45 @@ begin
 			FLAGB1 <= FLAGB;
 			FLAGB2 <= FLAGB1;
 			FLAGB3 <= FLAGB2;
+			FLAGB4 <= FLAGB3;
 			case (usb_rd_state)
-				4'd0: begin
-					usb_rd_state <= usb_rd_state + 4'b1;
+				4'd0,4'd1,4'd2: begin
 					usb_rd_cnt <= 9'd0;
-				end
-				4'd1,4'd2,4'd3: begin
-					usb_rd_state <= usb_rd_state + 4'b1;
 					SLCS <= 1'b0;
-				end
-				4'd4:	begin
 					usb_rd_state <= usb_rd_state + 4'b1;
+				end
+				4'd3:	begin
+					SLCS <= 1'b0;
+					if(FLAGA==1'b1) begin
+						usb_rd_state <= usb_rd_state + 4'b1;
+						SLOE <= 1'b0;
+					end
+				end
+				4'd4,4'd5: begin
 					SLCS <= 1'b0;
 					SLOE <= 1'b0;
+					usb_rd_state <= usb_rd_state + 4'b1;
 				end
-				4'd5: begin
+				4'd6: begin
 					SLCS <= 1'b0;
 					SLOE <= 1'b0;
-//					if (FLAGS == 1'b1) begin
-						if(FLAGA==1'b1) begin
-							SLRD <= 1'b0;
-							usb_rd_cnt <= usb_rd_cnt + 9'b1;
-//							if (FLAGB2 == 1'b0) begin
-//								SLRD <= 1'b1;
-//								usb_rd_state <= usb_rd_state + 4'b1;
-//							end
-						end
-						else begin
+					if(FLAGB1==1'b1) begin
+						if(FLAGA==1'b0 && usb_rd_cnt>=500) begin
 							usb_rd_state <= usb_rd_state + 4'b1;
 						end
-//						else if(FLAGB2==1'b1)begin
-//							usb_rd_state <= usb_rd_state + 4'b1;
-//						end
-//					end
-//					else begin
-//						if (FLAGA==1'b1) begin
-//							FLAGS<=1'b1;
-//							SLRD <= 1'b0;
-//							usb_rd_cnt <= usb_rd_cnt + 9'b1;
-//						end
-//					end
+						else begin
+							SLRD <= 1'b0;
+							usb_rd_cnt <= usb_rd_cnt + 9'b1;
+						end
+					end
+					else begin
+						usb_rd_state <= usb_rd_state + 4'b1;
+					end
 				end
-				4'd8: begin
+				4'd12: begin
 					usb_rd_state <= 4'd0;
 				end
 				default:	begin
-					SLCS <= 1'b0;
-					SLOE <= 1'b0;
 					usb_rd_state <= usb_rd_state + 4'b1;
 				end
 			endcase

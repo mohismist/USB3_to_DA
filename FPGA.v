@@ -64,6 +64,7 @@ wire	[8:0] usb_rd_cnt = 9'b0;
 wire	[3:0] usb_rd_state = 3'b0;
 wire	[31:0] usb_wr_cnt = 32'b0;
 wire	[2:0] usb_wr_state = 3'b0;
+wire FLAGB2;
 
 wire	[31:0] data_u2p;
 wire	[31:0] data_p2u;
@@ -90,6 +91,7 @@ stream stream_inst(
 	.SLWR(USB3_SLWR),
 	.A1(USB3_A1),
 	.A0(USB3_A0),
+	.FLAGB2(FLAGB2),
 	.usb_rd_cnt(usb_rd_cnt),
 	.usb_wr_cnt(usb_wr_cnt),
 	.usb_rd_state(usb_rd_state),
