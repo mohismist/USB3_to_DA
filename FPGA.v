@@ -29,7 +29,7 @@ module FPGA(
 	input USB3_CTL5,	//FLAGB
 	inout [31:0] USB3_DQ,
 	
-	output [31:0] data_hnr,
+	//output [31:0] data_hnr,
 	output USB3_CTL2,	//SLOE 输出使能信号，其唯一功能是驱动数据总线
 	output USB3_CTL3,	//SLRD
 	output USB3_CTL1,	//SLWR
@@ -43,18 +43,19 @@ module FPGA(
 	output [13:0] DAC2,
 	output [13:0] DAC3,
 	output [13:0] DAC4,
-	output [13:0] DAC5,
-	output [13:0] DAC6,
-	output [13:0] DAC7,
-	output [13:0] DAC8,
+	//output [13:0] DAC5,
+	//output [13:0] DAC6,
+	//output [13:0] DAC7,
+	//output [13:0] DAC8,
 	
-	output DAC_CLK,
+	output DAC_CLK
 	
-	output	[7:0] clk_1023k,
-	output	[7:0] data_ca
+//	output	[7:0] clk_1023k,
+//	output	[7:0] data_ca
 	);
 	
-	
+wire [7:0] data_ca;	
+wire [7:0] clk_1023k;
 // clocks
 wire	SYS_CLK;
 wire	CLK_100M;
@@ -91,7 +92,7 @@ wire	[31:0] hnr_DQ;
 wire	[31:0] data_u2p;
 wire	[31:0] data_p2u;
 wire	RESET_N;
-
+wire  FLAGB2;
 // 8 channel NCO
 
 
@@ -246,19 +247,19 @@ hnr_fifo fifo_inst(
 	.rdempty(hnr_rdempty),
 	.wrfull(hnr_wrfull));
 	
-stream	stream_inst(
+stream stream_inst(
 	.clk(USB3_PCLK),
 	.rst_n(RESET_N),
 	.FLAGA(USB3_FLAGA),
+	.FLAGB(USB3_FLAGB),
 	.DATA_DIR(DATA_DIR),
-	.wrfull(hnr_wrfull),
-	.wrreq(hnr_wrreq),
 	.SLCS(USB3_SLCS),
 	.SLOE(USB3_SLOE),
 	.SLRD(USB3_SLRD),
 	.SLWR(USB3_SLWR),
 	.A1(USB3_A1),
 	.A0(USB3_A0),
+	.FLAGB2(FLAGB2),
 	.usb_rd_cnt(usb_rd_cnt),
 	.usb_wr_cnt(usb_wr_cnt),
 	.usb_rd_state(usb_rd_state),
@@ -300,10 +301,10 @@ assign	DAC1 = clk_carrier0;//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier
 assign	DAC2 = data_ca[1]? ~clk_carrier1:clk_carrier1;
 assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier2:clk_carrier2;
 assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
-assign	DAC5 = (data_ca[4]^data_msg[4])? ~clk_carrier4:clk_carrier4;
-assign	DAC6 = (data_ca[5]^data_msg[5])? ~clk_carrier5:clk_carrier5;
-assign	DAC7 = (data_ca[6]^data_msg[6])? ~clk_carrier6:clk_carrier6;
-assign	DAC8 = (data_ca[7]^data_msg[7])? ~clk_carrier7:clk_carrier7;
+//assign	DAC5 = (data_ca[4]^data_msg[4])? ~clk_carrier4:clk_carrier4;
+//assign	DAC6 = (data_ca[5]^data_msg[5])? ~clk_carrier5:clk_carrier5;
+//assign	DAC7 = (data_ca[6]^data_msg[6])? ~clk_carrier6:clk_carrier6;
+//assign	DAC8 = (data_ca[7]^data_msg[7])? ~clk_carrier7:clk_carrier7;
 
 assign	delay_ca0 = 10'd1;
 assign	delay_ca1 = 10'd1;
