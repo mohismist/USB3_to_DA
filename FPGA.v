@@ -79,7 +79,7 @@ wire	USB3_FLAGB;
 // USB Interface
 wire	DATA_DIR = 1'b0;//1 for p2u	0 for u2p
 wire	[13:0] usb_rd_cnt = 14'b0;
-wire	[2:0] usb_rd_state = 3'b0;
+wire	[3:0] usb_rd_state ;//= 4'b0;
 wire	[31:0] usb_wr_cnt = 32'b0;
 wire	[2:0] usb_wr_state = 3'b0;
 
@@ -297,7 +297,7 @@ assign	SCLK = SIG_CLK;
 assign	USB3_FLAGA = USB3_CTL4;
 assign	USB3_FLAGB = USB3_CTL5; 
 
-assign	DAC1 = clk_carrier0;//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
+assign	DAC1 = (usb_rd_state == 4'd)?14'b0:USB3_DQ[31:18];//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
 assign	DAC2 = data_ca[1]? ~clk_carrier1:clk_carrier1;
 assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier2:clk_carrier2;
 assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
