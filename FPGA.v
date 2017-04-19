@@ -207,7 +207,7 @@ NCO_bb	nco_inst(
 ram_bb	ram_inst(
 	.clk(CLK_100M),
 	.rst_n(RESET_N),
-	.data(data_u2p),
+	.data(data_cache),
 	
 	.delay_ca0(delay_ca0),
 	.delay_ca1(delay_ca1),
@@ -237,16 +237,6 @@ hnr_pll pll_inst(
 	.c1(CLK_100M),
 	.locked(pll_lock));
 
-hnr_fifo fifo_inst(
-	.data(data_u2p),
-	.rdclk(SYS_CLK),
-	.rdreq(hnr_rdreq),
-	.wrclk(USB3_PCLK),
-	.wrreq(hnr_wrreq),
-	.q(hnr_DQ),
-	.rdempty(hnr_rdempty),
-	.wrfull(hnr_wrfull));
-	
 stream stream_inst(
 	.clk(USB3_PCLK),
 	.rst_n(RESET_N),
@@ -265,6 +255,17 @@ stream stream_inst(
 	.usb_rd_state(usb_rd_state),
 	.usb_wr_state(usb_wr_state));
 
+	
+ram_cache_bb cache_inst(
+    .wrclock(USB3_PCLK),
+    .rdclock(CLK_100M),
+    .data(data_u2p),
+    .q(data_cache),
+    .usb_rd_state(usb_rd_state),
+	 .rst_n(RESET_N),
+	 .USB3_FLAGA(USB3_FLAGA)
+);
+	
 always @(posedge USB3_PCLK) begin
 	if (counter >= 32'h000f_0000) begin
 		cnt1 <= 1'b1;
@@ -297,7 +298,7 @@ assign	SCLK = SIG_CLK;
 assign	USB3_FLAGA = USB3_CTL4;
 assign	USB3_FLAGB = USB3_CTL5; 
 
-assign	DAC1 = (usb_rd_state == 4'd)?14'b0:USB3_DQ[31:18];//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
+assign	DAC1 = (usb_rd_state == 4'd6)?14'b0:USB3_DQ[31:18];//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
 assign	DAC2 = data_ca[1]? ~clk_carrier1:clk_carrier1;
 assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier2:clk_carrier2;
 assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
