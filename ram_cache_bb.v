@@ -17,12 +17,12 @@ input rst_n;
 input USB3_FLAGA;
 output	[31:0]  q;
 
-reg wren;
+reg wren=1'b0;
 reg rden;
 reg flag=1'b0;
-reg [8:0]  rd_count;
-reg	[7:0]  rdaddress;
-reg	[7:0]  wraddress;
+reg [8:0]  rd_count=9'd0;
+reg	[7:0]  rdaddress=8'd0;
+reg	[7:0]  wraddress=8'd0;
 
 reg   [3:0]wr_state=4'b0;
 reg   [7:0]rd_state=8'd0;
@@ -49,7 +49,7 @@ begin
                     wr_state <= wr_state + 1;
                 end
             end
-            4'd1,4'd2,4'd3:begin
+            4'd1,4'd2:begin
                 wren <= 1'b1;
                 wraddress <= wraddress + 1;
                 if(usb_rd_state!=4'd6) begin
