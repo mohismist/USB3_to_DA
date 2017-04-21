@@ -72,13 +72,13 @@ always@(posedge rdclock or negedge rst_n) begin
     else begin
         case(rd_state)
             4'd0:begin
-                if(rden==1'b1)begin
-                    if(wraddress==7'd255)begin
-                        rdaddress<=7'd0;
-                    end
-                    else begin
-                        rdaddress<=wraddress+1;
-                    end
+                if(wraddress==7'd255)begin
+                   rdaddress<=7'd0;
+                end
+                else begin
+                   rdaddress<=wraddress+8'd1;
+                end
+					 if(rden==1'b1)begin
                     rd_state <= rd_state+1;
                 end
             end
