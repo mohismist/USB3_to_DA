@@ -22,7 +22,7 @@ reg rden;
 reg flag=1'b0;
 reg [8:0]  rd_count=9'd0;
 reg	[7:0]  rdaddress=8'd0;
-reg	[7:0]  wraddress=8'd0;
+reg	[7:0]  wraddress=8'd15;
 
 reg   [3:0]wr_state=4'b0;
 reg   [7:0]rd_state=8'd0;
@@ -47,6 +47,7 @@ begin
                 wren <= 1'b0;
                 if(usb_rd_state==4'd6) begin
                     wr_state <= wr_state + 1;
+						  wren <= 1'b1;
                 end
             end
             4'd1,4'd2:begin
@@ -114,7 +115,7 @@ always@(posedge rdclock) begin
         end
         4'd1:begin
             rd_count <= rd_count + 1;
-            if(rd_count > 8'd255) begin
+            if(rd_count > 8'd253) begin
                 rd_count<= 8'd0;
                 flag<=1'b1;
                 flag_state<=flag_state+1;
