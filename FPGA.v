@@ -263,7 +263,8 @@ ram_cache_bb cache_inst(
     .q(data_cache),
     .usb_rd_state(usb_rd_state),
 	 .rst_n(RESET_N),
-	 .USB3_FLAGA(USB3_FLAGA)
+	 .USB3_FLAGA(USB3_FLAGA),
+	 .wren_for_ram(wren)
 );
 	
 always @(posedge USB3_PCLK) begin

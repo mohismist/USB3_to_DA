@@ -5,7 +5,8 @@ module ram_cache_bb(
     q,
     usb_rd_state,
     rst_n,
-    USB3_FLAGA
+    USB3_FLAGA,
+	  wren_for_ram
 );
 
 
@@ -15,6 +16,7 @@ input	  wrclock;
 input [3:0]usb_rd_state;
 input rst_n;
 input USB3_FLAGA;
+output [15:0]wren_for_ram;
 output	[31:0]  q;
 
 reg wren=1'b0;
@@ -127,4 +129,8 @@ always@(posedge rdclock) begin
         end
     endcase
 end
+
+assign wren_for_ram = (rden == 1'b1 )?16'hffff:16'b0;
+
 endmodule
+
