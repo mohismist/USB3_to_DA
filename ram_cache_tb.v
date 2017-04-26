@@ -18,14 +18,14 @@ reg[3:0] data_state=4'd0;
 
 localparam DATA_WIDTH_DELAY = 10;
 
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca0;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca1;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca2;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca3;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca4;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca5;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca6;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca7;
+	reg [DATA_WIDTH_DELAY-1:0] delay_ca0=0;
+	reg [DATA_WIDTH_DELAY-1:0] delay_ca1=0;
+	reg [DATA_WIDTH_DELAY-1:0] delay_ca2=0;
+	reg [DATA_WIDTH_DELAY-1:0] delay_ca3=0;
+	reg [DATA_WIDTH_DELAY-1:0] delay_ca4=0;
+	reg [DATA_WIDTH_DELAY-1:0] delay_ca5=0;
+	reg [DATA_WIDTH_DELAY-1:0] delay_ca6=0;
+	reg [DATA_WIDTH_DELAY-1:0] delay_ca7=0;
 
 
 	wire [15:0] wren;
@@ -111,7 +111,7 @@ always@(posedge wrclock) begin
             data_state<=data_state+1;
         end
         4'd6:begin
-            data<={24'b0,dcount[7:0]};
+            data<=32'hAAAAAAAA;//{24'b0,dcount[7:0]};
             USB3_FLAGA<=1'b1;
             usb_rd_state<=4'd6;
             dcount<=dcount+1;
@@ -120,7 +120,7 @@ always@(posedge wrclock) begin
             end
         end
         4'd7:begin
-            data<={24'b0,dcount[7:0]};
+            data<=32'hAAAAAAAA;//{24'b0,dcount[7:0]};
             USB3_FLAGA<=1'b1;
             usb_rd_state<=4'd0;
             dcount<=dcount+1;
