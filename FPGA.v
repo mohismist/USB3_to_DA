@@ -149,7 +149,7 @@ wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca7;
 wire	[15:0] wren;
 
 wire	[7:0] data_msg;
-
+wire  [31:0] data_cache;
 // For test
 reg	[31:0] counter = 32'b1;
 reg	cnt1 = 1'b0;
@@ -218,7 +218,7 @@ ram_bb	ram_inst(
 	.delay_ca6(delay_ca6),
 	.delay_ca7(delay_ca7),
 	
-	.clk_1023k(clk_1023k),
+	.clk_1023k(CLK_100M),//clk_1023k),
 	.wren(wren),
 	.data_ca(data_ca),
 	.data_msg(data_msg));

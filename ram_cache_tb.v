@@ -68,7 +68,7 @@ ram_bb ram_inst(
 	.delay_ca6(delay_ca6),
 	.delay_ca7(delay_ca7),
 	
-	.clk_1023k(rdclock),
+	.clk_1023k(clk_1023k),
 	.wren(wren),
 	
 	.data_ca(data_ca),
