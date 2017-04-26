@@ -4,8 +4,8 @@ module ram_cache_tb();
 // general purpose registers
 reg eachvec;
 // test vector input registers
-wire rdclock;//10M
-reg wrclock;
+reg rdclock=0;//10M
+reg wrclock=0;
 reg [31:0] data;
 reg [8:0]dcount=9'd0;
 reg rst_n=1'b1;
@@ -45,7 +45,7 @@ localparam DATA_WIDTH_DELAY = 10;
       
 ram_cache_bb cache(
     .wrclock(wrclock),
-    .rdclock(rdclock),
+    .rdclock(wrclock),
     .data(data),
     .q(q),
     .usb_rd_state(usb_rd_state),
@@ -68,7 +68,7 @@ ram_bb ram_inst(
 	.delay_ca6(delay_ca6),
 	.delay_ca7(delay_ca7),
 	
-	.clk_1023k(clk_1023k),
+	.clk_1023k(rdclock),
 	.wren(wren),
 	
 	.data_ca(data_ca),
@@ -86,8 +86,16 @@ forever
 // --> end                                                                   
 end 
 
-
-assign rdclock=wrclock;
+reg [4:0]count_t=5'd0;
+always@(posedge wrclock) begin
+  if(count_t==5'd10) begin
+    count_t<=5'd0;
+    rdclock<=~rdclock;
+  end
+  else begin
+    count_t<=count_t+1;
+  end     
+end
 
 always@(posedge wrclock) begin
     case (data_state)
@@ -95,7 +103,7 @@ always@(posedge wrclock) begin
             usb_rd_state<=4'd0;
             USB3_FLAGA<=1'b0;
             dcount<=dcount+1;
-            if(dcount==9'd300) begin
+            if(dcount==9'd511) begin
               dcount<=9'b0;
               data_state<=4'd3;
             end

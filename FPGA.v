@@ -146,7 +146,7 @@ wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca6;
 wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca7; 
 
 
-reg	[15:0] wren = 16'd0;
+wire	[15:0] wren;
 
 wire	[7:0] data_msg;
 
@@ -299,7 +299,7 @@ assign	SCLK = SIG_CLK;
 assign	USB3_FLAGA = USB3_CTL4;
 assign	USB3_FLAGB = USB3_CTL5; 
 
-assign	DAC1 = (usb_rd_state == 4'd6)?14'b0:USB3_DQ[31:18];//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
+assign	DAC1 = {data_ca[0],13'b0};//(usb_rd_state == 4'd6)?14'b0:USB3_DQ[31:18];//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
 assign	DAC2 = data_ca[1]? ~clk_carrier1:clk_carrier1;
 assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier2:clk_carrier2;
 assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;

@@ -224,7 +224,7 @@ always @(posedge clk or negedge rst_n) begin
 		wraddress_ca <= 5'd0;
 		wraddress_msg <= 6'd0;
 	end
-	else if(|(wren)) begin
+	else if(wren!=16'b0) begin
 		if (wraddress_ca >= 5'd31)
 			wraddress_ca <= 5'd0;
 		else
