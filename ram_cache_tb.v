@@ -68,7 +68,7 @@ ram_bb ram_inst(
 	.delay_ca6(delay_ca6),
 	.delay_ca7(delay_ca7),
 	
-	.clk_1023k(clk_1023k),
+	.clk_1023k(wrclock),
 	.wren(wren),
 	
 	.data_ca(data_ca),
@@ -119,7 +119,7 @@ always@(posedge wrclock) begin
             data_state<=data_state+1;
         end
         4'd6:begin
-            data<=32'hAAAAAAAA;//{24'b0,dcount[7:0]};
+            data<={24'b0,dcount[7:0]};
             USB3_FLAGA<=1'b1;
             usb_rd_state<=4'd6;
             dcount<=dcount+1;
@@ -128,7 +128,7 @@ always@(posedge wrclock) begin
             end
         end
         4'd7:begin
-            data<=32'hAAAAAAAA;//{24'b0,dcount[7:0]};
+            data<={24'b0,dcount[7:0]};
             USB3_FLAGA<=1'b1;
             usb_rd_state<=4'd0;
             dcount<=dcount+1;
@@ -140,7 +140,7 @@ always@(posedge wrclock) begin
             USB3_FLAGA<=1'b0;
             usb_rd_state<=4'd0;
             data_state<=4'd0;
-            dcount<=9'd1;
+            dcount<=9'd0;
         end
     endcase
 end

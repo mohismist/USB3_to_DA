@@ -67,6 +67,7 @@ begin
     end
 end
 
+reg wren_flag=0;
 always@(posedge rdclock or negedge rst_n) begin
     if(~rst_n) begin
         rdaddress <=0;
@@ -80,18 +81,30 @@ always@(posedge rdclock or negedge rst_n) begin
                 else begin
                    rdaddress<=wraddress+8'd1;
                 end
-					 if(rden==1'b1)begin
-                    rd_state <= rd_state+1;
+                wren_flag<=1'b0;
+					      if(rden==1'b1)begin
+                    rd_state <= rd_state+1;           
                 end
             end
             4'd1:begin
                 rdaddress<=rdaddress+1;
+                wren_flag<=1'b0;
+                rd_state<=rd_state+1;
+            end
+            4'd2:begin
+               rdaddress<=rdaddress+1;
+                 wren_flag<=1'b1;
                 if(rden==1'b0)begin
                     rd_state<=rd_state+1;
                 end
             end
+            4'd3:begin
+              rd_state<=rd_state+1;
+              wren_flag<=1'd1;
+            end
             default:begin
                 rd_state<=4'd0;
+                wren_flag<=1'b0;
             end
         endcase
     end
@@ -130,7 +143,9 @@ always@(posedge rdclock) begin
     endcase
 end
 
-assign wren_for_ram = (rden == 1'b1 )?16'hffff:16'b0;
+
+
+assign wren_for_ram = (wren_flag == 1'b1 )?16'hffff:16'b0;
 
 endmodule
 
