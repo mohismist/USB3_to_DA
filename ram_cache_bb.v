@@ -6,7 +6,7 @@ module ram_cache_bb(
     usb_rd_state,
     rst_n,
     USB3_FLAGA,
-	  wren_for_ram
+    wren_for_ram
 );
 
 
@@ -25,7 +25,7 @@ reg flag=1'b0;
 reg [8:0]  rd_count=9'd0;
 reg	[7:0]  rdaddress=8'd0;
 reg	[7:0]  wraddress=8'd15;
-
+reg [3:0]  pack_type=4'd0;
 reg   [3:0]wr_state=4'b0;
 reg   [7:0]rd_state=8'd0;
 ram_cache cache(
@@ -49,7 +49,7 @@ begin
                 wren <= 1'b0;
                 if(usb_rd_state==4'd6) begin
                     wr_state <= wr_state + 1;
-						  wren <= 1'b1;
+                    wren <= 1'b1;
                 end
             end
             4'd1,4'd2:begin
@@ -58,6 +58,23 @@ begin
                 if(usb_rd_state!=4'd6) begin
                     wr_state <= wr_state+1;
                 end
+            end
+            4'd3:begin
+                wren <=1'b0;
+                wr_state <= 4'd0;
+                if((data&32'hff0000ff)==32'hff0000ff)
+                    case data[23:8]
+                        16'h0000: begin
+                            pack_type=4'd1;//下一个包为C/A码
+                        end
+                        16'h000a: begin
+                            pack_type=4'd2;
+                        end
+                        16'
+                    endcase
+                end
+                else
+                    pack_type<=pack_type+4'd5
             end
             default:begin
                 wren <= 1'b0;
@@ -76,13 +93,13 @@ always@(posedge rdclock or negedge rst_n) begin
         case(rd_state)
             4'd0:begin
                 if(wraddress==7'd255)begin
-                   rdaddress<=7'd0;
+                    rdaddress<=7'd0;
                 end
                 else begin
-                   rdaddress<=wraddress+8'd1;
+                    rdaddress<=wraddress+8'd1;
                 end
                 wren_flag<=1'b0;
-					      if(rden==1'b1)begin
+                if(rden==1'b1)begin
                     rd_state <= rd_state+1;           
                 end
             end
@@ -92,15 +109,15 @@ always@(posedge rdclock or negedge rst_n) begin
                 rd_state<=rd_state+1;
             end
             4'd2:begin
-               rdaddress<=rdaddress+1;
-                 wren_flag<=1'b1;
+                rdaddress<=rdaddress+1;
+                wren_flag<=1'b1;
                 if(rden==1'b0)begin
                     rd_state<=rd_state+1;
                 end
             end
             4'd3:begin
-              rd_state<=rd_state+1;
-              wren_flag<=1'd1;
+                rd_state<=rd_state+1;
+                wren_flag<=1'd1;
             end
             default:begin
                 rd_state<=4'd0;
