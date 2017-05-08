@@ -70,7 +70,16 @@ begin
                         16'h000a: begin
                             pack_type=4'd2;
                         end
-                        16'
+                        16'h00aa: begin
+                            pack_type=4'd3;
+                        end
+                        16'h0aaa: begin
+                            pack_type=4'd4;
+                        end
+                        16'haaaa: begin
+                            pack_type=4'd5;
+                        end
+
                     endcase
                 end
                 else
@@ -105,7 +114,8 @@ always@(posedge rdclock or negedge rst_n) begin
             end
             4'd1:begin
                 rdaddress<=rdaddress+1;
-                wren_flag<=1'b0;
+                wren_flag<=1'b1;
+                //wren_flag置1比开始传出数据早一个周期，方便通信协议部分的时序同步
                 rd_state<=rd_state+1;
             end
             4'd2:begin
@@ -122,6 +132,112 @@ always@(posedge rdclock or negedge rst_n) begin
             default:begin
                 rd_state<=4'd0;
                 wren_flag<=1'b0;
+            end
+        endcase
+    end
+end
+
+//通信协议的具体实现
+reg [9:0] com_state=10'b0;
+reg [5:0] com_count=6'b0;
+always@(posedge rdclock or negedge rst_n)begin
+    if(!rst_n) begin
+        wren_for_ram<=16'b0;
+        com_reg<=10'b0;
+    end
+    else begin
+        case(com_state)
+            10'd0:begin
+                wren_for_ram<=16'b0;
+                if(wren_flag==1'b1) begin
+                    case(pack_type) 
+                        4'd6:begin
+                            wren_for_ram<=16'h0001;
+                            com_state<=10'd1;
+                        end
+                        4'd7:begin
+                            wren_for_ram<=16'h0100;
+                            com_state<=10'd9;
+                        end
+                        4'd8:begin
+                        end
+                        default:begin
+                            wren_for_ram<=16'b0;
+                            com_state<=10'd0;
+                        end
+                    endcase
+                end
+            end
+            10'd1:begin
+                if(com_count==6'b31) begin
+                    com_count<=6'b0;
+                    com_state<=com_state+10'b1;
+                    wren_for_ram<={8'h00,8'b0000_0010};
+                end
+                wren_for_ram<={8'h00,8'b0000_0001};
+                com_count<=com_count+6'b1;
+            end
+            10'd2:begin
+                if(com_count==6'b31) begin
+                    com_count<=6'b0;
+                    com_state<=com_state+10'b1;
+                    wren_for_ram<={8'h00,8'b0000_0100};
+                end
+                wren_for_ram<={8'h00,8'b0000_0010};
+                com_count<=com_count+6'b1;
+            end
+            10'd3:begin
+                if(com_count==6'b31) begin
+                    com_count<=6'b0;
+                    com_state<=com_state+10'b1;
+                    wren_for_ram<={8'h00,8'b0000_1000};
+                end
+                wren_for_ram<={8'h00,8'b0000_0100};
+                com_count<=com_count+6'b1;
+            end
+            10'd4:begin
+                if(com_count==6'b31) begin
+                    com_count<=6'b0;
+                    com_state<=com_state+10'b1;
+                    wren_for_ram<={8'h00,8'b0001_0000};
+                end
+                wren_for_ram<={8'h00,8'b0000_1000};
+                com_count<=com_count+6'b1;
+            end
+            10'd5:begin
+                if(com_count==6'b31) begin
+                    com_count<=6'b0;
+                    com_state<=com_state+10'b1;
+                    wren_for_ram<={8'h00,8'b0010_0000};
+                end
+                wren_for_ram<={8'h00,8'b0001_0000};
+                com_count<=com_count+6'b1;
+            end
+            10'd6:begin
+                if(com_count==6'b31) begin
+                    com_count<=6'b0;
+                    com_state<=com_state+10'b1;
+                    wren_for_ram<={8'h00,8'b0100_0000};
+                end
+                wren_for_ram<={8'h00,8'b0010_0000};
+                com_count<=com_count+6'b1;
+            end
+            10'd7:begin
+                if(com_count==6'b31) begin
+                    com_count<=6'b0;
+                    com_state<=com_state+10'b1;
+                    wren_for_ram<={8'h00,8'b1000_0000};
+                end
+                wren_for_ram<={8'h00,8'b0100_0000};
+                com_count<=com_count+6'b1;
+            end
+            10'd8:begin
+                if(com_count==6'b31) begin
+                    com_count<=6'b0;
+                    com_state<=com_state+10'b1;
+                end
+                wren_for_ram<={8'h00,8'b1000_0000};
+                com_count<=0;
             end
         endcase
     end
@@ -160,9 +276,6 @@ always@(posedge rdclock) begin
     endcase
 end
 
-
-
-assign wren_for_ram = (wren_flag == 1'b1 )?16'hffff:16'b0;
 
 endmodule
 
