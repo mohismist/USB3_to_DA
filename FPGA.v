@@ -28,7 +28,6 @@ module FPGA(
 	input USB3_CTL5,	//FLAGB
 	inout [31:0] USB3_DQ,
 	
-	output [31:0] DATA_DQ,
 	output USB3_CTL2,	//SLOE 杈撳嚭浣胯兘淇″彿锛屽叾鍞竴鍔熻兘鏄┍鍔ㄦ暟鎹€荤嚎
 	output USB3_CTL3,	//SLRD
 	output USB3_CTL1,	//SLWR
@@ -60,19 +59,16 @@ wire	USB3_FLAGB;
 
 // USB Interface
 wire	DATA_DIR = 1'b0;//1 for p2u	0 for u2p
+
 wire	[8:0] usb_rd_cnt = 9'b0;
 wire	[3:0] usb_rd_state = 3'b0;
+
 wire	[31:0] usb_wr_cnt = 32'b0;
 wire	[2:0] usb_wr_state = 3'b0;
-wire FLAGB2;
 
 wire	[31:0] data_u2p;
 wire	[31:0] data_p2u;
 wire	RESET_N;
-
-reg	[31:0] counter = 32'b1;
-reg	cnt1 = 1'b0;
-reg	[3:0] cnt2 = 4'b0;
 
 pll_hnr pll_inst(
 	.inclk0(CLK_IN),
@@ -91,32 +87,14 @@ stream stream_inst(
 	.SLWR(USB3_SLWR),
 	.A1(USB3_A1),
 	.A0(USB3_A0),
-	.FLAGB2(FLAGB2),
 	.usb_rd_cnt(usb_rd_cnt),
-	.usb_wr_cnt(usb_wr_cnt),
 	.usb_rd_state(usb_rd_state),
+	.usb_wr_cnt(usb_wr_cnt),
 	.usb_wr_state(usb_wr_state));
-
 	
-always @(posedge USB3_PCLK) begin
-	if (counter >= 32'h000f_0000) begin
-		cnt1 <= 1'b1;
-		cnt2 <= cnt2 + 4'b1;
-		if (cnt2 == 10) begin
-			counter <= 32'b0;
-			cnt2 <= 4'b0;
-		end
-	end
-	else	begin
-		cnt1 <= 1'b0;
-		counter <= counter + 32'h0000_0002;
-	end
-end
-	
-assign	data_p2u = counter;
+assign	data_p2u = 32'haaaaaaaa;
 assign	USB3_DQ = DATA_DIR? data_p2u:32'hzzzzzzzz;
 assign	data_u2p = DATA_DIR? 32'hzzzzzzzz:USB3_DQ;
-assign	DATA_DQ = data_p2u;
 
 assign	USB3_CTL2 = USB3_SLOE;
 assign	USB3_CTL3 = USB3_SLRD;
