@@ -94,13 +94,6 @@ module ram_msg (
 		altsyncram_component.clock_enable_input_a = "BYPASS",
 		altsyncram_component.clock_enable_input_b = "BYPASS",
 		altsyncram_component.clock_enable_output_b = "BYPASS",
-`ifdef NO_PLI
-		altsyncram_component.init_file = "Hex2.rif"
-`else
-		altsyncram_component.init_file = "Hex2.hex"
-`endif
-,
-		altsyncram_component.init_file_layout = "PORT_B",
 		altsyncram_component.intended_device_family = "Cyclone III",
 		altsyncram_component.lpm_type = "altsyncram",
 		altsyncram_component.numwords_a = 47,
@@ -128,7 +121,7 @@ endmodule
 // Retrieval info: PRIVATE: BYTE_ENABLE_A NUMERIC "0"
 // Retrieval info: PRIVATE: BYTE_ENABLE_B NUMERIC "0"
 // Retrieval info: PRIVATE: BYTE_SIZE NUMERIC "8"
-// Retrieval info: PRIVATE: BlankMemory NUMERIC "0"
+// Retrieval info: PRIVATE: BlankMemory NUMERIC "1"
 // Retrieval info: PRIVATE: CLOCK_ENABLE_INPUT_A NUMERIC "0"
 // Retrieval info: PRIVATE: CLOCK_ENABLE_INPUT_B NUMERIC "0"
 // Retrieval info: PRIVATE: CLOCK_ENABLE_OUTPUT_A NUMERIC "0"
@@ -186,8 +179,6 @@ endmodule
 // Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_A STRING "BYPASS"
 // Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_B STRING "BYPASS"
 // Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_B STRING "BYPASS"
-// Retrieval info: CONSTANT: INIT_FILE STRING "Hex2.hex"
-// Retrieval info: CONSTANT: INIT_FILE_LAYOUT STRING "PORT_B"
 // Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone III"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "altsyncram"
 // Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "47"
@@ -219,6 +210,6 @@ endmodule
 // Retrieval info: GEN_FILE: TYPE_NORMAL ram_msg.inc TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL ram_msg.cmp TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL ram_msg.bsf TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL ram_msg_inst.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL ram_msg_bb.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL ram_msg_inst.v FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL ram_msg_bb.v FALSE
 // Retrieval info: LIB_FILE: altera_mf

@@ -219,6 +219,17 @@ ram_msg ram_msg7(
 	.wren(wren[15]),
 	.q(data_msg[7]));
 	
+ram_controlworld ram_world(
+	.data(data),
+	.rdaddress(rdaddress_control[7]),
+	.rdclock(clk_1023k[0]),
+	.wraddress(wraddress_msg),
+	.wrclock(clk),
+	.wren(wren[15]),
+	.q(data_msg[7]));
+
+)
+	
 always @(posedge clk or negedge rst_n) begin
 	if(~rst_n) begin
 		wraddress_ca <= 5'd0;

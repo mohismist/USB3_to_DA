@@ -70,7 +70,15 @@ begin
                         16'h000a: begin
                             pack_type=4'd2;
                         end
-                        16'
+                        16'h00aa: begin 
+                            pack_type=4'd3;
+                        end
+                        16'h0aaa:begin
+                            pack_tyoe=4'd4;
+                        end
+                        16'haaaa:begin
+                            pack_type=4'd5;
+                        end
                     endcase
                 end
                 else
@@ -161,7 +169,7 @@ always@(posedge rdclock) begin
 end
 
 
-
+always@(posedge rdclock)
 assign wren_for_ram = (wren_flag == 1'b1 )?16'hffff:16'b0;
 
 endmodule
