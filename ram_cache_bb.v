@@ -16,7 +16,7 @@ input	  wrclock;
 input [3:0]usb_rd_state;
 input rst_n;
 input USB3_FLAGA;
-output [15:0]wren_for_ram;
+output [23:0]wren_for_ram;
 output	[31:0]  q;
 
 reg wren=1'b0;
@@ -141,7 +141,8 @@ begin
                 end
                 4'd3:begin
                     rd_state<=rd_state+1;
-                    wren_flag<=1'd1;
+                    //wren_flag置0比结束数据传出早一个周期
+                    wren_flag<=1'd0;
                 end
                 default:begin
                     rd_state<=4'd0;
@@ -164,16 +165,18 @@ begin
                 10'd0:begin
                     wren_for_ram<=16'b0;
                     if(wren_flag==1'b1) begin
-                        case(pack_type) 
+                        case(pack_type)
                             5'd6:begin
-                                wren_for_ram<=16'h0001;
+                                wren_for_ram<=24'h000001;
                                 com_state<=10'd1;
                             end
                             5'd7:begin
-                                wren_for_ram<=16'h0100;
+                                wren_for_ram<=24'h000100;
                                 com_state<=10'd9;
                             end
-                            5'd8:begin
+                            5'd10,5'd11,5'd12,5'd13,5'd14,5'd15,5'd16,5'd17:begin
+                                com_state<=10'd17;
+                                wren_for_ram<={8'b1<<(pack_type-10),16'h0};
                             end
                             default:begin
                                 wren_for_ram<=16'b0;
@@ -188,18 +191,52 @@ begin
                         wren_for_ram<={16'h00,8'b0000_0001<<com_state};
                         com_state<=com_state+10'b1;
                     end
-                    case()
-                    wren_for_ram<={16'h00,8'b0000_0001<<(com_state-1)};
-                    com_count<=com_count+6'b1;
+                    else begin
+                        wren_for_ram<={16'h00,8'b0000_0001<<(com_state-1)};
+                        com_count<=com_count+6'b1;
+                    end
                 end
                 10'd8:begin
                     if(com_count==6'b31) begin
                         com_count<=6'b0;
                         com_state<=10'd0;
+                        wren_for_ram<=24'h0;
                     end
-                    wren_for_ram<={8'h00,8'b1000_0000};
-                    com_count<=0;
+                    else begin
+                        wren_for_ram<={16'h00,8'b1000_0000};
+                        com_count<=0;
+                    end
                 end
+                10'd9,10'd10,10'd11,10'd12,10'13,10'd14,10'd15:begin
+                    if(com_count==6'b9) begin
+                        com_count<=6'b0;
+                        wren_for_ram<={8'h00,8'b0000_0001<<(com_state-8),8'h00};
+                        com_state<=com_state+10'b1;
+                    end
+                    else begin
+                        wren_for_ram<={8'h00,8'b0000_0001<<(com_state-9),8'h00};
+                        com_count<=com_count+6'b1;
+                    end
+                end
+                10'd16:begin
+                    if(com_count==6'b9) begin
+                        com_count<=6'b0;
+                        com_state<=10'd0;
+                        wren_for_ram<=24'h0;
+                    end
+                    else begin
+                        wren_for_ram<={8'h00,8'b1000_0000,8'h00};
+                        com_count<=0;
+                    end
+                end
+                10'd17:begin
+                    if(wren_flag==1'b1) begin
+                        wren_for_ram<={8'b1<<(pack_type-10),16'h0};
+                    end
+                    else begin
+                        wren_for_ram<=24'h0;
+                        com_state<=10'd0;
+                    end
             endcase
         end
     end

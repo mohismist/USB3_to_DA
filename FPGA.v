@@ -146,7 +146,7 @@ wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca6;
 wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca7; 
 
 
-wire	[15:0] wren;
+wire	[23:0] wren;
 
 wire	[7:0] data_msg;
 wire  [31:0] data_cache;
