@@ -209,19 +209,45 @@ ram_bb	ram_inst(
 	.rst_n(RESET_N),
 	.data(data_cache),
 	
-	.delay_ca0(delay_ca0),
-	.delay_ca1(delay_ca1),
-	.delay_ca2(delay_ca2),
-	.delay_ca3(delay_ca3),
-	.delay_ca4(delay_ca4),
-	.delay_ca5(delay_ca5),
-	.delay_ca6(delay_ca6),
-	.delay_ca7(delay_ca7),
+
 	
 	.clk_1023k(CLK_100M),//clk_1023k),
 	.wren(wren),
 	.data_ca(data_ca),
-	.data_msg(data_msg));
+	.data_msg(data_msg),
+	.fre_carrier0(fre_carrier0),
+	.fre_1023k0(fre_1023k0),
+	.pha_1023k0(pha_1023k0),
+	
+	.fre_carrier1(fre_carrier1),
+	.fre_1023k1(fre_1023k1),
+	.pha_1023k1(pha_1023k1),
+	
+	.fre_carrier2(fre_carrier2),
+	.fre_1023k2(fre_1023k2),
+	.pha_1023k2(pha_1023k2),
+	
+	.fre_carrier3(fre_carrier3),
+	.fre_1023k3(fre_1023k3),
+	.pha_1023k3(pha_1023k3),
+	
+	.fre_carrier4(fre_carrier4),
+	.fre_1023k4(fre_1023k4),
+	.pha_1023k4(pha_1023k4),
+	
+	.fre_carrier5(fre_carrier5),
+	.fre_1023k5(fre_1023k5),
+	.pha_1023k5(pha_1023k5),
+	
+	.fre_carrier6(fre_carrier6),
+	.fre_1023k6(fre_1023k6),
+	.pha_1023k6(pha_1023k6),
+	
+	.fre_carrier7(fre_carrier7),
+	.fre_1023k7(fre_1023k7),
+	.pha_1023k7(pha_1023k7),
+	
+	);
 
 
 // pll, 10MHz input, 200MHz output
@@ -264,7 +290,7 @@ ram_cache_bb cache_inst(
     .usb_rd_state(usb_rd_state),
 	 .rst_n(RESET_N),
 	 .USB3_FLAGA(USB3_FLAGA),
-	 .wren_for_ram(wren)
+	 .wren_out(wren)
 );
 	
 always @(posedge USB3_PCLK) begin
@@ -307,43 +333,6 @@ assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
 //assign	DAC6 = (data_ca[5]^data_msg[5])? ~clk_carrier5:clk_carrier5;
 //assign	DAC7 = (data_ca[6]^data_msg[6])? ~clk_carrier6:clk_carrier6;
 //assign	DAC8 = (data_ca[7]^data_msg[7])? ~clk_carrier7:clk_carrier7;
-
-assign	delay_ca0 = 10'd1;
-assign	delay_ca1 = 10'd1;
-assign	delay_ca2 = 10'd1;
-assign	delay_ca3 = 10'd1;
-assign	delay_ca4 = 10'd1;
-assign	delay_ca5 = 10'd1;
-assign	delay_ca6 = 10'd1;
-assign	delay_ca7 = 10'd1;
-
-assign 	fre_carrier0 = 28'd74764642;
-assign 	fre_carrier1 = 28'd74764642;
-assign 	fre_carrier2 = 28'd74764642;
-assign 	fre_carrier3 = 28'd74764642;
-assign 	fre_carrier4 = 28'd74764642;
-assign 	fre_carrier5 = 28'd74764642;
-assign 	fre_carrier6 = 28'd74764642;
-assign 	fre_carrier7 = 28'd74764642;
-
-
-assign 	fre_1023k0 = 28'd1647663;
-assign 	fre_1023k1 = 28'd1647663;
-assign 	fre_1023k2 = 28'd1647663;
-assign 	fre_1023k3 = 28'd1647663;
-assign 	fre_1023k4 = 28'd1647663;
-assign 	fre_1023k5 = 28'd1647663;
-assign 	fre_1023k6 = 28'd1647663;
-assign 	fre_1023k7 = 28'd1647663;
-
-assign 	pha_1023k0 = 28'd0;
-assign 	pha_1023k1 = 28'd0;
-assign 	pha_1023k2 = 28'd0;
-assign 	pha_1023k3 = 28'd0;//67108864;
-assign 	pha_1023k4 = 28'd0;//67108864;
-assign 	pha_1023k5 = 28'd0;//67108864;
-assign 	pha_1023k6 = 28'd0;//134217728;
-assign 	pha_1023k7 = 28'd0;//134217728;
 
 
 //assign	USB3_SLOE = ~hnr_wrreq;
