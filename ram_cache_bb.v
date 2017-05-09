@@ -63,7 +63,7 @@ begin
             4'd3:begin
                 wren <=1'b0;
                 wr_state <= 4'd0;
-                if((data&32'hff0000ff)==32'hff0000ff) begin
+                if((data&32'hff0000ff)==32'hff0000aa) begin
                     case(data[23:8])
                         16'h0000: begin
                             pack_type<=5'd1;//下一个包为C/A码
@@ -130,7 +130,7 @@ always@(posedge rdclock or negedge rst_n) begin
                 end
             end
             4'd1:begin
-                rdaddress<=rdaddress+1;
+                //rdaddress<=rdaddress+1;
                 wren_flag<=1'b1;
                 //wren_flag置1比开始传出数据早一个周期，方便通信协议部分的时序同步
                 rd_state<=rd_state+1;
@@ -207,7 +207,7 @@ always@(posedge rdclock or negedge rst_n)begin
                 end
                 else begin
                     wren_for_ram<={16'h00,8'b1000_0000};
-                    com_count<=0;
+                    com_count<=com_count+6'd1;
                 end
             end
             10'd9,10'd10,10'd11,10'd12,10'd13,10'd14,10'd15:begin
@@ -229,7 +229,7 @@ always@(posedge rdclock or negedge rst_n)begin
                 end
                 else begin
                     wren_for_ram<={8'h00,8'b1000_0000,8'h00};
-                    com_count<=0;
+                    com_count<=com_count+6'b1;
                 end
             end
             10'd17:begin
