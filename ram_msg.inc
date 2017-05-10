@@ -16,9 +16,9 @@
 FUNCTION ram_msg 
 (
 	data[31..0],
-	rdaddress[10..0],
+	rdaddress[8..0],
 	rdclock,
-	wraddress[5..0],
+	wraddress[3..0],
 	wrclock,
 	wren
 )

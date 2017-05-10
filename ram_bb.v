@@ -83,10 +83,10 @@ output reg[31:0] fre_1023k6;
 output reg[31:0] fre_1023k7;
 reg clk_1M;
 reg	[4:0] wraddress_ca;
-reg	[5:0] wraddress_msg;
+reg	[3:0] wraddress_msg;
 reg [7:0] wraddress_control;
 wire	[9:0] rdaddress_ca [7:0];
-reg	[8:0] rdaddress_msg [7:0];
+reg	[9:0] rdaddress_msg [7:0];
 reg [7:0] rdaddress_word[7:0];
 wire [31:0] word_cache[7:0];
 
@@ -96,7 +96,7 @@ reg [4:0] counter_msg [7:0];
 initial
 begin
     wraddress_ca= 4'd0;
-    wraddress_msg= 6'd0;
+    wraddress_msg= 4'd0;
     clk_1M=1'b0;
 
     rdaddress_msg[0] = 9'd0;
@@ -377,17 +377,17 @@ ram_controlword ram_word7(
 always @(posedge clk or negedge rst_n) begin
     if(~rst_n) begin
         wraddress_ca <= 5'd0;
-        wraddress_msg <= 6'd0;
+        wraddress_msg <= 4'd0;
     end
     else begin
         if((wren&{16'h0,8'hff})!=24'b0) begin
             wraddress_ca <= wraddress_ca + 1'b1;//到31会自己变成0
         end
         if((wren&{8'h0,8'hff,8'h0})!=24'b0) begin
-            if (wraddress_msg >= 6'd9)
-                wraddress_msg <= 6'd0;
+            if (wraddress_msg >= 4'd9)
+                wraddress_msg <= 4'd0;
             else
-                wraddress_msg <= wraddress_msg + 1'b1;
+                wraddress_msg <= wraddress_msg + 4'b1;
         end
         if((wren&{16'h0,8'hff})!=24'b0) begin
             wraddress_control <= wraddress_control + 1'b1;

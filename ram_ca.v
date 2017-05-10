@@ -207,9 +207,9 @@ endmodule
 // Retrieval info: CONNECT: @wren_a 0 0 0 0 wren 0 0 0 0
 // Retrieval info: CONNECT: q 0 0 1 0 @q_b 0 0 1 0
 // Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca.inc TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca.cmp TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca.bsf TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca_inst.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca_bb.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca.inc FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca.cmp FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca.bsf FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca_inst.v FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL ram_ca_bb.v FALSE
 // Retrieval info: LIB_FILE: altera_mf

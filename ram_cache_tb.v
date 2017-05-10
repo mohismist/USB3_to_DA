@@ -18,17 +18,8 @@ reg[3:0] data_state=4'd0;
 
 localparam DATA_WIDTH_DELAY = 10;
 
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca0=0;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca1=0;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca2=0;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca3=0;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca4=0;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca5=0;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca6=0;
-	reg [DATA_WIDTH_DELAY-1:0] delay_ca7=0;
 
-
-	wire [15:0] wren;
+	wire [23:0] wren;
 
 	wire [7:0] data_ca;
 	wire [7:0] data_msg;
@@ -43,6 +34,53 @@ localparam DATA_WIDTH_DELAY = 10;
   assign clk_1023k[6]=rdclock;
   assign clk_1023k[7]=rdclock;
       
+
+wire	[31:0] fre_carrier0;
+wire	[31:0] fre_carrier1;
+wire	[31:0] fre_carrier2;
+wire	[31:0] fre_carrier3;
+wire	[31:0] fre_carrier4;
+wire	[31:0] fre_carrier5;
+wire	[31:0] fre_carrier6;
+wire	[31:0] fre_carrier7;
+
+wire	[31:0] fre_1023k0; 
+wire	[31:0] fre_1023k1; 
+wire	[31:0] fre_1023k2; 
+wire	[31:0] fre_1023k3; 
+wire	[31:0] fre_1023k4; 
+wire	[31:0] fre_1023k5; 
+wire	[31:0] fre_1023k6; 
+wire	[31:0] fre_1023k7; 
+
+wire	[31:0] pha_1023k0;
+wire	[31:0] pha_1023k1;
+wire	[31:0] pha_1023k2;
+wire	[31:0] pha_1023k3;
+wire	[31:0] pha_1023k4;
+wire	[31:0] pha_1023k5;
+wire	[31:0] pha_1023k6;
+wire	[31:0] pha_1023k7;
+
+wire	[31:0]  clk_carrier0;
+wire	[31:0]  clk_carrier1;
+wire	[31:0]  clk_carrier2;
+wire	[31:0]  clk_carrier3;
+wire	[31:0]  clk_carrier4;
+wire	[31:0]  clk_carrier5;
+wire	[31:0]  clk_carrier6;
+wire	[31:0]  clk_carrier7;
+
+wire	[31:0] delay_ca0; 
+wire	[31:0] delay_ca1; 
+wire	[31:0] delay_ca2; 
+wire	[31:0] delay_ca3; 
+wire	[31:0] delay_ca4; 
+wire	[31:0] delay_ca5; 
+wire	[31:0] delay_ca6; 
+wire	[31:0] delay_ca7; 
+
+
 ram_cache_bb cache(
     .wrclock(wrclock),
     .rdclock(wrclock),
@@ -51,28 +89,51 @@ ram_cache_bb cache(
     .usb_rd_state(usb_rd_state),
     .rst_n(rst_n),
     .USB3_FLAGA(USB3_FLAGA),
-    .wren_for_ram(wren)
+    .wren_out(wren)
 );
 
 ram_bb ram_inst(
 	.clk(wrclock),
 	.rst_n(rst_n),
 	.data(q),
-	
-	.delay_ca0(delay_ca0),
-	.delay_ca1(delay_ca1),
-	.delay_ca2(delay_ca2),
-	.delay_ca3(delay_ca3),
-	.delay_ca4(delay_ca4),
-	.delay_ca5(delay_ca5),
-	.delay_ca6(delay_ca6),
-	.delay_ca7(delay_ca7),
+
 	
 	.clk_1023k(wrclock),
 	.wren(wren),
 	
 	.data_ca(data_ca),
-	.data_msg(data_msg)
+	.data_msg(data_msg),
+		.fre_carrier0(fre_carrier0),
+	.fre_1023k0(fre_1023k0),
+	.pha_1023k0(pha_1023k0),
+	
+	.fre_carrier1(fre_carrier1),
+	.fre_1023k1(fre_1023k1),
+	.pha_1023k1(pha_1023k1),
+	
+	.fre_carrier2(fre_carrier2),
+	.fre_1023k2(fre_1023k2),
+	.pha_1023k2(pha_1023k2),
+	
+	.fre_carrier3(fre_carrier3),
+	.fre_1023k3(fre_1023k3),
+	.pha_1023k3(pha_1023k3),
+	
+	.fre_carrier4(fre_carrier4),
+	.fre_1023k4(fre_1023k4),
+	.pha_1023k4(pha_1023k4),
+	
+	.fre_carrier5(fre_carrier5),
+	.fre_1023k5(fre_1023k5),
+	.pha_1023k5(pha_1023k5),
+	
+	.fre_carrier6(fre_carrier6),
+	.fre_1023k6(fre_1023k6),
+	.pha_1023k6(pha_1023k6),
+	
+	.fre_carrier7(fre_carrier7),
+	.fre_1023k7(fre_1023k7),
+	.pha_1023k7(pha_1023k7)
 );
 
 
@@ -133,6 +194,7 @@ always@(posedge wrclock) begin
             usb_rd_state<=4'd0;
             dcount<=dcount+1;
             if(dcount==255) begin
+                data<={8'hff,16'h00aa,8'haa};
                 data_state<=data_state+1;
             end
         end

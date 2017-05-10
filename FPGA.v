@@ -96,9 +96,7 @@ wire  FLAGB2;
 // 8 channel NCO
 
 
-localparam DATA_WIDTH_NCO = 28;
-localparam DATA_WIDTH_DAC = 14;
-localparam DATA_WIDTH_NCO_DELAY = 10;
+
 
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier0;
 wire	[DATA_WIDTH_NCO-1:0] fre_carrier1;
