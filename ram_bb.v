@@ -86,7 +86,7 @@ reg	[4:0] wraddress_ca;
 reg	[3:0] wraddress_msg;
 reg [7:0] wraddress_control;
 wire	[9:0] rdaddress_ca [7:0];
-reg	[9:0] rdaddress_msg [7:0];
+reg	[8:0] rdaddress_msg [7:0];
 reg [7:0] rdaddress_word[7:0];
 wire [31:0] word_cache[7:0];
 
