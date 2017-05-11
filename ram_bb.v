@@ -92,13 +92,14 @@ wire [31:0] word_cache[7:0];
 
 reg	[9:0] counter_ca [7:0];
 reg [4:0] counter_msg [7:0];
-
+reg [6:0]  clk_counter;
 initial
 begin
     wraddress_ca= 4'd0;
     wraddress_msg= 4'd0;
     wraddress_control<=8'd0;
     clk_1M=1'b0;
+    clk_counter<=7'b0;
 
     rdaddress_msg[0] = 9'd0;
     rdaddress_msg[1] = 9'd0;
@@ -109,14 +110,14 @@ begin
     rdaddress_msg[6] = 9'd0;
     rdaddress_msg[7] = 9'd0;
 
-    rdaddress_word[0] = 8'd0;
-    rdaddress_word[1] = 8'd0;
-    rdaddress_word[2] = 8'd0;
-    rdaddress_word[3] = 8'd0;
-    rdaddress_word[4] = 8'd0;
-    rdaddress_word[5] = 8'd0;
-    rdaddress_word[6] = 8'd0;
-    rdaddress_word[7] = 8'd0;
+    rdaddress_word[0] = 8'd255;
+    rdaddress_word[1] = 8'd255;
+    rdaddress_word[2] = 8'd255;
+    rdaddress_word[3] = 8'd255;
+    rdaddress_word[4] = 8'd255;
+    rdaddress_word[5] = 8'd255;
+    rdaddress_word[6] = 8'd255;
+    rdaddress_word[7] = 8'd255;
 
 
     counter_ca[0] = 10'd0;
@@ -289,7 +290,7 @@ ram_msg ram_msg7(
 ram_controlword ram_word0(
     .data(data),
     .rdaddress(rdaddress_word[0]),
-    .rdclock(clk_1M),
+    .rdclock(clk),
     .wraddress(wraddress_control),
     .wrclock(clk),
     .wren(wren[16]),
@@ -299,7 +300,7 @@ ram_controlword ram_word0(
 ram_controlword ram_word1(
     .data(data),
     .rdaddress(rdaddress_word[1]),
-    .rdclock(clk_1M),
+    .rdclock(clk),
     .wraddress(wraddress_control),
     .wrclock(clk),
     .wren(wren[17]),
@@ -310,7 +311,7 @@ ram_controlword ram_word1(
 ram_controlword ram_word2(
     .data(data),
     .rdaddress(rdaddress_word[2]),
-    .rdclock(clk_1M),
+    .rdclock(clk),
     .wraddress(wraddress_control),
     .wrclock(clk),
     .wren(wren[18]),
@@ -321,7 +322,7 @@ ram_controlword ram_word2(
 ram_controlword ram_word3(
     .data(data),
     .rdaddress(rdaddress_word[3]),
-    .rdclock(clk_1M),
+    .rdclock(clk),
     .wraddress(wraddress_control),
     .wrclock(clk),
     .wren(wren[19]),
@@ -332,7 +333,7 @@ ram_controlword ram_word3(
 ram_controlword ram_word4(
     .data(data),
     .rdaddress(rdaddress_word[4]),
-    .rdclock(clk_1M),
+    .rdclock(clk),
     .wraddress(wraddress_control),
     .wrclock(clk),
     .wren(wren[20]),
@@ -343,7 +344,7 @@ ram_controlword ram_word4(
 ram_controlword ram_word5(
     .data(data),
     .rdaddress(rdaddress_word[5]),
-    .rdclock(clk_1M),
+    .rdclock(clk),
     .wraddress(wraddress_control),
     .wrclock(clk),
     .wren(wren[21]),
@@ -354,7 +355,7 @@ ram_controlword ram_word5(
 ram_controlword ram_word6(
     .data(data),
     .rdaddress(rdaddress_word[6]),
-    .rdclock(clk_1M),
+    .rdclock(clk),
     .wraddress(wraddress_control),
     .wrclock(clk),
     .wren(wren[22]),
@@ -691,7 +692,6 @@ always @(posedge clk or negedge rst_n) begin
     end
 end
 
-reg [6:0]clk_counter;
 always @(posedge clk) begin
     if(clk_counter==7'd99) begin
         clk_counter<=7'b0;
