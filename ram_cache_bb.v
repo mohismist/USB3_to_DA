@@ -176,7 +176,7 @@ always@(posedge rdclock or negedge rst_n)begin
                             com_state<=10'd9;
                         end
                         5'd10,5'd11,5'd12,5'd13,5'd14,5'd15,5'd16,5'd17:begin
-                            com_state<=10'd17;
+                            com_state<=10'd18;
                             wren_for_ram<={8'b1<<(pack_type-10),16'h0};
                         end
                         default:begin
@@ -222,7 +222,7 @@ always@(posedge rdclock or negedge rst_n)begin
             10'd16:begin
                 if(com_count==6'd9) begin
                     com_count<=6'b0;
-                    com_state<=10'd0;
+                    com_state<=10'd17;
                     wren_for_ram<=24'h0;
                 end
                 else begin
@@ -231,6 +231,12 @@ always@(posedge rdclock or negedge rst_n)begin
                 end
             end
             10'd17:begin
+              wren_for_ram<=24'h0;
+              com_count<=6'b0;
+              if(wren_flag==1'b0)
+                com_state<=6'b0;
+            end
+            10'd18:begin
                 if(wren_flag==1'b1) begin
                     wren_for_ram<={8'b1<<(pack_type-10),16'h0};
                 end
@@ -238,7 +244,7 @@ always@(posedge rdclock or negedge rst_n)begin
                     wren_for_ram<=24'h0;
                     com_state<=10'd0;
                 end
-            end
+            end       
         endcase
     end
 end

@@ -25,14 +25,14 @@ wire [7:0] data_ca;
 wire [7:0] data_msg;
 wire [7:0] clk_1023k;
 
-assign clk_1023k[0]=rdclock;
-assign clk_1023k[1]=rdclock;
-assign clk_1023k[2]=rdclock;
-assign clk_1023k[3]=rdclock;
-assign clk_1023k[4]=rdclock;
-assign clk_1023k[5]=rdclock;
-assign clk_1023k[6]=rdclock;
-assign clk_1023k[7]=rdclock;
+assign clk_1023k[0]=wrclock;
+assign clk_1023k[1]=wrclock;
+assign clk_1023k[2]=wrclock;
+assign clk_1023k[3]=wrclock;
+assign clk_1023k[4]=wrclock;
+assign clk_1023k[5]=wrclock;
+assign clk_1023k[6]=wrclock;
+assign clk_1023k[7]=wrclock;
 
 
 wire	[31:0] fre_carrier0;
@@ -98,7 +98,7 @@ ram_bb ram_inst(
     .data(q),
 
 
-    .clk_1023k(wrclock),
+    .clk_1023k(clk_1023k),
     .wren(wren),
 
     .data_ca(data_ca),
@@ -194,7 +194,7 @@ always@(posedge wrclock) begin
             usb_rd_state<=4'd0;
             dcount<=dcount+1;
             if(dcount==255) begin
-                data<={8'hff,16'h00aa,8'haa};
+                data<={8'hff,16'h0000,8'haa};
                 data_state<=data_state+1;
                 dcount<=0;
             end
@@ -234,7 +234,7 @@ always@(posedge wrclock) begin
             dcount<=dcount+1;
             if(dcount==255) begin
                 data<={24'b0,8'd255-dcount[7:0]};
-                data_state<=7'd8;
+                data_state<=7'd14;
             end
         end
         default:begin
