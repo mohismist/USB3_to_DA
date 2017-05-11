@@ -97,6 +97,7 @@ initial
 begin
     wraddress_ca= 4'd0;
     wraddress_msg= 4'd0;
+    wraddress_control<=8'd0;
     clk_1M=1'b0;
 
     rdaddress_msg[0] = 9'd0;
@@ -378,6 +379,7 @@ always @(posedge clk or negedge rst_n) begin
     if(~rst_n) begin
         wraddress_ca <= 5'd0;
         wraddress_msg <= 4'd0;
+        wraddress_control<=8'd0;
     end
     else begin
         if((wren&{16'h0,8'hff})!=24'b0) begin
@@ -389,8 +391,8 @@ always @(posedge clk or negedge rst_n) begin
             else
                 wraddress_msg <= wraddress_msg + 4'b1;
         end
-        if((wren&{16'h0,8'hff})!=24'b0) begin
-            wraddress_control <= wraddress_control + 1'b1;
+        if((wren&{8'hff,16'h00})!=24'b0) begin
+            wraddress_control <= wraddress_control + 8'b1;
         end
     end
 end
