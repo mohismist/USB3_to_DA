@@ -203,7 +203,7 @@ always@(posedge wrclock) begin
             USB3_FLAGA<=1'b0;
             usb_rd_state<=4'd0;
             dcount<=dcount+1;
-            if(dcount==20'd1024) begin
+            if(dcount==20'd4096) begin
                 dcount<=20'b0;
                 data_state<=7'd9;
             end
@@ -234,7 +234,7 @@ always@(posedge wrclock) begin
             dcount<=dcount+1;
             if(dcount==255) begin
                 data<={24'b0,8'd255-dcount[7:0]};
-                data_state<=data_state+1;
+                data_state<=7'd8;
             end
         end
         default:begin
