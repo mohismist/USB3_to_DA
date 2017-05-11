@@ -95,7 +95,7 @@ reg [4:0] counter_msg [7:0];
 reg [6:0]  clk_counter;
 initial
 begin
-    wraddress_ca= 4'd0;
+    wraddress_ca= 5'd0;
     wraddress_msg= 4'd0;
     wraddress_control<=8'd0;
     clk_1M=1'b0;
@@ -395,6 +395,9 @@ always @(posedge clk or negedge rst_n) begin
         if((wren&{8'hff,16'h00})!=24'b0) begin
             wraddress_control <= wraddress_control + 8'b1;
         end
+		  else begin 
+				wraddress_control<=8'd0;
+		  end
     end
 end
 

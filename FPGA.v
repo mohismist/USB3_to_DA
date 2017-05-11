@@ -96,53 +96,41 @@ wire  FLAGB2;
 // 8 channel NCO
 
 
+wire	[31:0] fre_carrier0;
+wire	[31:0] fre_carrier1;
+wire	[31:0] fre_carrier2;
+wire	[31:0] fre_carrier3;
+wire	[31:0] fre_carrier4;
+wire	[31:0] fre_carrier5;
+wire	[31:0] fre_carrier6;
+wire	[31:0] fre_carrier7;
 
+wire	[31:0] fre_1023k0; 
+wire	[31:0] fre_1023k1; 
+wire	[31:0] fre_1023k2; 
+wire	[31:0] fre_1023k3; 
+wire	[31:0] fre_1023k4; 
+wire	[31:0] fre_1023k5; 
+wire	[31:0] fre_1023k6; 
+wire	[31:0] fre_1023k7; 
 
-wire	[DATA_WIDTH_NCO-1:0] fre_carrier0;
-wire	[DATA_WIDTH_NCO-1:0] fre_carrier1;
-wire	[DATA_WIDTH_NCO-1:0] fre_carrier2;
-wire	[DATA_WIDTH_NCO-1:0] fre_carrier3;
-wire	[DATA_WIDTH_NCO-1:0] fre_carrier4;
-wire	[DATA_WIDTH_NCO-1:0] fre_carrier5;
-wire	[DATA_WIDTH_NCO-1:0] fre_carrier6;
-wire	[DATA_WIDTH_NCO-1:0] fre_carrier7;
+wire	[31:0] pha_1023k0;
+wire	[31:0] pha_1023k1;
+wire	[31:0] pha_1023k2;
+wire	[31:0] pha_1023k3;
+wire	[31:0] pha_1023k4;
+wire	[31:0] pha_1023k5;
+wire	[31:0] pha_1023k6;
+wire	[31:0] pha_1023k7;
 
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k0; 
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k1; 
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k2; 
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k3; 
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k4; 
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k5; 
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k6; 
-wire	[DATA_WIDTH_NCO-1:0] fre_1023k7; 
-
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k0;
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k1;
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k2;
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k3;
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k4;
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k5;
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k6;
-wire	[DATA_WIDTH_NCO-1:0] pha_1023k7;
-
-wire	[DATA_WIDTH_DAC-1:0]  clk_carrier0;
-wire	[DATA_WIDTH_DAC-1:0]  clk_carrier1;
-wire	[DATA_WIDTH_DAC-1:0]  clk_carrier2;
-wire	[DATA_WIDTH_DAC-1:0]  clk_carrier3;
-wire	[DATA_WIDTH_DAC-1:0]  clk_carrier4;
-wire	[DATA_WIDTH_DAC-1:0]  clk_carrier5;
-wire	[DATA_WIDTH_DAC-1:0]  clk_carrier6;
-wire	[DATA_WIDTH_DAC-1:0]  clk_carrier7;
-
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca0; 
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca1; 
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca2; 
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca3; 
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca4; 
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca5; 
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca6; 
-wire	[DATA_WIDTH_NCO_DELAY-1:0] delay_ca7; 
-
+wire	[31:0]  clk_carrier0;
+wire	[31:0]  clk_carrier1;
+wire	[31:0]  clk_carrier2;
+wire	[31:0]  clk_carrier3;
+wire	[31:0]  clk_carrier4;
+wire	[31:0]  clk_carrier5;
+wire	[31:0]  clk_carrier6;
+wire	[31:0]  clk_carrier7;
 
 wire	[23:0] wren;
 
@@ -154,40 +142,40 @@ reg	cnt1 = 1'b0;
 reg	[3:0] cnt2 = 4'b0;
 
 NCO_bb	nco_inst(
-	.clk(CLK_166M),
+	.clk(CLK_100M),
 	.rst_n(RESET_N),
 	
-	.fre_carrier0(fre_carrier0),
-	.fre_1023k0(fre_1023k0),
-	.pha_1023k0(pha_1023k0),
+	.fre_carrier0(fre_carrier0[27:0]),
+	.fre_1023k0(fre_1023k0[27:0]),
+	.pha_1023k0(pha_1023k0[27:0]),
 	
-	.fre_carrier1(fre_carrier1),
-	.fre_1023k1(fre_1023k1),
-	.pha_1023k1(pha_1023k1),
+	.fre_carrier1(fre_carrier1[27:0]),
+	.fre_1023k1(fre_1023k1[27:0]),
+	.pha_1023k1(pha_1023k1[27:0]),
 	
-	.fre_carrier2(fre_carrier2),
-	.fre_1023k2(fre_1023k2),
-	.pha_1023k2(pha_1023k2),
+	.fre_carrier2(fre_carrier2[27:0]),
+	.fre_1023k2(fre_1023k2[27:0]),
+	.pha_1023k2(pha_1023k2[27:0]),
 	
-	.fre_carrier3(fre_carrier3),
-	.fre_1023k3(fre_1023k3),
-	.pha_1023k3(pha_1023k3),
+	.fre_carrier3(fre_carrier3[27:0]),
+	.fre_1023k3(fre_1023k3[27:0]),
+	.pha_1023k3(pha_1023k3[27:0]),
 	
-	.fre_carrier4(fre_carrier4),
-	.fre_1023k4(fre_1023k4),
-	.pha_1023k4(pha_1023k4),
+	.fre_carrier4(fre_carrier4[27:0]),
+	.fre_1023k4(fre_1023k4[27:0]),
+	.pha_1023k4(pha_1023k4[27:0]),
 	
-	.fre_carrier5(fre_carrier5),
-	.fre_1023k5(fre_1023k5),
-	.pha_1023k5(pha_1023k5),
+	.fre_carrier5(fre_carrier5[27:0]),
+	.fre_1023k5(fre_1023k5[27:0]),
+	.pha_1023k5(pha_1023k5[27:0]),
 	
-	.fre_carrier6(fre_carrier6),
-	.fre_1023k6(fre_1023k6),
-	.pha_1023k6(pha_1023k6),
+	.fre_carrier6(fre_carrier6[27:0]),
+	.fre_1023k6(fre_1023k6[27:0]),
+	.pha_1023k6(pha_1023k6[27:0]),
 	
-	.fre_carrier7(fre_carrier7),
-	.fre_1023k7(fre_1023k7),
-	.pha_1023k7(pha_1023k7),
+	.fre_carrier7(fre_carrier7[27:0]),
+	.fre_1023k7(fre_1023k7[27:0]),
+	.pha_1023k7(pha_1023k7[27:0]),
 	
 	.clk_1023k(clk_1023k),
 	
@@ -209,7 +197,7 @@ ram_bb	ram_inst(
 	
 
 	
-	.clk_1023k(CLK_100M),//clk_1023k),
+	.clk_1023k(CLK_1023k),//clk_1023k),
 	.wren(wren),
 	.data_ca(data_ca),
 	.data_msg(data_msg),
@@ -323,10 +311,10 @@ assign	SCLK = SIG_CLK;
 assign	USB3_FLAGA = USB3_CTL4;
 assign	USB3_FLAGB = USB3_CTL5; 
 
-assign	DAC1 = (data_ca[0]^data_msg[0])? ~clk_carrier3:clk_carrier3;//(usb_rd_state == 4'd6)?14'b0:USB3_DQ[31:18];//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
-assign	DAC2 = (data_ca[1]^data_msg[1])? ~clk_carrier3:clk_carrier3;
-assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier3:clk_carrier3;
-assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
+assign	DAC1 = (data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;//(usb_rd_state == 4'd6)?14'b0:USB3_DQ[31:18];//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier0;
+assign	DAC2 = clk_carrier0;
+assign	DAC3 = (data_ca[0])? ~clk_carrier2:clk_carrier2;
+assign	DAC4 = {data_ca[0],13'b0};
 //assign	DAC5 = (data_ca[4]^data_msg[4])? ~clk_carrier4:clk_carrier4;
 //assign	DAC6 = (data_ca[5]^data_msg[5])? ~clk_carrier5:clk_carrier5;
 //assign	DAC7 = (data_ca[6]^data_msg[6])? ~clk_carrier6:clk_carrier6;

@@ -53,9 +53,15 @@ begin
                     wren <= 1'b1;
                 end
             end
-            4'd1,4'd2:begin
+            4'd1:begin
                 wren <= 1'b1;
                 wraddress <= wraddress + 1;
+                if(usb_rd_state!=4'd6) begin
+                    wr_state <= wr_state+1;
+                end
+            end
+				4'd2:begin
+                wren <= 1'b0;
                 if(usb_rd_state!=4'd6) begin
                     wr_state <= wr_state+1;
                 end
@@ -118,9 +124,6 @@ always@(posedge rdclock or negedge rst_n) begin
     else begin
         case(rd_state)
             4'd0:begin
-                if(wraddress==7'd255)begin
-                    rdaddress<=7'd0;
-                end
                 wren_flag<=1'b0;
                 if(rden==1'b1)begin
                     rd_state <= rd_state+1;           
