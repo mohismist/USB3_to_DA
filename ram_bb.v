@@ -73,15 +73,15 @@ output reg[31:0] pha_1023k4;
 output reg[31:0] pha_1023k5;
 output reg[31:0] pha_1023k6;
 output reg[31:0] pha_1023k7;
-output reg[31:0] fre_1023k0;
-output reg[31:0] fre_1023k1;
-output reg[31:0] fre_1023k2;
-output reg[31:0] fre_1023k3;
-output reg[31:0] fre_1023k4;
-output reg[31:0] fre_1023k5;
-output reg[31:0] fre_1023k6;
-output reg[31:0] fre_1023k7;
-reg clk_1M;
+output reg[31:0] fre_1023k0=32'd2746095;
+output reg[31:0] fre_1023k1=32'd2746095;
+output reg[31:0] fre_1023k2=32'd2746095;
+output reg[31:0] fre_1023k3=32'd2746095;
+output reg[31:0] fre_1023k4=32'd2746095;
+output reg[31:0] fre_1023k5=32'd2746095;
+output reg[31:0] fre_1023k6=32'd2746095;
+output reg[31:0] fre_1023k7=32'd2746095;
+reg clk_1k;
 reg	[4:0] wraddress_ca;
 reg	[3:0] wraddress_msg;
 reg [7:0] wraddress_control;
@@ -92,14 +92,14 @@ wire [31:0] word_cache[7:0];
 
 reg	[9:0] counter_ca [7:0];
 reg [4:0] counter_msg [7:0];
-reg [6:0]  clk_counter;
+reg [13:0]  clk_counter;
 initial
 begin
     wraddress_ca= 5'd0;
     wraddress_msg= 4'd0;
     wraddress_control<=8'd0;
-    clk_1M=1'b0;
-    clk_counter<=7'b0;
+    clk_1k=1'b0;
+    clk_counter<=14'b0;
 
     rdaddress_msg[0] = 9'd0;
     rdaddress_msg[1] = 9'd0;
@@ -608,8 +608,8 @@ always @(posedge clk or negedge rst_n) begin
     else begin
         case(rd_w_state)
             4'd0:begin
-                if(clk_1M==1'b1) begin
-                    rd_w_state<=rd_w_state+1;
+                if(clk_1k==1'b1) begin
+                    rd_w_state<=rd_w_state+4'd1;
                     rdaddress_word[0]<=rdaddress_word[0]+8'd1;
                     rdaddress_word[1]<=rdaddress_word[1]+8'd1;
                     rdaddress_word[2]<=rdaddress_word[2]+8'd1;
@@ -621,7 +621,7 @@ always @(posedge clk or negedge rst_n) begin
                 end
             end
             4'd1:begin
-                rd_w_state<=rd_w_state+1;
+                rd_w_state<=rd_w_state+4'd1;
                     rdaddress_word[0]<=rdaddress_word[0]+8'd1;
                     rdaddress_word[1]<=rdaddress_word[1]+8'd1;
                     rdaddress_word[2]<=rdaddress_word[2]+8'd1;
@@ -640,7 +640,7 @@ always @(posedge clk or negedge rst_n) begin
                 fre_carrier5<=word_cache[5];
                 fre_carrier6<=word_cache[6];
                 fre_carrier7<=word_cache[7];
-                rd_w_state<=rd_w_state+1;
+                rd_w_state<=rd_w_state+4'd1;
                 rdaddress_word[0]<=rdaddress_word[0]+8'd1;
                 rdaddress_word[1]<=rdaddress_word[1]+8'd1;
                 rdaddress_word[2]<=rdaddress_word[2]+8'd1;
@@ -659,7 +659,7 @@ always @(posedge clk or negedge rst_n) begin
                 fre_1023k5<=word_cache[5];
                 fre_1023k6<=word_cache[6];
                 fre_1023k7<=word_cache[7];
-                rd_w_state<=rd_w_state+1;
+                rd_w_state<=rd_w_state+4'd1;
                 rdaddress_word[0]<=rdaddress_word[0]+8'd1;
                 rdaddress_word[1]<=rdaddress_word[1]+8'd1;
                 rdaddress_word[2]<=rdaddress_word[2]+8'd1;
@@ -678,7 +678,7 @@ always @(posedge clk or negedge rst_n) begin
                 pha_1023k5<=word_cache[5];
                 pha_1023k6<=word_cache[6];
                 pha_1023k7<=word_cache[7];
-                rd_w_state<=rd_w_state+1;
+                rd_w_state<=rd_w_state+4'd1;
             end
             4'd5:begin
                 delay_ca0<=word_cache[0];
@@ -696,13 +696,13 @@ always @(posedge clk or negedge rst_n) begin
 end
 
 always @(posedge clk) begin
-    if(clk_counter==7'd99) begin
+    if(clk_counter==14'd9999) begin
         clk_counter<=7'b0;
-        clk_1M<=1'b0;
+        clk_1k<=1'b0;
     end
     else begin
-        if(clk_counter==7'd98) begin
-            clk_1M<=1'b1;
+        if(clk_counter==14'd9998) begin
+            clk_1k<=1'b1;
         end
         clk_counter<=clk_counter+1;
     end
