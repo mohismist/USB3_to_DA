@@ -19,17 +19,12 @@
 module FPGA(
 	//CLK
 	input CLK_IN,	//10M
-	input CLK_26M,
-	
-	//reset signal
-	//input RESET_N,
-	
+		
 	//GPIF II
 	input USB3_CTL4,	//FLAGA
 	input USB3_CTL5,	//FLAGB
 	inout [31:0] USB3_DQ,
 	
-	//output [31:0] data_hnr,
 	output USB3_CTL2,	//SLOE 输出使能信号，其唯一功能是驱动数据总线
 	output USB3_CTL3,	//SLRD
 	output USB3_CTL1,	//SLWR
@@ -37,30 +32,25 @@ module FPGA(
 	output USB3_PCLK,	//100M
 	output USB3_CTL11,
 	output USB3_CTL12,
-	output SCLK,
 	
 	output [13:0] DAC1,
 	output [13:0] DAC2,
 	output [13:0] DAC3,
 	output [13:0] DAC4,
-	//output [13:0] DAC5,
-	//output [13:0] DAC6,
-	//output [13:0] DAC7,
-	//output [13:0] DAC8,
+	output [13:0] DAC5,
+	output [13:0] DAC6,
+	output [13:0] DAC7,
+	output [13:0] DAC8,
 	
 	output DAC_CLK
 	
-//	output	[7:0] clk_1023k,
-//	output	[7:0] data_ca
 	);
 	
 wire [7:0] data_ca;	
 wire [7:0] clk_1023k;
 // clocks
-wire	SYS_CLK;
 wire	CLK_100M;
-wire	CLK_166M;
-wire	SIG_CLK;
+wire	SCLK;
 
 // Reset signals
 wire	pll_lock; // PLL locked signal
@@ -84,7 +74,7 @@ wire	[31:0] usb_wr_cnt = 32'b0;
 wire	[2:0] usb_wr_state = 3'b0;
 
 //hnr fifo
-wire	hnr_rdreq;
+//wire	hnr_rdreq;
 wire	hnr_wrreq;
 wire	hnr_rdempty;
 wire	hnr_wrfull;
@@ -123,23 +113,22 @@ wire	[31:0] pha_1023k5;
 wire	[31:0] pha_1023k6;
 wire	[31:0] pha_1023k7;
 
-wire	[31:0]  clk_carrier0;
-wire	[31:0]  clk_carrier1;
-wire	[31:0]  clk_carrier2;
-wire	[31:0]  clk_carrier3;
-wire	[31:0]  clk_carrier4;
-wire	[31:0]  clk_carrier5;
-wire	[31:0]  clk_carrier6;
-wire	[31:0]  clk_carrier7;
+
+localparam DAC_WIDTH = 14;
+
+wire	[DAC_WIDTH-1:0]  clk_carrier0;
+wire	[DAC_WIDTH-1:0]  clk_carrier1;
+wire	[DAC_WIDTH-1:0]  clk_carrier2;
+wire	[DAC_WIDTH-1:0]  clk_carrier3;
+wire	[DAC_WIDTH-1:0]  clk_carrier4;
+wire	[DAC_WIDTH-1:0]  clk_carrier5;
+wire	[DAC_WIDTH-1:0]  clk_carrier6;
+wire	[DAC_WIDTH-1:0]  clk_carrier7;
 
 wire	[23:0] wren;
 
 wire	[7:0] data_msg;
 wire  [31:0] data_cache;
-// For test
-reg	[31:0] counter = 32'b1;
-reg	cnt1 = 1'b0;
-reg	[3:0] cnt2 = 4'b0;
 
 NCO_bb	nco_inst(
 	.clk(CLK_100M),
@@ -194,9 +183,7 @@ ram_bb	ram_inst(
 	.clk(CLK_100M),
 	.rst_n(RESET_N),
 	.data(data_cache),
-	
-
-	
+		
 	.clk_1023k(clk_1023k),
 	.wren(wren),
 	.data_ca(data_ca),
@@ -231,15 +218,15 @@ ram_bb	ram_inst(
 	
 	.fre_carrier7(fre_carrier7),
 	.fre_1023k7(fre_1023k7),
-	.pha_1023k7(pha_1023k7),
+	.pha_1023k7(pha_1023k7)
 	
 	);
 
 
-// pll, 10MHz input, 200MHz output
+// pll, 10MHz input, 100MHz output
 sig_pll	pll(
 	.inclk0(CLK_IN),
-	.c0(SIG_CLK),
+	.c0(SCLK),
 	.locked(SIG_LOCK)); 
 	
 // pll, 10MHz input, 100MHz output
@@ -278,24 +265,8 @@ ram_cache_bb cache_inst(
 	 .USB3_FLAGA(USB3_FLAGA),
 	 .wren_out(wren)
 );
-	
-always @(posedge USB3_PCLK) begin
-	if (counter >= 32'h000f_0000) begin
-		cnt1 <= 1'b1;
-		cnt2 <= cnt2 + 4'b1;
-		if (cnt2 == 10) begin
-			counter <= 32'b0;
-			cnt2 <= 4'b0;
-		end
-	end
-	else	begin
-		cnt1 <= 1'b0;
-		counter <= counter + 32'h0000_0002;
-	end
-end
 
-assign	data_p2u = counter;
-assign	data_hnr = hnr_DQ;
+assign	data_p2u = 32'd15;
 assign	USB3_DQ = DATA_DIR? data_p2u:32'hzzzzzzzz;
 assign	data_u2p = DATA_DIR? 32'hzzzzzzzz:USB3_DQ;
 
@@ -306,7 +277,6 @@ assign	USB3_CTL0 = USB3_SLCS;
 assign	USB3_CTL11 = USB3_A1;
 assign	USB3_CTL12 = USB3_A0;
 assign	USB3_PCLK = CLK_100M;
-assign	SCLK = SIG_CLK;
 
 assign	USB3_FLAGA = USB3_CTL4;
 assign	USB3_FLAGB = USB3_CTL5; 
@@ -315,20 +285,11 @@ assign	DAC1 = clk_carrier0;//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier
 assign	DAC2 = (data_ca[1]^data_msg[1])? ~clk_carrier1:clk_carrier1;
 assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier2:clk_carrier2;
 assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
-//assign	DAC5 = (data_ca[4]^data_msg[4])? ~clk_carrier4:clk_carrier4;
-//assign	DAC6 = (data_ca[5]^data_msg[5])? ~clk_carrier5:clk_carrier5;
-//assign	DAC7 = (data_ca[6]^data_msg[6])? ~clk_carrier6:clk_carrier6;
-//assign	DAC8 = (data_ca[7]^data_msg[7])? ~clk_carrier7:clk_carrier7;
+assign	DAC5 = 14'd0;
+assign	DAC6 = 14'd0;
+assign	DAC7 = 14'd0;
+assign	DAC8 = 14'd0;
 
-
-//assign	USB3_SLOE = ~hnr_wrreq;
-//assign	USB3_SLRD = ~hnr_wrreq;
-//assign	USB3_SLWR = 1'b1;
-//assign	USB3_A1 = 1'b1;
-//assign	USB3_A0 = 1'b1;
-
-//assign	hnr_wrreq	=	USB3_CTL4?cnt1:1'b1;
-assign	hnr_rdreq = hnr_rdempty?1'b0:1'b1;
-assign 	DAC_CLK = CLK_166M;
+assign 	DAC_CLK = CLK_100M;
 assign 	RESET_N=1;
 endmodule

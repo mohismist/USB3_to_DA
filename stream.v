@@ -20,7 +20,7 @@ module stream(
 
 reg FLAGB1 = 1'b1;
 reg FLAGB3 = 1'b1;
-reg FLAGB4 = 1'b1;
+//reg FLAGB4 = 1'b1;
 
 always@(posedge clk or negedge rst_n)
 begin
@@ -57,7 +57,7 @@ begin
             FLAGB1 <= FLAGB;
             FLAGB2 <= FLAGB1;
             FLAGB3 <= FLAGB2;
-            FLAGB4 <= FLAGB3;
+      //      FLAGB4 <= FLAGB3;
             case (usb_rd_state)
                 4'd0,4'd1,4'd2: begin
                     usb_rd_cnt <= 9'd0;

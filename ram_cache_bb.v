@@ -49,21 +49,21 @@ begin
             4'd0:begin
                 wren <= 1'b0;
                 if(usb_rd_state==4'd6) begin
-                    wr_state <= wr_state + 1;
+                    wr_state <= wr_state + 4'd1;
                     wren <= 1'b1;
                 end
             end
             4'd1:begin
                 wren <= 1'b1;
-                wraddress <= wraddress + 1;
+                wraddress <= wraddress + 8'd1;
                 if(usb_rd_state!=4'd6) begin
-                    wr_state <= wr_state+1;
+                    wr_state <= wr_state+4'd1;
                 end
             end
 				4'd2:begin
                 wren <= 1'b0;
                 if(usb_rd_state!=4'd6) begin
-                    wr_state <= wr_state+1;
+                    wr_state <= wr_state+4'd1;
                 end
             end
             4'd3:begin
@@ -125,26 +125,26 @@ always@(posedge rdclock or negedge rst_n) begin
         case(rd_state)
             4'd0:begin
                 wren_flag<=1'b0;
+					 rdaddress<=wraddress+8'd1;
                 if(rden==1'b1)begin
-                    rd_state <= rd_state+1;           
-                    rdaddress<=wraddress+8'd1;
+                    rd_state <= rd_state+8'd1;              
                 end
             end
             4'd1:begin
                 //rdaddress<=rdaddress+1;
                 wren_flag<=1'b1;
                 //wren_flag置1比开始传出数据早一个周期，方便通信协议部分的时序同步
-                rd_state<=rd_state+1;
+                rd_state<=rd_state+8'd1;
             end
             4'd2:begin
-                rdaddress<=rdaddress+1;
+                rdaddress<=rdaddress+8'd1;
                 wren_flag<=1'b1;
                 if(rden==1'b0)begin
-                    rd_state<=rd_state+1;
+                    rd_state<=rd_state+8'd1;
                 end
             end
             4'd3:begin
-                rd_state<=rd_state+1;
+                rd_state<=rd_state+8'd1;
                 //wren_flag置0比结束数据传出早一个周期
                 wren_flag<=1'd0;
             end
@@ -267,15 +267,15 @@ always@(posedge rdclock) begin
         4'd0:begin
             flag<=1'b0;
             if(rden==1'b1) begin
-                flag_state <= flag_state + 1;
+                flag_state <= flag_state + 4'd1;
             end
         end
         4'd1:begin
-            rd_count <= rd_count + 1;
+            rd_count <= rd_count + 9'd1;
             if(rd_count > 8'd253) begin
                 rd_count<= 8'd0;
                 flag<=1'b1;
-                flag_state<=flag_state+1;
+                flag_state<=flag_state+4'd1;
             end
         end
         default:begin
