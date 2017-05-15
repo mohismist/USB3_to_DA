@@ -37,10 +37,10 @@ module FPGA(
 	output [13:0] DAC2,
 	output [13:0] DAC3,
 	output [13:0] DAC4,
-	output [13:0] DAC5,
-	output [13:0] DAC6,
-	output [13:0] DAC7,
-	output [13:0] DAC8,
+//	output [13:0] DAC5,
+//	output [13:0] DAC6,
+//	output [13:0] DAC7,
+//	output [13:0] DAC8,
 	
 	output DAC_CLK
 	
@@ -51,10 +51,6 @@ wire [7:0] clk_1023k;
 // clocks
 wire	CLK_100M;
 wire	SCLK;
-
-// Reset signals
-wire	pll_lock; // PLL locked signal
-wire	SIG_LOCK; // PLL locked signal
 
 // GPIF II
 wire	USB3_SLWR;
@@ -68,23 +64,13 @@ wire	USB3_FLAGB;
 
 // USB Interface
 wire	DATA_DIR = 1'b0;//1 for p2u	0 for u2p
-wire	[13:0] usb_rd_cnt = 14'b0;
-wire	[3:0] usb_rd_state ;//= 4'b0;
-wire	[31:0] usb_wr_cnt = 32'b0;
-wire	[2:0] usb_wr_state = 3'b0;
+wire	[13:0] usb_rd_cnt;
+wire	[3:0] usb_rd_state;
 
-//hnr fifo
-//wire	hnr_rdreq;
-wire	hnr_wrreq;
-wire	hnr_rdempty;
-wire	hnr_wrfull;
-wire	[31:0] hnr_DQ;
 wire	[31:0] data_u2p;
 wire	[31:0] data_p2u;
 wire	RESET_N;
-wire  FLAGB2;
 // 8 channel NCO
-
 
 wire	[31:0] fre_carrier0;
 wire	[31:0] fre_carrier1;
@@ -129,6 +115,28 @@ wire	[23:0] wren;
 
 wire	[7:0] data_msg;
 wire  [31:0] data_cache;
+
+// pll, 10MHz input, 100MHz output
+hnr_pll pll_inst(
+	.inclk0(CLK_IN),
+	.c0(SCLK),
+	.c1(CLK_100M),
+	.locked(pll_lock));
+
+stream stream_inst(
+	.clk(USB3_PCLK),
+	.rst_n(RESET_N),
+	.FLAGA(USB3_FLAGA),
+	.FLAGB(USB3_FLAGB),
+	.DATA_DIR(DATA_DIR),
+	.SLCS(USB3_SLCS),
+	.SLOE(USB3_SLOE),
+	.SLRD(USB3_SLRD),
+	.SLWR(USB3_SLWR),
+	.A1(USB3_A1),
+	.A0(USB3_A0),
+	.usb_rd_cnt(usb_rd_cnt),
+	.usb_rd_state(usb_rd_state));
 
 NCO_bb	nco_inst(
 	.clk(CLK_100M),
@@ -176,7 +184,6 @@ NCO_bb	nco_inst(
 	.clk_carrier5(clk_carrier5),
 	.clk_carrier6(clk_carrier6),
 	.clk_carrier7(clk_carrier7)
-	
 	);
 
 ram_bb	ram_inst(
@@ -221,39 +228,6 @@ ram_bb	ram_inst(
 	.pha_1023k7(pha_1023k7)
 	
 	);
-
-
-// pll, 10MHz input, 100MHz output
-sig_pll	pll(
-	.inclk0(CLK_IN),
-	.c0(SCLK),
-	.locked(SIG_LOCK)); 
-	
-// pll, 10MHz input, 100MHz output
-hnr_pll pll_inst(
-	.inclk0(CLK_IN),
-	.c0(CLK_166M),
-	.c1(CLK_100M),
-	.locked(pll_lock));
-
-stream stream_inst(
-	.clk(USB3_PCLK),
-	.rst_n(RESET_N),
-	.FLAGA(USB3_FLAGA),
-	.FLAGB(USB3_FLAGB),
-	.DATA_DIR(DATA_DIR),
-	.SLCS(USB3_SLCS),
-	.SLOE(USB3_SLOE),
-	.SLRD(USB3_SLRD),
-	.SLWR(USB3_SLWR),
-	.A1(USB3_A1),
-	.A0(USB3_A0),
-	.FLAGB2(FLAGB2),
-	.usb_rd_cnt(usb_rd_cnt),
-	.usb_wr_cnt(usb_wr_cnt),
-	.usb_rd_state(usb_rd_state),
-	.usb_wr_state(usb_wr_state));
-
 	
 ram_cache_bb cache_inst(
     .wrclock(USB3_PCLK),
@@ -285,10 +259,10 @@ assign	DAC1 = clk_carrier0;//(data_ca[0]^data_msg[0])? ~clk_carrier0:clk_carrier
 assign	DAC2 = (data_ca[1]^data_msg[1])? ~clk_carrier1:clk_carrier1;
 assign	DAC3 = (data_ca[2]^data_msg[2])? ~clk_carrier2:clk_carrier2;
 assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
-assign	DAC5 = 14'd0;
-assign	DAC6 = 14'd0;
-assign	DAC7 = 14'd0;
-assign	DAC8 = 14'd0;
+//assign	DAC5 = 14'd0;
+//assign	DAC6 = 14'd0;
+//assign	DAC7 = 14'd0;
+//assign	DAC8 = 14'd0;
 
 assign 	DAC_CLK = CLK_100M;
 assign 	RESET_N=1;
