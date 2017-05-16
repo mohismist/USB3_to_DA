@@ -426,7 +426,9 @@ always @(posedge clk_1023k[0] or negedge rst_n) begin
                 else
                     rdaddress_msg[0] <= rdaddress_msg[0] + 9'b1;
             end
-            counter_msg[0]<=counter_msg[0]+5'd1;
+				else begin
+					counter_msg[0]<=counter_msg[0]+5'd1;
+				end
         end
     end
 end
@@ -475,7 +477,9 @@ always @(posedge clk_1023k[2] or negedge rst_n) begin
                 else
                     rdaddress_msg[2] <= rdaddress_msg[2] + 9'b1;
             end
-            counter_msg[2]<=counter_msg[2]+5'd1;
+				else begin
+					counter_msg[2]<=counter_msg[2]+5'd1;
+				end
         end
     end
 end
@@ -499,7 +503,9 @@ always @(posedge clk_1023k[3] or negedge rst_n) begin
                 else
                     rdaddress_msg[3] <= rdaddress_msg[3] + 9'b1;
             end
-            counter_msg[3]<=counter_msg[3]+5'd1;
+				else begin
+					counter_msg[3]<=counter_msg[3]+5'd1;
+				end
         end
     end
 end
