@@ -50,10 +50,11 @@ function miffile(filename,svnum)
     fprintf(fid,'DATA_RADIX=HEX;\n'); %指定数据基数
     fprintf(fid,'CONTENT BEGIN\n'); %固定格式
     for k=1:1024 %数据段数据
-        printf(fid,'%3d',k-1);
-        printf(fid,' : ');
-        printf(fid,'%s',data_ca(k));
-        printf(fid,';\n');
+        fprintf(fid,'%3d',k-1);
+        fprintf(fid,' : ');
+        fprintf(fid,'%s',data_ca(k));
+        fprintf(fid,';\n');
     end
-    printf(fid,'END;\n'); %固定格式
+    fprintf(fid,'END;\n'); %固定格式
+    fclose(fid);
 end

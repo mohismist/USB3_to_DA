@@ -449,7 +449,9 @@ always @(posedge clk_1023k[1] or negedge rst_n) begin
                 else
                     rdaddress_msg[1] <= rdaddress_msg[1] + 9'b1;
             end
-            counter_msg[1]<=counter_msg[1]+5'd1;
+				else begin
+					counter_msg[1]<=counter_msg[1]+5'd1;
+				end
         end
     end
 end
@@ -714,14 +716,14 @@ always @(posedge clk) begin
     end
 end
 
-assign	rdaddress_ca[0] = (counter_ca[0] >=(delay_ca0[9:0]+1))?(counter_ca[0]-delay_ca0[9:0]):(10'd1023-delay_ca0[9:0]+counter_ca[0]+10'd1);
-assign	rdaddress_ca[1] = (counter_ca[1] >=(delay_ca1[9:0]+1))?(counter_ca[1]-delay_ca1[9:0]):(10'd1023-delay_ca1[9:0]+counter_ca[1]+10'd1);
-assign	rdaddress_ca[2] = (counter_ca[2] >=(delay_ca2[9:0]+1))?(counter_ca[2]-delay_ca2[9:0]):(10'd1023-delay_ca2[9:0]+counter_ca[2]+10'd1);
-assign	rdaddress_ca[3] = (counter_ca[3] >=(delay_ca3[9:0]+1))?(counter_ca[3]-delay_ca3[9:0]):(10'd1023-delay_ca3[9:0]+counter_ca[3]+10'd1);
-assign	rdaddress_ca[4] = (counter_ca[4] >=(delay_ca4[9:0]+1))?(counter_ca[4]-delay_ca4[9:0]):(10'd1023-delay_ca4[9:0]+counter_ca[4]+10'd1);
-assign	rdaddress_ca[5] = (counter_ca[5] >=(delay_ca5[9:0]+1))?(counter_ca[5]-delay_ca5[9:0]):(10'd1023-delay_ca5[9:0]+counter_ca[5]+10'd1);
-assign	rdaddress_ca[6] = (counter_ca[6] >=(delay_ca6[9:0]+1))?(counter_ca[6]-delay_ca6[9:0]):(10'd1023-delay_ca6[9:0]+counter_ca[6]+10'd1);
-assign	rdaddress_ca[7] = (counter_ca[7] >=(delay_ca7[9:0]+1))?(counter_ca[7]-delay_ca7[9:0]):(10'd1023-delay_ca7[9:0]+counter_ca[7]+10'd1);
+assign	rdaddress_ca[0] = (counter_ca[0] >=(delay_ca0[9:0]+1))?(counter_ca[0]-delay_ca0[9:0]):(10'd1023-delay_ca0[9:0]+counter_ca[0]);
+assign	rdaddress_ca[1] = (counter_ca[1] >=(delay_ca1[9:0]+1))?(counter_ca[1]-delay_ca1[9:0]):(10'd1023-delay_ca1[9:0]+counter_ca[1]);
+assign	rdaddress_ca[2] = (counter_ca[2] >=(delay_ca2[9:0]+1))?(counter_ca[2]-delay_ca2[9:0]):(10'd1023-delay_ca2[9:0]+counter_ca[2]);
+assign	rdaddress_ca[3] = (counter_ca[3] >=(delay_ca3[9:0]+1))?(counter_ca[3]-delay_ca3[9:0]):(10'd1023-delay_ca3[9:0]+counter_ca[3]);
+assign	rdaddress_ca[4] = (counter_ca[4] >=(delay_ca4[9:0]+1))?(counter_ca[4]-delay_ca4[9:0]):(10'd1023-delay_ca4[9:0]+counter_ca[4]);
+assign	rdaddress_ca[5] = (counter_ca[5] >=(delay_ca5[9:0]+1))?(counter_ca[5]-delay_ca5[9:0]):(10'd1023-delay_ca5[9:0]+counter_ca[5]);
+assign	rdaddress_ca[6] = (counter_ca[6] >=(delay_ca6[9:0]+1))?(counter_ca[6]-delay_ca6[9:0]):(10'd1023-delay_ca6[9:0]+counter_ca[6]);
+assign	rdaddress_ca[7] = (counter_ca[7] >=(delay_ca7[9:0]+1))?(counter_ca[7]-delay_ca7[9:0]):(10'd1023-delay_ca7[9:0]+counter_ca[7]);
 
 
 endmodule
