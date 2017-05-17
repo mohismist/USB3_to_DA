@@ -96,8 +96,8 @@ module ram_msg (
 		altsyncram_component.clock_enable_output_b = "BYPASS",
 		altsyncram_component.intended_device_family = "Cyclone III",
 		altsyncram_component.lpm_type = "altsyncram",
-		altsyncram_component.numwords_a = 20,
-		altsyncram_component.numwords_b = 640,
+		altsyncram_component.numwords_a = 30,
+		altsyncram_component.numwords_b = 960,
 		altsyncram_component.operation_mode = "DUAL_PORT",
 		altsyncram_component.outdata_aclr_b = "NONE",
 		altsyncram_component.outdata_reg_b = "UNREGISTERED",
@@ -144,7 +144,7 @@ endmodule
 // Retrieval info: PRIVATE: JTAG_ENABLED NUMERIC "0"
 // Retrieval info: PRIVATE: JTAG_ID STRING "NONE"
 // Retrieval info: PRIVATE: MAXIMUM_DEPTH NUMERIC "0"
-// Retrieval info: PRIVATE: MEMSIZE NUMERIC "640"
+// Retrieval info: PRIVATE: MEMSIZE NUMERIC "960"
 // Retrieval info: PRIVATE: MEM_IN_BITS NUMERIC "1"
 // Retrieval info: PRIVATE: MIFfilename STRING "Hex2.hex"
 // Retrieval info: PRIVATE: OPERATION_MODE NUMERIC "2"
@@ -181,8 +181,8 @@ endmodule
 // Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_B STRING "BYPASS"
 // Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone III"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "altsyncram"
-// Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "20"
-// Retrieval info: CONSTANT: NUMWORDS_B NUMERIC "640"
+// Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "30"
+// Retrieval info: CONSTANT: NUMWORDS_B NUMERIC "960"
 // Retrieval info: CONSTANT: OPERATION_MODE STRING "DUAL_PORT"
 // Retrieval info: CONSTANT: OUTDATA_ACLR_B STRING "NONE"
 // Retrieval info: CONSTANT: OUTDATA_REG_B STRING "UNREGISTERED"

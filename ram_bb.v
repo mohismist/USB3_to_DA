@@ -390,7 +390,12 @@ always @(posedge clk or negedge rst_n)begin
 					wr_msg_state<=8'haa;
 				end
 				else begin
-					wraddress_msg<=(rdaddress_msg[0]<10'd320)?5'd10:5'd0;
+					if(rdaddress_msg[0]>10'd19 && rdaddress_msg[0]<10'd321 )
+						wraddress_msg<=5'd20;
+					if(rdaddress_msg[0]>10'd339 && rdaddress_msg[0]<10'd641 )
+						wraddress_msg<=5'd0;
+					if(rdaddress_msg[0]>10'd659 && rdaddress_msg[0]<10'd961 )
+						wraddress_msg<=5'd10;
 				end
 			end
 			8'h02:begin
@@ -521,6 +526,9 @@ always @(posedge clk_1023k[0] or negedge rst_n) begin
 							rdaddress_msg[0] <= 10'd340;
 						end
 						10'd639:begin
+							rdaddress_msg[0] <= 10'd660;
+						end
+						10'd959:begin
 							rdaddress_msg[0] <= 10'd20;
 						end
 						default:begin
@@ -828,7 +836,7 @@ always @(posedge clk) begin
         if(clk_counter==14'd9998) begin
             clk_1k<=1'b1;
         end
-        clk_counter<=clk_counter+1;
+        clk_counter<=clk_counter+14'd1;
     end
 end
 

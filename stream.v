@@ -17,7 +17,7 @@ module stream(
 
 reg FLAGB1 = 1'b1;
 reg FLAGB2 = 1'b1;
-reg FLAGB3 = 1'b1;
+reg FLAGB3;
 
 always@(posedge clk or negedge rst_n)
 begin
