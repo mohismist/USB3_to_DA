@@ -83,18 +83,26 @@ output reg[31:0] fre_1023k6=32'd2746095;
 output reg[31:0] fre_1023k7=32'd2746095;
 reg clk_1k;
 reg	[4:0] wraddress_ca;
-reg	[3:0] wraddress_msg;
+reg	[4:0] wraddress_msg;
 reg [7:0] wraddress_control;
 wire	[9:0] rdaddress_ca [7:0];
-reg	[8:0] rdaddress_msg [7:0];
+reg	[9:0] rdaddress_msg [7:0];
 reg [7:0] rdaddress_word[7:0];
 wire [31:0] word_cache[7:0];
 
 reg	[9:0] counter_ca [7:0];
 reg [4:0] counter_msg [7:0];
 reg [13:0]  clk_counter;
+
+reg [7:0]wr_msg_state;
+reg [4:0]wr_msg_count;
+reg [4:0]wr_ad_begin;
+
 initial
 begin
+    wr_msg_state=8'd1;
+    wr_ad_begin=5'd0;
+
     wraddress_ca= 5'd0;
     wraddress_msg= 4'd0;
     wraddress_control<=8'd0;
@@ -375,38 +383,133 @@ ram_controlword ram_word7(
 
 
 
+always @(posedge clk or negedge rst_n)begin
+if(~rst_n)begin
+			wr_msg_state<=8'h1;
+			wraddress_msg<=5'd0;
+end
+else begin
+	case(wr_msg_state)
+		8'h1:begin
+			if(wren==24'h000100) begin
+					wraddress_msg<=wraddress_msg+5'd1;
+					wr_msg_state<=8'haa;
+			end
+			else begin
+					wraddress_msg<=(rdaddress_msg[0]<10'd320)?5'd10:5'd0;
+					wr_ad_begin  <=(rdaddress_msg[0]<10'd320)?5'd10:5'd0;
+			end
+		end
+		8'h2:begin
+			if(wren==24'h000200) begin
+					wraddress_msg<=wraddress_msg+5'd1;
+					wr_msg_state<=8'haa;
+			end
+			else begin
+					wraddress_msg<=(rdaddress_msg[1]<10'd320)?5'd10:5'd0;
+					wr_ad_begin  <=(rdaddress_msg[1]<10'd320)?5'd10:5'd0;
+			end
+			
+		end
+		8'h4:begin
+			if(wren==24'h000400) begin
+					wraddress_msg<=wraddress_msg+5'd1;
+					wr_msg_state<=8'haa;
+			end
+			else begin
+					wraddress_msg<=(rdaddress_msg[2]<10'd320)?5'd10:5'd0;
+					wr_ad_begin  <=(rdaddress_msg[2]<10'd320)?5'd10:5'd0;
+			end
+		end
+		8'h8:begin
+			if(wren==24'h000800) begin
+					wraddress_msg<=wraddress_msg+5'd1;
+					wr_msg_state<=8'haa;
+			end
+			else begin
+					wraddress_msg<=(rdaddress_msg[3]<10'd320)?5'd10:5'd0;
+					wr_ad_begin  <=(rdaddress_msg[3]<10'd320)?5'd10:5'd0;
+			end
+		end
+		8'h10:begin
+			if(wren==24'h001000) begin
+					wraddress_msg<=wraddress_msg+5'd1;
+					wr_msg_state<=8'haa;
+			end
+			else begin
+					wraddress_msg<=(rdaddress_msg[4]<10'd320)?5'd10:5'd0;
+					wr_ad_begin  <=(rdaddress_msg[4]<10'd320)?5'd10:5'd0;
+			end
+		end
+		8'h20:begin
+			if(wren==24'h002000) begin
+					wraddress_msg<=wraddress_msg+5'd1;
+					wr_msg_state<=8'haa;
+			end
+			else begin
+					wraddress_msg<=(rdaddress_msg[5]<10'd320)?5'd10:5'd0;
+					wr_ad_begin  <=(rdaddress_msg[5]<10'd320)?5'd10:5'd0;
+			end
+		end
+		8'h40:begin
+			if(wren==24'h004000) begin
+					wraddress_msg<=wraddress_msg+5'd1;
+					wr_msg_state<=8'haa;
+			end
+			else begin
+					wraddress_msg<=(rdaddress_msg[6]<10'd320)?5'd10:5'd0;
+					wr_ad_begin  <=(rdaddress_msg[6]<10'd320)?5'd10:5'd0;
+			end
+		end
+		8'h80:begin
+			if(wren==24'h008000) begin
+					wraddress_msg<=wraddress_msg+5'd1;
+					wr_msg_state<=8'haa;
+			end
+			else begin
+					wraddress_msg<=(rdaddress_msg[7]<10'd320)?5'd10:5'd0;
+					wr_ad_begin  <=(rdaddress_msg[7]<10'd320)?5'd10:5'd0;
+			end
+		end	
+		8'haa:begin
+			if(wraddress_msg==(5'd8+wr_ad_begin)) begin
+					wr_msg_state<=(wren[15:8]<<8'd1);
+					wraddress_msg<=wraddress_msg+5'd1;
+			end
+			else begin
+				wraddress_msg<=wraddress_msg+5'd1;
+			end
+		end	
+		default:begin
+			wr_msg_state<=8'h1;
+			wraddress_msg<=5'd0;
+		end		
+	endcase
+end
+end
 
 always @(posedge clk or negedge rst_n) begin
-    if(~rst_n) begin
+
+ if(~rst_n) begin
         wraddress_ca <= 5'd0;
-        wraddress_msg <= 4'd0;
         wraddress_control<=8'd0;
     end
     else begin
         if((wren&{16'h0,8'hff})!=24'b0) begin
-            wraddress_ca <= wraddress_ca + 1'b1;//到31会自己变成0
+            wraddress_ca <= wraddress_ca + 1'b1;//鍒1浼氳嚜宸卞彉鎴
         end
 		  else begin 
 				wraddress_control<=5'd0;
-		  end
-        if((wren&{8'h0,8'hff,8'h0})!=24'b0) begin
-            if (wraddress_msg >= 4'd9)
-                wraddress_msg <= 4'd0;
-            else
-                wraddress_msg <= wraddress_msg + 4'b1;
-        end
-		  else begin 
-				wraddress_control<=4'd0;
-		  end
+		  end   
+		  
         if((wren&{8'hff,16'h00})!=24'b0) begin
             wraddress_control <= wraddress_control + 8'b1;
         end
 		  else begin 
 				wraddress_control<=8'd0;
 		  end
-    end
+	end
 end
-
 
 always @(posedge clk_1023k[0] or negedge rst_n) begin
     if(~rst_n) begin
@@ -421,10 +524,17 @@ always @(posedge clk_1023k[0] or negedge rst_n) begin
         if (rdaddress_ca[0] == 10'd1023) begin
             if(counter_msg[0]>=5'd19) begin
                 counter_msg[0]<=5'd0;
-                if (rdaddress_msg[0]>=9'd319)
-                    rdaddress_msg[0] <= 9'd20;
-                else
-                    rdaddress_msg[0] <= rdaddress_msg[0] + 9'b1;
+                case(rdaddress_msg[0])
+                  10'd319:begin
+							rdaddress_msg[0] <= 10'd340;
+						end
+                  10'd639:begin
+							rdaddress_msg[0]<=10'd20;
+						end
+						default:begin
+							rdaddress_msg[0] <= rdaddress_msg[0] + 10'b1;
+						end
+					endcase
             end
 				else begin
 					counter_msg[0]<=counter_msg[0]+5'd1;
@@ -446,10 +556,17 @@ always @(posedge clk_1023k[1] or negedge rst_n) begin
         if (rdaddress_ca[1] == 10'd1023) begin
             if(counter_msg[1]>=5'd19) begin
                 counter_msg[1]<=5'd0;
-                if (rdaddress_msg[1]>=9'd319)
-                    rdaddress_msg[1] <= 9'd20;
-                else
-                    rdaddress_msg[1] <= rdaddress_msg[1] + 9'b1;
+                case(rdaddress_msg[1])
+                  10'd319:begin
+							rdaddress_msg[1] <= 10'd340;
+						end
+                  10'd639:begin
+							rdaddress_msg[1]<=10'd20;
+						end
+						default:begin
+							rdaddress_msg[1] <= rdaddress_msg[1] + 10'b1;
+						end
+					endcase
             end
 				else begin
 					counter_msg[1]<=counter_msg[1]+5'd1;
@@ -472,10 +589,17 @@ always @(posedge clk_1023k[2] or negedge rst_n) begin
         if (rdaddress_ca[2] == 10'd1023) begin
             if(counter_msg[2]>=5'd19) begin
                 counter_msg[2]<=5'd0;
-                if (rdaddress_msg[2]>=9'd319)
-                    rdaddress_msg[2] <= 9'd20;
-                else
-                    rdaddress_msg[2] <= rdaddress_msg[2] + 9'b1;
+                case(rdaddress_msg[2])
+                  10'd319:begin
+							rdaddress_msg[2] <= 10'd340;
+						end
+                  10'd639:begin
+							rdaddress_msg[2]<=10'd20;
+						end
+						default:begin
+							rdaddress_msg[2] <= rdaddress_msg[2] + 10'b1;
+						end
+					endcase
             end
 				else begin
 					counter_msg[2]<=counter_msg[2]+5'd1;
@@ -498,10 +622,17 @@ always @(posedge clk_1023k[3] or negedge rst_n) begin
         if (rdaddress_ca[3] == 10'd1023) begin
             if(counter_msg[3]>=5'd19) begin
                 counter_msg[3]<=5'd0;
-                if (rdaddress_msg[3]>=9'd319)
-                    rdaddress_msg[3] <= 9'd20;
-                else
-                    rdaddress_msg[3] <= rdaddress_msg[3] + 9'b1;
+                case(rdaddress_msg[3])
+                  10'd319:begin
+							rdaddress_msg[3] <= 10'd340;
+						end
+                  10'd639:begin
+							rdaddress_msg[3]<=10'd20;
+						end
+						default:begin
+							rdaddress_msg[3] <= rdaddress_msg[3] + 10'b1;
+						end
+					endcase
             end
 				else begin
 					counter_msg[3]<=counter_msg[3]+5'd1;
@@ -524,12 +655,21 @@ always @(posedge clk_1023k[4] or negedge rst_n) begin
         if (rdaddress_ca[4] == 10'd1023) begin
             if(counter_msg[4]>=5'd19) begin
                 counter_msg[4]<=5'd0;
-                if (rdaddress_msg[4]>=9'd319)
-                    rdaddress_msg[4] <= 9'd20;
-                else
-                    rdaddress_msg[4] <= rdaddress_msg[4] + 9'b1;
+                case(rdaddress_msg[4])
+                  10'd319:begin
+							rdaddress_msg[4] <= 10'd340;
+						end
+                  10'd639:begin
+							rdaddress_msg[4]<=10'd20;
+						end
+						default:begin
+							rdaddress_msg[4] <= rdaddress_msg[4] + 10'b1;
+						end
+					endcase
             end
-            counter_msg[4]<=counter_msg[4]+5'd1;
+				else begin
+					counter_msg[4]<=counter_msg[4]+5'd1;
+				end
         end
     end
 end
@@ -548,12 +688,21 @@ always @(posedge clk_1023k[5] or negedge rst_n) begin
         if (rdaddress_ca[5] == 10'd1023) begin
             if(counter_msg[5]>=5'd19) begin
                 counter_msg[5]<=5'd0;
-                if (rdaddress_msg[5]>=9'd319)
-                    rdaddress_msg[5] <= 9'd20;
-                else
-                    rdaddress_msg[5] <= rdaddress_msg[5] + 9'b1;
+                case(rdaddress_msg[5])
+                  10'd319:begin
+							rdaddress_msg[5] <= 10'd340;
+						end
+                  10'd639:begin
+							rdaddress_msg[5]<=10'd20;
+						end
+						default:begin
+							rdaddress_msg[5] <= rdaddress_msg[5] + 10'b1;
+						end
+					endcase
             end
-            counter_msg[5]<=counter_msg[5]+5'd1;
+				else begin
+					counter_msg[5]<=counter_msg[5]+5'd1;
+				end
         end
     end
 end
@@ -572,12 +721,21 @@ always @(posedge clk_1023k[6] or negedge rst_n) begin
         if (rdaddress_ca[6] == 10'd1023) begin
             if(counter_msg[6]>=5'd19) begin
                 counter_msg[6]<=5'd0;
-                if (rdaddress_msg[6]>=9'd319)
-                    rdaddress_msg[6] <= 9'd20;
-                else
-                    rdaddress_msg[6] <= rdaddress_msg[6] + 9'b1;
+                case(rdaddress_msg[6])
+                  10'd319:begin
+							rdaddress_msg[6] <= 10'd340;
+						end
+                  10'd639:begin
+							rdaddress_msg[6]<=10'd20;
+						end
+						default:begin
+							rdaddress_msg[6] <= rdaddress_msg[6] + 10'b1;
+						end
+					endcase
             end
-            counter_msg[6]<=counter_msg[6]+5'd1;
+				else begin
+					counter_msg[6]<=counter_msg[6]+5'd1;
+				end
         end
     end
 end
@@ -596,12 +754,21 @@ always @(posedge clk_1023k[7] or negedge rst_n) begin
         if (rdaddress_ca[7] == 10'd1023) begin
             if(counter_msg[7]>=5'd19) begin
                 counter_msg[7]<=5'd0;
-                if (rdaddress_msg[7]>=9'd319)
-                    rdaddress_msg[7] <= 9'd20;
-                else
-                    rdaddress_msg[7] <= rdaddress_msg[7] + 9'b1;
+                case(rdaddress_msg[7])
+                  10'd319:begin
+							rdaddress_msg[7] <= 10'd340;
+						end
+                  10'd639:begin
+							rdaddress_msg[7]<=10'd20;
+						end
+						default:begin
+							rdaddress_msg[7] <= rdaddress_msg[7] + 10'b1;
+						end
+					endcase
             end
-            counter_msg[7]<=counter_msg[7]+5'd1;
+				else begin
+					counter_msg[7]<=counter_msg[7]+5'd1;
+				end
         end
     end
 end
