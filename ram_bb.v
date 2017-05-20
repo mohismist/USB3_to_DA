@@ -85,7 +85,7 @@ reg clk_1k;
 reg	[4:0] wraddress_ca;
 reg	[4:0] wraddress_msg;
 reg [7:0] wraddress_control;
-wire	[9:0] rdaddress_ca [7:0];
+reg	[9:0] rdaddress_ca [7:0];
 reg	[9:0] rdaddress_msg [7:0];
 reg [7:0] rdaddress_word[7:0];
 wire [31:0] word_cache[7:0];
@@ -552,6 +552,7 @@ always @(posedge clk_1023k[0] or negedge rst_n) begin
             counter_ca[0] <= 10'd1;
         else
             counter_ca[0] <= counter_ca[0] + 1'b1;
+		  rdaddress_ca[0] <= (counter_ca[0] >=(delay_ca0[9:0]+1))?(counter_ca[0]-delay_ca0[9:0]):(10'd1023-delay_ca0[9:0]+counter_ca[0]);
         if (rdaddress_ca[0] == 10'd1023) begin
             if(counter_msg[0]>=5'd19) begin
                 counter_msg[0]<=5'd0;
@@ -588,6 +589,7 @@ always @(posedge clk_1023k[1] or negedge rst_n) begin
             counter_ca[1] <= 10'd1;
         else
             counter_ca[1] <= counter_ca[1] + 1'b1;
+		  rdaddress_ca[1] <= (counter_ca[1] >=(delay_ca1[9:0]+1))?(counter_ca[1]-delay_ca0[9:0]):(10'd1023-delay_ca1[9:0]+counter_ca[1]);
         if (rdaddress_ca[1] == 10'd1023) begin
             if(counter_msg[1]>=5'd19) begin
                 counter_msg[1]<=5'd0;
@@ -624,6 +626,7 @@ always @(posedge clk_1023k[2] or negedge rst_n) begin
             counter_ca[2] <= 10'd1;
         else
             counter_ca[2] <= counter_ca[2] + 1'b1;
+		  rdaddress_ca[2] = (counter_ca[2] >=(delay_ca2[9:0]+1))?(counter_ca[2]-delay_ca2[9:0]):(10'd1023-delay_ca2[9:0]+counter_ca[2]);
         if (rdaddress_ca[2] == 10'd1023) begin
             if(counter_msg[2]>=5'd19) begin
                 counter_msg[2]<=5'd0;
@@ -660,6 +663,7 @@ always @(posedge clk_1023k[3] or negedge rst_n) begin
             counter_ca[3] <= 10'd1;
         else
             counter_ca[3] <= counter_ca[3] + 1'b1;
+		  rdaddress_ca[3] = (counter_ca[3] >=(delay_ca3[9:0]+1))?(counter_ca[3]-delay_ca3[9:0]):(10'd1023-delay_ca3[9:0]+counter_ca[3]);
         if (rdaddress_ca[3] == 10'd1023) begin
             if(counter_msg[3]>=5'd19) begin
                 counter_msg[3]<=5'd0;
@@ -684,7 +688,7 @@ always @(posedge clk_1023k[3] or negedge rst_n) begin
         end
     end
 end
-
+/*
 always @(posedge clk_1023k[4] or negedge rst_n) begin
     if(~rst_n) begin
         counter_ca[4] <= 10'd1;
@@ -695,6 +699,7 @@ always @(posedge clk_1023k[4] or negedge rst_n) begin
             counter_ca[4] <= 10'd1;
         else
             counter_ca[4] <= counter_ca[4] + 1'b1;
+		  rdaddress_ca[4] = (counter_ca[4] >=(delay_ca4[9:0]+1))?(counter_ca[4]-delay_ca4[9:0]):(10'd1023-delay_ca4[9:0]+counter_ca[4]);
         if (rdaddress_ca[4] == 10'd1023) begin
             if(counter_msg[4]>=5'd19) begin
                 counter_msg[4]<=5'd0;
@@ -731,6 +736,7 @@ always @(posedge clk_1023k[5] or negedge rst_n) begin
             counter_ca[5] <= 10'd1;
         else
             counter_ca[5] <= counter_ca[5] + 1'b1;
+		  rdaddress_ca[5] = (counter_ca[5] >=(delay_ca5[9:0]+1))?(counter_ca[5]-delay_ca5[9:0]):(10'd1023-delay_ca5[9:0]+counter_ca[5]);
         if (rdaddress_ca[5] == 10'd1023) begin
             if(counter_msg[5]>=5'd19) begin
                 counter_msg[5]<=5'd0;
@@ -767,6 +773,7 @@ always @(posedge clk_1023k[6] or negedge rst_n) begin
             counter_ca[6] <= 10'd1;
         else
             counter_ca[6] <= counter_ca[6] + 1'b1;
+		  rdaddress_ca[6] = (counter_ca[6] >=(delay_ca6[9:0]+1))?(counter_ca[6]-delay_ca6[9:0]):(10'd1023-delay_ca6[9:0]+counter_ca[6]);
         if (rdaddress_ca[6] == 10'd1023) begin
             if(counter_msg[6]>=5'd19) begin
                 counter_msg[6]<=5'd0;
@@ -803,6 +810,7 @@ always @(posedge clk_1023k[7] or negedge rst_n) begin
             counter_ca[7] <= 10'd1;
         else
             counter_ca[7] <= counter_ca[7] + 1'b1;
+		  rdaddress_ca[7] = (counter_ca[7] >=(delay_ca7[9:0]+1))?(counter_ca[7]-delay_ca7[9:0]):(10'd1023-delay_ca7[9:0]+counter_ca[7]);
         if (rdaddress_ca[7] == 10'd1023) begin
             if(counter_msg[7]>=5'd19) begin
                 counter_msg[7]<=5'd0;
@@ -827,6 +835,7 @@ always @(posedge clk_1023k[7] or negedge rst_n) begin
         end
     end
 end
+*/
 
 reg [3:0]rd_w_state=4'd0;
 always @(posedge clk or negedge rst_n) begin
@@ -943,15 +952,6 @@ always @(posedge clk) begin
         clk_counter<=clk_counter+14'd1;
     end
 end
-
-assign	rdaddress_ca[0] = (counter_ca[0] >=(delay_ca0[9:0]+1))?(counter_ca[0]-delay_ca0[9:0]):(10'd1023-delay_ca0[9:0]+counter_ca[0]);
-assign	rdaddress_ca[1] = (counter_ca[1] >=(delay_ca1[9:0]+1))?(counter_ca[1]-delay_ca1[9:0]):(10'd1023-delay_ca1[9:0]+counter_ca[1]);
-assign	rdaddress_ca[2] = (counter_ca[2] >=(delay_ca2[9:0]+1))?(counter_ca[2]-delay_ca2[9:0]):(10'd1023-delay_ca2[9:0]+counter_ca[2]);
-assign	rdaddress_ca[3] = (counter_ca[3] >=(delay_ca3[9:0]+1))?(counter_ca[3]-delay_ca3[9:0]):(10'd1023-delay_ca3[9:0]+counter_ca[3]);
-assign	rdaddress_ca[4] = (counter_ca[4] >=(delay_ca4[9:0]+1))?(counter_ca[4]-delay_ca4[9:0]):(10'd1023-delay_ca4[9:0]+counter_ca[4]);
-assign	rdaddress_ca[5] = (counter_ca[5] >=(delay_ca5[9:0]+1))?(counter_ca[5]-delay_ca5[9:0]):(10'd1023-delay_ca5[9:0]+counter_ca[5]);
-assign	rdaddress_ca[6] = (counter_ca[6] >=(delay_ca6[9:0]+1))?(counter_ca[6]-delay_ca6[9:0]):(10'd1023-delay_ca6[9:0]+counter_ca[6]);
-assign	rdaddress_ca[7] = (counter_ca[7] >=(delay_ca7[9:0]+1))?(counter_ca[7]-delay_ca7[9:0]):(10'd1023-delay_ca7[9:0]+counter_ca[7]);
 
 
 endmodule

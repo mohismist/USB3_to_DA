@@ -23,7 +23,7 @@ module FPGA(
 	//GPIF II
 	input USB3_CTL4,	//FLAGA
 	input USB3_CTL5,	//FLAGB
-	inout [31:0] USB3_DQ,
+	input [31:0] USB3_DQ,
 	
 	output USB3_CTL2,	//SLOE 输出使能信号，其唯一功能是驱动数据总线
 	output USB3_CTL3,	//SLRD
@@ -232,7 +232,7 @@ ram_bb	ram_inst(
 ram_cache_bb cache_inst(
     .wrclock(USB3_PCLK),
     .rdclock(CLK_100M),
-    .data(data_u2p),
+    .data(USB3_DQ),
     .q(data_cache),
     .usb_rd_state(usb_rd_state),
 	 .rst_n(RESET_N),
@@ -241,7 +241,6 @@ ram_cache_bb cache_inst(
 );
 
 assign	data_p2u = 32'd15;
-assign	USB3_DQ = DATA_DIR? data_p2u:32'hzzzzzzzz;
 assign	data_u2p = DATA_DIR? 32'hzzzzzzzz:USB3_DQ;
 
 assign	USB3_CTL2 = USB3_SLOE;
