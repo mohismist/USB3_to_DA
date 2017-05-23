@@ -14,7 +14,7 @@ input [31:0]data;
 input	  rdclock;
 input	  wrclock;
 input [3:0]usb_rd_state;
-input rst_n;
+output reg rst_n;
 input USB3_FLAGA;
 output	[31:0]  q;
 output [23:0]wren_out;
@@ -43,6 +43,7 @@ begin
     if(~rst_n) begin
         wraddress <= 8'b0;
         wren <= 1'b0;
+		  rst_n<=1'b1;
     end
     else begin
         case(wr_state)
@@ -86,9 +87,13 @@ begin
                         16'haaaa: begin
                             pack_type<=5'd4;
                         end
+								16'h0a0a:begin
+									rst_n<=1'b0;
+								end
                     endcase
                 end
                 else begin
+						  rst_n<=1'b1;
                     case(pack_type)
                         5'd1,5'd2,5'd2,5'd4,5'd5:begin
                             pack_type<=pack_type+5'd5;
@@ -109,6 +114,7 @@ begin
                 end
             end
             default:begin
+					 rst_n<=1'b1;
                 wren <= 1'b0;
                 wr_state <= 4'd0;
             end
@@ -186,7 +192,7 @@ always@(posedge rdclock or negedge rst_n)begin
                             wren_for_ram<=16'b0;
                             com_state<=10'd0;
                         end
-                    endcase
+                    endcase						  
                 end
             end
             10'd1,10'd2,10'd3,10'd4,10'd5,10'd6,10'd7:begin

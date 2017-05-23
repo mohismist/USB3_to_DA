@@ -264,5 +264,4 @@ assign	DAC4 = (data_ca[3]^data_msg[3])? ~clk_carrier3:clk_carrier3;
 //assign	DAC8 = 14'd0;
 
 assign 	DAC_CLK = CLK_100M;
-assign 	RESET_N=1;
 endmodule

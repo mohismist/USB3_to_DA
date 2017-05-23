@@ -903,14 +903,14 @@ end
 reg [3:0]rd_w_state=4'd0;
 always @(posedge clk or negedge rst_n) begin
     if(~rst_n) begin
-        rdaddress_word[0]<=0;
-        rdaddress_word[1]<=0;
-        rdaddress_word[2]<=0;
-        rdaddress_word[3]<=0;
-        rdaddress_word[4]<=0;
-        rdaddress_word[5]<=0;
-        rdaddress_word[6]<=0;
-        rdaddress_word[7]<=0;
+        rdaddress_word[0]<=9'd511;
+        rdaddress_word[1]<=9'd511;
+        rdaddress_word[2]<=9'd511;
+        rdaddress_word[3]<=9'd511;
+        rdaddress_word[4]<=9'd511;
+        rdaddress_word[5]<=9'd511;
+        rdaddress_word[6]<=9'd511;
+        rdaddress_word[7]<=9'd511;
         rd_w_state<=4'd0;
     end
     else begin
