@@ -6,29 +6,30 @@ module ram_cache_bb(
     usb_rd_state,
     rst_n,
     USB3_FLAGA,
-    wren_out
+    wren_out,
+	 clk_1k
 );
 
 
 input [31:0]data;
-input	  rdclock;
-input	  wrclock;
+input rdclock;
+input	wrclock;
 input [3:0]usb_rd_state;
 output reg rst_n;
 input USB3_FLAGA;
-output	[31:0]  q;
+output [31:0]  q;
 output [23:0]wren_out;
-
+output reg clk_1k;
 reg [23:0]wren_for_ram;
 reg wren=1'b0;
 reg rden;
 reg flag=1'b0;
 reg [8:0]  rd_count=9'd0;
-reg	[7:0]  rdaddress=8'd0;
-reg	[7:0]  wraddress=8'd15;
+reg [7:0]  rdaddress=8'd0;
+reg [7:0]  wraddress=8'd15;
 reg [4:0]  pack_type=5'd0;
-reg   [3:0]wr_state=4'b0;
-reg   [7:0]rd_state=8'd0;
+reg [3:0]  wr_state=4'b0;
+reg [7:0]  rd_state=8'd0;
 ram_cache cache(
     .data(data),
     .rdaddress(rdaddress),
@@ -290,7 +291,19 @@ always@(posedge rdclock) begin
         end
     endcase
 end
-
+reg [13:0]  clk_counter=14'd0;
+always @(posedge wrclock) begin
+    if(clk_counter==14'd9999) begin
+        clk_counter<=7'b0;
+        clk_1k<=1'b0;
+    end
+    else begin
+        if(clk_counter==14'd9998&&pack_type<5'd10) begin
+            clk_1k<=1'b1;
+        end
+        clk_counter<=clk_counter+14'd1;
+    end
+end
 
 assign wren_out = wren_for_ram;
 

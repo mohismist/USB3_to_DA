@@ -98,7 +98,7 @@ wire	[31:0] pha_1023k4;
 wire	[31:0] pha_1023k5;
 wire	[31:0] pha_1023k6;
 wire	[31:0] pha_1023k7;
-
+wire clk_1k;
 
 localparam DAC_WIDTH = 14;
 
@@ -225,8 +225,8 @@ ram_bb	ram_inst(
 	
 	.fre_carrier7(fre_carrier7),
 	.fre_1023k7(fre_1023k7),
-	.pha_1023k7(pha_1023k7)
-	
+	.pha_1023k7(pha_1023k7),
+	.clk_1k(clk_1k)
 	);
 	
 ram_cache_bb cache_inst(
@@ -237,7 +237,8 @@ ram_cache_bb cache_inst(
     .usb_rd_state(usb_rd_state),
 	 .rst_n(RESET_N),
 	 .USB3_FLAGA(USB3_FLAGA),
-	 .wren_out(wren)
+	 .wren_out(wren),
+	 .clk_1k(clk_1k)
 );
 
 assign	data_p2u = 32'd15;

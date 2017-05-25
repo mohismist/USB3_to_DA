@@ -33,7 +33,8 @@ module ram_bb(
     fre_1023k4,
     fre_1023k5,
     fre_1023k6,
-    fre_1023k7
+    fre_1023k7,
+	 clk_1k
 );
 
 
@@ -81,7 +82,7 @@ output reg[31:0] fre_1023k4=32'd2746095;
 output reg[31:0] fre_1023k5=32'd2746095;
 output reg[31:0] fre_1023k6=32'd2746095;
 output reg[31:0] fre_1023k7=32'd2746095;
-reg clk_1k;
+input clk_1k;
 reg	[4:0] wraddress_ca;
 reg	[4:0] wraddress_msg;
 reg [8:0] wraddress_control;
@@ -94,14 +95,12 @@ reg	[7:0]	wr_msg_state = 8'h00;
 reg	[3:0]	wr_msg_count = 4'd0;
 reg	[9:0] counter_ca [7:0];
 reg [4:0] counter_msg [7:0];
-reg [13:0]  clk_counter;
+
 initial
 begin
     wraddress_ca= 5'd0;
     wraddress_msg= 5'd0;
     wraddress_control<=8'd0;
-    clk_1k=1'b0;
-    clk_counter<=14'b0;
 
     rdaddress_msg[0] = 10'd0;
     rdaddress_msg[1] = 10'd0;
@@ -139,8 +138,6 @@ begin
     counter_msg[5] = 5'd0;
     counter_msg[6] = 5'd0;
     counter_msg[7] = 5'd0;
-
-
 end 
 
 ram_ca ram_ca0(
@@ -450,12 +447,13 @@ always @(posedge clk or negedge rst_n)begin
                     wr_msg_state<=8'haa;
                 end
                 else begin
+					 wraddress_msg<=5'd0;/*
                     if(rdaddress_msg[4]>10'd19 && rdaddress_msg[4]<10'd321 )
                         wraddress_msg<=5'd20;
                     if(rdaddress_msg[4]>10'd339 && rdaddress_msg[4]<10'd641 )
                         wraddress_msg<=5'd0;
                     if(rdaddress_msg[4]>10'd659 && rdaddress_msg[4]<10'd961 )
-                        wraddress_msg<=5'd10;
+                        wraddress_msg<=5'd10;*/
                 end
             end
             8'h20:begin
@@ -465,12 +463,13 @@ always @(posedge clk or negedge rst_n)begin
                     wr_msg_state<=8'haa;
                 end
                 else begin
+					 wraddress_msg<=5'd0;/*
                     if(rdaddress_msg[5]>10'd19 && rdaddress_msg[5]<10'd321 )
                         wraddress_msg<=5'd20;
                     if(rdaddress_msg[5]>10'd339 && rdaddress_msg[5]<10'd641 )
                         wraddress_msg<=5'd0;
                     if(rdaddress_msg[5]>10'd659 && rdaddress_msg[5]<10'd961 )
-                        wraddress_msg<=5'd10;
+                        wraddress_msg<=5'd10;*/
                 end
             end
             8'h40:begin
@@ -480,12 +479,13 @@ always @(posedge clk or negedge rst_n)begin
                     wr_msg_state<=8'haa;
                 end
                 else begin
+					 wraddress_msg<=5'd0;/*
                     if(rdaddress_msg[6]>10'd19 && rdaddress_msg[6]<10'd321 )
                         wraddress_msg<=5'd20;
                     if(rdaddress_msg[6]>10'd339 && rdaddress_msg[6]<10'd641 )
                         wraddress_msg<=5'd0;
                     if(rdaddress_msg[6]>10'd659 && rdaddress_msg[6]<10'd961 )
-                        wraddress_msg<=5'd10;
+                        wraddress_msg<=5'd10;*/
                 end
             end
             8'h80:begin
@@ -495,12 +495,13 @@ always @(posedge clk or negedge rst_n)begin
                     wr_msg_state<=8'haa;
                 end
                 else begin
+					 wraddress_msg<=5'd0;/*
                     if(rdaddress_msg[7]>10'd19 && rdaddress_msg[7]<10'd321 )
                         wraddress_msg<=5'd20;
                     if(rdaddress_msg[7]>10'd339 && rdaddress_msg[7]<10'd641 )
                         wraddress_msg<=5'd0;
                     if(rdaddress_msg[7]>10'd659 && rdaddress_msg[7]<10'd961 )
-                        wraddress_msg<=5'd10;
+                        wraddress_msg<=5'd10;*/
                 end
             end
             8'haa:begin
@@ -532,8 +533,6 @@ always @(posedge clk or negedge rst_n) begin
         end
     end
 end
-
-
 
 reg [3:0] control_state=4'd0;
 reg [8:0] control_count=9'd0;
@@ -607,12 +606,11 @@ always @(posedge clk or negedge rst_n) begin
 end
 
 
-
-
 always @(posedge clk_1023k[0] or negedge rst_n) begin
     if(~rst_n) begin
         counter_ca[0] <= 10'd1;
-        rdaddress_msg[0] <= 10'd0;
+        rdaddress_msg[0] <= 10'd0;		  
+		  counter_msg[0]<=5'd0;
     end
     else begin
         if (counter_ca[0] == 10'd1023)
@@ -648,7 +646,8 @@ end
 always @(posedge clk_1023k[1] or negedge rst_n) begin
     if(~rst_n) begin
         counter_ca[1] <= 10'd1;
-        rdaddress_msg[1] <= 10'd0;
+        rdaddress_msg[1] <= 10'd0;		  
+		  counter_msg[1]<=5'd0;
     end
     else begin
         if (counter_ca[1] == 10'd1023)
@@ -685,6 +684,7 @@ always @(posedge clk_1023k[2] or negedge rst_n) begin
     if(~rst_n) begin
         counter_ca[2] <= 10'd1;
         rdaddress_msg[2] <= 10'd0;
+		  counter_msg[2]<=5'd0;
     end
     else begin
         if (counter_ca[2] == 10'd1023)
@@ -721,6 +721,7 @@ always @(posedge clk_1023k[3] or negedge rst_n) begin
     if(~rst_n) begin
         counter_ca[3] <= 10'd1;
         rdaddress_msg[3] <= 10'd0;
+		  counter_msg[3]<=5'd0;
     end
     else begin
         if (counter_ca[3] == 10'd1023)
@@ -911,12 +912,44 @@ always @(posedge clk or negedge rst_n) begin
         rdaddress_word[5]<=9'd511;
         rdaddress_word[6]<=9'd511;
         rdaddress_word[7]<=9'd511;
+		  fre_carrier0<=32'd124607739;
+		  fre_carrier1<=32'd124607739;
+		  fre_carrier2<=32'd124607739;
+		  fre_carrier3<=32'd124607739;
+		  fre_carrier4<=32'd124607739;
+		  fre_carrier5<=32'd124607739;
+		  fre_carrier6<=32'd124607739;
+		  fre_carrier7<=32'd124607739;
+		  fre_1023k0<=32'd2746095;
+		  fre_1023k1<=32'd2746095;
+		  fre_1023k2<=32'd2746095;
+		  fre_1023k3<=32'd2746095;
+		  fre_1023k4<=32'd2746095;
+		  fre_1023k5<=32'd2746095;
+		  fre_1023k6<=32'd2746095;
+		  fre_1023k7<=32'd2746095;
+		  pha_1023k0<=32'd0;
+		  pha_1023k1<=32'd0;
+		  pha_1023k2<=32'd0;
+		  pha_1023k3<=32'd0;
+		  pha_1023k4<=32'd0;
+		  pha_1023k5<=32'd0;
+		  pha_1023k6<=32'd0;
+		  pha_1023k7<=32'd0;
+		  delay_ca0<=32'd0;
+		  delay_ca1<=32'd0;
+		  delay_ca2<=32'd0;
+		  delay_ca3<=32'd0;
+		  delay_ca4<=32'd0;
+		  delay_ca5<=32'd0;
+		  delay_ca6<=32'd0;
+		  delay_ca7<=32'd0;
         rd_w_state<=4'd0;
     end
     else begin
         case(rd_w_state)
             4'd0:begin
-                if(clk_1k==1'b1&&wren==24'b0) begin
+                if(clk_1k==1'b1) begin
                     rd_w_state<=rd_w_state+4'd1;
                     rdaddress_word[0]<=rdaddress_word[0]+9'd1;
                     rdaddress_word[1]<=rdaddress_word[1]+9'd1;
@@ -1003,24 +1036,9 @@ always @(posedge clk or negedge rst_n) begin
     end
 end
 
-always @(posedge clk) begin
-    if(clk_counter==14'd9999) begin
-        clk_counter<=7'b0;
-        clk_1k<=1'b0;
-    end
-    else begin
-        if(clk_counter==14'd9998) begin
-            clk_1k<=1'b1;
-        end
-        clk_counter<=clk_counter+14'd1;
-    end
-end
-assign		  rdaddress_ca[0] = (counter_ca[0] >=(delay_ca0[9:0]+1))?(counter_ca[0]-delay_ca0[9:0]):(10'd1023-delay_ca0[9:0]+counter_ca[0]);
- 
-assign 		  rdaddress_ca[1] = (counter_ca[1] >=(delay_ca1[9:0]+1))?(counter_ca[1]-delay_ca0[9:0]):(10'd1023-delay_ca1[9:0]+counter_ca[1]);
-
-assign		  rdaddress_ca[2] = (counter_ca[2] >=(delay_ca2[9:0]+1))?(counter_ca[2]-delay_ca2[9:0]):(10'd1023-delay_ca2[9:0]+counter_ca[2]);
-
-assign		  rdaddress_ca[3] = (counter_ca[3] >=(delay_ca3[9:0]+1))?(counter_ca[3]-delay_ca3[9:0]):(10'd1023-delay_ca3[9:0]+counter_ca[3]);
+assign rdaddress_ca[0] = (counter_ca[0]>=(delay_ca0[9:0]+1))?(counter_ca[0]-delay_ca0[9:0]):(10'd1023-delay_ca0[9:0]+counter_ca[0]);
+assign rdaddress_ca[1] = (counter_ca[1]>=(delay_ca1[9:0]+1))?(counter_ca[1]-delay_ca1[9:0]):(10'd1023-delay_ca1[9:0]+counter_ca[1]);
+assign rdaddress_ca[2] = (counter_ca[2]>=(delay_ca2[9:0]+1))?(counter_ca[2]-delay_ca2[9:0]):(10'd1023-delay_ca2[9:0]+counter_ca[2]);
+assign rdaddress_ca[3] = (counter_ca[3]>=(delay_ca3[9:0]+1))?(counter_ca[3]-delay_ca3[9:0]):(10'd1023-delay_ca3[9:0]+counter_ca[3]);
  
 endmodule
